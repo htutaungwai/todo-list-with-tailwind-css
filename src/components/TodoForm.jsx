@@ -13,12 +13,15 @@ const TodoForm = ({ todos, setTodos }) => {
 
   return (
     <form
+      className="pl-4 "
       onSubmit={(e) => {
         e.preventDefault();
         addNewTodo();
       }}
     >
-      <label htmlFor="title">Title</label>
+      <label htmlFor="title" className="font-semibold pr-4">
+        Title:
+      </label>
       <input
         type="text"
         id="title"
@@ -27,8 +30,11 @@ const TodoForm = ({ todos, setTodos }) => {
           setNewTodo({ ...newTodo, title: e.target.value });
         }}
       />
-
-      <label htmlFor="status">Status:</label>
+      <br />
+      <br />
+      <label htmlFor="status" className="font-semibold pr-4">
+        Status:
+      </label>
       <select
         name="status"
         id="status"
@@ -40,7 +46,9 @@ const TodoForm = ({ todos, setTodos }) => {
         <option value="complete">complete</option>
         <option value="incomplete">incomplete</option>
       </select>
-      <button>+</button>
+      <button className=" bg-red-600 py-2 px-4 text-white rounded-full">
+        submit
+      </button>
     </form>
   );
 };

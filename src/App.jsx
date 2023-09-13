@@ -3,13 +3,15 @@ import AddTodo from "./components/AddTodo";
 import dataTodos from "./data/dataTodos";
 import "./index.css";
 
+import ToodList from "./components/TodoList";
+import AddTaskBtn from "./components/AddTaskBtn";
 function App() {
   const [showAddTodo, setShowAddTodo] = useState(false);
   const [todos, setTodos] = useState(dataTodos);
 
   return (
-    <div className="min-h-screen min-w-screen w-screen h-screen bg-[#F0F0F0] flex justify-center content-center flex-col">
-      <h1 className="text-5xl text-red-500 font-bold"> TODO LIST</h1>
+    <div className="min-h-screen min-w-screen w-screen h-screen flex flex-col">
+      {/* Show Todo Start END */}
       {showAddTodo && (
         <AddTodo
           setShowAddTodo={setShowAddTodo}
@@ -18,14 +20,13 @@ function App() {
           setTodos={setTodos}
         />
       )}
+      {/* Show TODO END*/}
 
-      <button
-        onClick={() => {
-          setShowAddTodo(!showAddTodo);
-        }}
-      >
-        Add Task
-      </button>
+      {/* Todo List */}
+      <ToodList todos={todos} setTodos={setTodos} />
+
+      {/* ADD TASK BUTTON  */}
+      <AddTaskBtn setShowAddTodo={setShowAddTodo} showAddTodo={showAddTodo} />
     </div>
   );
 }
