@@ -19,7 +19,10 @@ const addTodo = ({ showAddTodo, setShowAddTodo, todos, setTodos }) => {
           if (e.target.id === "outside") setShowAddTodo(false);
         }}
       ></div>
-      <div id="inside" className="bg-zinc-50 w-5/6 h-1/2 relative pt-10 ">
+      <div
+        id="inside"
+        className="bg-zinc-50 w-5/6 h-2/3 lg:w-1/3 relative pt-10 "
+      >
         <button
           className="text-red-500 text-3xl font-bold absolute right-1 top-1 "
           onClick={() => {
@@ -30,12 +33,8 @@ const addTodo = ({ showAddTodo, setShowAddTodo, todos, setTodos }) => {
         </button>
 
         {/* TODO FORM */}
-        <div>
-          <h1 className="text-xl text-center font-bold poppins mb-4">
-            Add TODO
-          </h1>
-          <TodoForm todos={todos} setTodos={setTodos} />
-        </div>
+
+        <TodoForm todos={todos} setTodos={setTodos} />
       </div>
     </motion.div>
   );
