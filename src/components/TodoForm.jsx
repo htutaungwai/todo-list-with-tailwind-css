@@ -1,14 +1,21 @@
 import React, { useState } from "react";
 
-const TodoForm = ({ todos, setTodos }) => {
-  const [newTodo, setNewTodo] = useState({ title: null, status: null });
+const TodoForm = ({ todos, setTodos, setShowAddTodo }) => {
+  const [newTodo, setNewTodo] = useState({
+    title: null,
+    status: true,
+    description: "",
+    id: Math.floor(Math.random() * 99999999),
+  });
 
   const addNewTodo = () => {
     const { title, status } = newTodo;
-    if (title === null || title === "" || status === null || status === "")
+    if (title === null || title === "" || status === null || status === "") {
       return;
-    console.log("made it here");
-    setTodos([...todos, newTodo]);
+    }
+
+    setTodos([...todos, { ...newTodo }]);
+    setShowAddTodo(false);
   };
 
   return (
@@ -44,7 +51,10 @@ const TodoForm = ({ todos, setTodos }) => {
           id="status"
           form="statusform"
           onChange={(e) => {
-            setNewTodo({ ...newTodo, status: e.target.value });
+            setNewTodo({
+              ...newTodo,
+              status: e.target.value === "complete" ? true : false,
+            });
           }}
         >
           <option value="complete">complete</option>
@@ -53,16 +63,19 @@ const TodoForm = ({ todos, setTodos }) => {
         <br />
         <br />
         <label
-          for="message"
-          class="block mb-2 text-md font-medium  text-gray-900 dark:text-white"
+          htmlFor="message"
+          className="block mb-2 text-md font-medium  text-gray-900 dark:text-white"
         >
           Description:
         </label>
         <textarea
           id="message"
           rows="4"
-          class="block ml-3 lg:mx-auto lg:w-11/12 mt-2 p-2.5 w-5/6 text-sm text-gray-900 shadow-md bg-white rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          className="block ml-3 lg:mx-auto lg:w-11/12 mt-2 p-2.5 w-5/6 text-sm text-gray-900 shadow-md bg-white rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           placeholder="Write your thoughts here..."
+          onChange={(e) => {
+            setNewTodo({ ...newTodo, description: e.target.value });
+          }}
         ></textarea>
 
         <button className=" bg-red-600 py-2 px-4 text-white rounded-full absolute bottom-10 left-1/2 -translate-x-1/2">

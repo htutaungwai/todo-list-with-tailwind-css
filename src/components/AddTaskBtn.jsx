@@ -4,11 +4,8 @@ const AddTaskBtn = ({ setShowAddTodo, showAddTodo }) => {
   return (
     <div className=" flex justify-center items-center flex-col  h-1/6 max-w-xl ">
       <button
-        className="rounded-full bg-red-500 w-32 text-white font-bold py-2 uppercase shadow-xl 
-transition ease-in-out  hover:bg-red-600  text-sm block "
+        className="rounded-full bg-red-500 w-32 text-white font-bold py-2 uppercase shadow-xl transition ease-in-out  hover:bg-red-600  text-sm block"
         onClick={() => {
-          console.log("wtf");
-
           setShowAddTodo(!showAddTodo);
         }}
       >

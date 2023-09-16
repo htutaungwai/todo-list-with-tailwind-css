@@ -34,7 +34,11 @@ const addTodo = ({ showAddTodo, setShowAddTodo, todos, setTodos }) => {
 
         {/* TODO FORM */}
 
-        <TodoForm todos={todos} setTodos={setTodos} />
+        <TodoForm
+          todos={todos}
+          setTodos={setTodos}
+          setShowAddTodo={setShowAddTodo}
+        />
       </div>
     </motion.div>
   );

@@ -1,6 +1,7 @@
 import "./TodoList.css";
 
 const ToodList = ({ todos, setTodos }) => {
+  console.log(todos);
   return (
     <div className="h-5/6 w-full ">
       {/* This is H1 heading */}
@@ -10,7 +11,9 @@ const ToodList = ({ todos, setTodos }) => {
 
       <div className="border-black shadow-md mb-1  pt-2 flex pb-1 pl-4 items-center gap-2 rounded-sm">
         <h1 className="font-bold capitalize">Todos</h1>
-        <h1 className="text-white bg-red-600 rounded px-2 py-1">3</h1>
+        <h1 className="text-white bg-red-600 rounded px-2 py-1">
+          {todos.length}
+        </h1>
       </div>
       <div className="w-full h-full max-w-xl max-h-[84%]  poppins flex flex-col overflow-scroll overflow-x-hidden  bg-zinc-50">
         <ul className="poppins capitalize px-10 py-5 ">
