@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 
 const TodoForm = ({ todos, setTodos, setShowAddTodo }) => {
+  const inputRef = useRef(HTMLElement || null);
   const [newTodo, setNewTodo] = useState({
     title: null,
     status: true,
@@ -8,16 +9,21 @@ const TodoForm = ({ todos, setTodos, setShowAddTodo }) => {
     id: Math.floor(Math.random() * 99999999),
   });
 
-  const addNewTodo = () => {
+  useEffect(() => {
+    inputRef.current?.focus();
+  }, []);
+
+  // FUNCTIONS
+  function addNewTodo() {
     const { title, status } = newTodo;
     if (title === null || title === "" || status === null || status === "") {
       return;
     }
-
     setTodos([...todos, { ...newTodo }]);
     setShowAddTodo(false);
-  };
+  }
 
+  // COMPONENTS
   return (
     <div>
       <h1 className="text-xl text-center font-bold poppins mb-4">Add TODO</h1>
@@ -32,6 +38,7 @@ const TodoForm = ({ todos, setTodos, setShowAddTodo }) => {
           Title:
         </label>
         <input
+          ref={inputRef}
           type="text"
           id="title"
           name="title"
