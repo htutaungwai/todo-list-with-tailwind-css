@@ -2,15 +2,21 @@ import { useState } from "react";
 import AddTodo from "./components/AddTodo";
 import dataTodos from "./data/dataTodos";
 import "./index.css";
+import { useSelector } from "react-redux";
 
 import ToodList from "./components/TodoList";
 import AddTaskBtn from "./components/AddTaskBtn";
 function App() {
   const [showAddTodo, setShowAddTodo] = useState(false);
   const [todos, setTodos] = useState(dataTodos);
+  const { mood } = useSelector((state) => state.theme);
 
   return (
-    <div className="min-h-screen min-w-screen w-screen h-screen flex flex-col">
+    <div
+      className={`min-h-screen min-w-screen w-screen h-screen flex flex-col ${
+        mood === "dark" ? " bg-zinc-800 text-white" : "text-black"
+      }`}
+    >
       {/* Show Todo Start END */}
       {showAddTodo && (
         <AddTodo

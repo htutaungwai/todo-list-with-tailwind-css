@@ -14,14 +14,14 @@ const dataTodos = [
     id: "3900xwiwo",
   },
   {
-    title: "go to the school",
+    title: "do house chores",
     checked: false,
     description:
       "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web ",
     id: "390dw0xwiwo",
   },
   {
-    title: "go to the school",
+    title: "meet up with martin",
     checked: false,
     description:
       "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web ",
@@ -29,7 +29,7 @@ const dataTodos = [
   },
 
   {
-    title: "go to the school",
+    title: "fix the bathroom light",
     checked: false,
     description:
       "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web ",

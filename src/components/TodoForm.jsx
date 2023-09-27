@@ -1,9 +1,14 @@
 import React, { useState, useRef, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { addTodo } from "../features/todoSlice/todoSlice";
 
-const TodoForm = ({ todos, setTodos, setShowAddTodo }) => {
+const TodoForm = ({ setShowAddTodo }) => {
+  const todos = useSelector((state) => state.todo.todos);
+  const dispatch = useDispatch();
   const inputRef = useRef(HTMLElement || null);
   const [newTodo, setNewTodo] = useState({
     title: null,
+    checked: false,
     status: true,
     description: "",
     id: Math.floor(Math.random() * 99999999),
@@ -19,7 +24,7 @@ const TodoForm = ({ todos, setTodos, setShowAddTodo }) => {
     if (title === null || title === "" || status === null || status === "") {
       return;
     }
-    setTodos([...todos, { ...newTodo }]);
+    dispatch(addTodo(newTodo));
     setShowAddTodo(false);
   }
 

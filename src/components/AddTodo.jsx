@@ -20,14 +20,15 @@ const addTodo = ({ showAddTodo, setShowAddTodo, todos, setTodos }) => {
       };
     }, [ref]);
   }
+
   const wrapperRef = useRef(HTMLElement || null);
   useOutsideDivCloser(wrapperRef);
   return (
     <motion.div
-      initial={{ opacity: 0, opacity: 0.1 }}
-      animate={{ opacity: 1, opacity: 1 }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
-      className="absolute   w-screen h-screen duration-300 ease-in-out delay-200 transition-all backdrop-brightness-50 flex justify-center items-center"
+      className="absolute  w-screen h-screen duration-300 ease-in-out delay-200 transition-all backdrop-brightness-50 flex justify-center items-center"
     >
       <div className=" w-full h-full absolute"></div>
       <div
