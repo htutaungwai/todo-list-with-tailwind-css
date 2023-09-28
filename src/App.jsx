@@ -1,15 +1,26 @@
+// HOOKS
 import { useState } from "react";
-import AddTodo from "./components/AddTodo";
-import dataTodos from "./data/dataTodos";
-import "./index.css";
+
+// REDUX HOOKS
 import { useSelector } from "react-redux";
 
+// CSS STYLING
+import "./index.css";
+
+// INITIAL DATAS
+import dataTodos from "./data/dataTodos";
+
+// COMPONENTS
+import AddTodo from "./components/AddTodo";
 import ToodList from "./components/TodoList";
 import AddTaskBtn from "./components/AddTaskBtn";
+import EditPage from "./pages/EditPageMobile";
+
 function App() {
   const [showAddTodo, setShowAddTodo] = useState(false);
   const [todos, setTodos] = useState(dataTodos);
   const { mood } = useSelector((state) => state.theme);
+  const showEditPage = useSelector((state) => state.reveal.editPage);
 
   return (
     <div
@@ -27,6 +38,12 @@ function App() {
         />
       )}
       {/* Show TODO END*/}
+
+      {/*-------SHOW EDIT PAGE MOBILE START------*/}
+
+      {showEditPage && <EditPage />}
+
+      {/* ------- SHOW EDIT PAGE MOBILE END -------*/}
 
       {/* Todo List */}
       <ToodList todos={todos} setTodos={setTodos} />

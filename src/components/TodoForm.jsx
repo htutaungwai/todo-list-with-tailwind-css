@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { addTodo } from "../features/todoSlice/todoSlice";
+import { addTodo } from "../features/todosSlice/todosSlice";
 
 const TodoForm = ({ setShowAddTodo }) => {
   const todos = useSelector((state) => state.todo.todos);

@@ -1,19 +1,35 @@
+// HOOKS
 import { useRef, useEffect } from "react";
-import { checkTodo, removeSingleTodo } from "../features/todoSlice/todoSlice";
+
+// COMPONENTS
+import {
+  checkTodo,
+  removeSingleTodo,
+  selectTodo,
+} from "../features/todosSlice/todosSlice";
+
+// REDUX HOOKS
 import { useDispatch } from "react-redux";
+
+// REDUCERS
+import { revealEditPage } from "../features/showPagesSlice/revealSlice";
 
 const SingleTodo = ({ obj, mood }) => {
   const dispatch = useDispatch();
   const inputRef = useRef(HTMLInputElement || null);
 
   const onClickHandler = (event) => {
+    // IF USE CLICKS ON INPUT TAG
     if (event && inputRef.current === event) {
       setTimeout(() => {
         dispatch(removeSingleTodo(obj.id));
-      }, 3000);
-
+      }, 2000);
       return;
     }
+
+    // IF USER CLICKS ON DIV
+    dispatch(selectTodo(obj.id));
+    dispatch(revealEditPage());
   };
 
   return (

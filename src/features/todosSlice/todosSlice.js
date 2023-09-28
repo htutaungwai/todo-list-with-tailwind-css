@@ -3,10 +3,11 @@ import dataTodos from "../../data/dataTodos.js";
 
 const initialState = {
   todos: dataTodos,
+  selectedTodo: null,
 };
 
-const todoSlice = createSlice({
-  name: "todo",
+const todosSlice = createSlice({
+  name: "todos",
   initialState,
   reducers: {
     addTodo: (state, action) => {
@@ -30,8 +31,16 @@ const todoSlice = createSlice({
     removeSingleTodo: (state, action) => {
       state.todos = state.todos.filter((todo) => todo.id !== action.payload);
     },
+
+    selectTodo: (state, action) => {
+      const [newTodo] = state.todos.filter(
+        (todo) => todo.id === action.payload
+      );
+      state.selectedTodo = newTodo;
+    },
   },
 });
 
-export const { addTodo, checkTodo, removeSingleTodo } = todoSlice.actions;
-export default todoSlice.reducer;
+export const { addTodo, checkTodo, removeSingleTodo, selectTodo } =
+  todosSlice.actions;
+export default todosSlice.reducer;
