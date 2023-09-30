@@ -14,7 +14,6 @@ import dataTodos from "./data/dataTodos";
 import AddTodo from "./components/AddTodo";
 import ToodList from "./components/TodoList";
 import AddTaskBtn from "./components/AddTaskBtn";
-import EditPage from "./pages/EditPageMobile";
 
 function App() {
   const [showAddTodo, setShowAddTodo] = useState(false);
@@ -41,7 +40,7 @@ function App() {
 
       {/*-------SHOW EDIT PAGE MOBILE START------*/}
 
-      {showEditPage && <EditPage />}
+      {/* {showEditPage && <EditPage />} */}
 
       {/* ------- SHOW EDIT PAGE MOBILE END -------*/}
 
