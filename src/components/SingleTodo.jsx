@@ -9,12 +9,14 @@ import {
 } from "../features/todosSlice/todosSlice";
 
 // REDUX HOOKS
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 // REDUCERS
 import { revealEditPage } from "../features/showPagesSlice/revealSlice";
 
 const SingleTodo = ({ obj, mood }) => {
+  const selectedTodo = useSelector((state) => state.todo.selectedTodo);
+
   const dispatch = useDispatch();
   const inputRef = useRef(HTMLInputElement || null);
 
@@ -22,6 +24,11 @@ const SingleTodo = ({ obj, mood }) => {
     // IF USE CLICKS ON INPUT TAG
     if (event && inputRef.current === event) {
       setTimeout(() => {
+        console.log(typeof selectedTodo.id, typeof obj.id);
+        if (selectedTodo?.id === obj.id) {
+          console.log("we come here");
+          dispatch(revealEditPage(false));
+        }
         dispatch(removeSingleTodo(obj.id));
       }, 2000);
       return;
@@ -29,7 +36,7 @@ const SingleTodo = ({ obj, mood }) => {
 
     // IF USER CLICKS ON DIV
     dispatch(selectTodo(obj.id));
-    dispatch(revealEditPage());
+    dispatch(revealEditPage(true));
   };
 
   return (

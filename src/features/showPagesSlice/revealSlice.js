@@ -9,7 +9,7 @@ const revealsSlice = createSlice({
   initialState,
   reducers: {
     revealEditPage: (state, action) => {
-      state.editPage = !state.editPage;
+      state.editPage = action.payload;
     },
   },
 });
