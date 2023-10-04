@@ -32,7 +32,7 @@ const EditWeb = () => {
           onChangeHandler(e.target.value, "TITLE");
         }}
       />
-      <br />
+
       <textarea
         type="text"
         value={description}
@@ -40,7 +40,6 @@ const EditWeb = () => {
           onChangeHandler(e.target.value, "DESCRIPTION");
         }}
       />
-      <br />
 
       <DateTimePicker
         valueFormat="DD MMM YYYY hh:mm A"
