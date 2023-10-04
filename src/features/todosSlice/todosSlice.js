@@ -20,12 +20,56 @@ const todosSlice = createSlice({
       };
       state.todos.push(todo);
     },
-    checkTodo: (state, action) => {
+
+    updateTodo: (state, action) => {
+      const { id, name, value } = action.payload;
+
+      state.todos.map((todo) => {
+        if (todo.id === id) {
+          switch (name) {
+            case "TITLE":
+              todo.title = value;
+              break;
+            case "DESCRIPTION":
+              todo.description = value;
+              // code block
+              break;
+            case "DATE":
+              todo.date = value;
+              // code block
+              break;
+            default:
+              break;
+          }
+        }
+      });
+    },
+
+    updateCheckTodo: (state, action) => {
       state.todos.map((todo) => {
         if (todo.id === action.payload) {
           todo.checked = true;
         }
       });
+    },
+
+    updateSelectedTodo: (state, action) => {
+      const { name, value } = action.payload;
+      switch (name) {
+        case "TITLE":
+          state.selectedTodo.title = value;
+          break;
+        case "DESCRIPTION":
+          state.selectedTodo.description = value;
+          // code block
+          break;
+        case "DATE":
+          state.selectedTodo.date = value;
+          // code block
+          break;
+        default:
+          break;
+      }
     },
 
     removeSingleTodo: (state, action) => {
@@ -41,6 +85,12 @@ const todosSlice = createSlice({
   },
 });
 
-export const { addTodo, checkTodo, removeSingleTodo, selectTodo } =
-  todosSlice.actions;
+export const {
+  addTodo,
+  updateCheckTodo,
+  removeSingleTodo,
+  selectTodo,
+  updateTodo,
+  updateSelectedTodo,
+} = todosSlice.actions;
 export default todosSlice.reducer;

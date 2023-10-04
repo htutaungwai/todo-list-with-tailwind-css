@@ -3,9 +3,9 @@ import { useRef, useEffect } from "react";
 
 // COMPONENTS
 import {
-  checkTodo,
   removeSingleTodo,
   selectTodo,
+  updateCheckTodo,
 } from "../features/todosSlice/todosSlice";
 
 // REDUX HOOKS
@@ -24,9 +24,7 @@ const SingleTodo = ({ obj, mood }) => {
     // IF USE CLICKS ON INPUT TAG
     if (event && inputRef.current === event) {
       setTimeout(() => {
-        console.log(typeof selectedTodo.id, typeof obj.id);
         if (selectedTodo?.id === obj.id) {
-          console.log("we come here");
           dispatch(revealEditPage(false));
         }
         dispatch(removeSingleTodo(obj.id));
@@ -55,7 +53,7 @@ const SingleTodo = ({ obj, mood }) => {
           name={obj.id}
           checked={obj.checked}
           onChange={() => {
-            dispatch(checkTodo(obj.id));
+            dispatch(updateCheckTodo(obj.id));
           }}
         />
 
