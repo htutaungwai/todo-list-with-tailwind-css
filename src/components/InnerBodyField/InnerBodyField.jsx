@@ -1,7 +1,7 @@
 import React from "react";
 
 // COMPONENTS
-import EditWeb from "../pages/EditWeb";
+import EditWeb from "./EditWeb";
 
 // REDUX HOOKS
 import { useSelector } from "react-redux";

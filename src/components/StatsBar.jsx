@@ -1,8 +1,11 @@
 import { BsMoonFill, BsSunFill } from "react-icons/bs";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { changeTheme } from "../features/themeSlice/themeSlice";
 
-const StatsBar = ({ todos, mood }) => {
+const StatsBar = () => {
+  // STATES
+  const todos = useSelector((state) => state.todo.todos);
+  const { mood } = useSelector((state) => state.theme);
   const dispatch = useDispatch();
   return (
     <div

@@ -5,13 +5,15 @@ import {
   selectTodo,
   updateTodo,
   updateSelectedTodo,
-} from "../features/todosSlice/todosSlice";
+} from "../../features/todosSlice/todosSlice";
 
 const EditWeb = () => {
   const dispatch = useDispatch();
   const { title, description, checked, date, id } = useSelector(
     (state) => state.todo.selectedTodo
   );
+
+  console.log(date);
 
   const onChangeHandler = (value, name) => {
     const typicalObject = {
@@ -42,11 +44,12 @@ const EditWeb = () => {
       />
 
       <DateTimePicker
+        value={new Date(date)}
         valueFormat="DD MMM YYYY hh:mm A"
         label="Pick date and time"
         placeholder="Pick date and time"
         onChange={(e) => {
-          onChangeHandler(e, "DATE");
+          onChangeHandler(e.toISOString(), "DATE");
         }}
       />
     </div>

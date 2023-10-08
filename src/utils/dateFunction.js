@@ -1,5 +1,5 @@
 export function byDate(a, b) {
-  return new Date(a.date).valueOf() - new Date(b.date).valueOf();
+  return Date.parse(new Date(a.date)) - Date.parse(new Date(b.date));
 }
 
 export function getMonthName(monthNumber) {
@@ -11,6 +11,8 @@ export function getMonthName(monthNumber) {
 export const primeDateGenerator = (dates) => {
   const primeObject = {};
   dates.sort(byDate);
+
+  console.log(dates);
   dates.forEach((d) => {
     const dd = new Date(d.date);
     if (!primeObject[dd.getFullYear()]) {
@@ -24,5 +26,3 @@ export const primeDateGenerator = (dates) => {
 
   return primeObject;
 };
-
-console.log(primeObject);
