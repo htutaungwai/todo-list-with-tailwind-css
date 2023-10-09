@@ -6,6 +6,9 @@ import { useSelector } from "react-redux";
 
 // DATE GENERATOR
 import { primeDateGenerator } from "../../utils/dateFunction";
+import { isObjectEmpty } from "../../utils/objFunctions";
+import NoTodos from "./NoTodos";
+import TodoFilter from "./TodoFilter/TodoFilter";
 
 const SortedTodoList = () => {
   // STATES
@@ -24,9 +27,13 @@ const SortedTodoList = () => {
         mood === "light" ? "bg-zinc-50" : "bg-black  text-white"
       }`}
     >
-      <ul className="poppins capitalize px-10 py-5">
-        {primeSortedObject.length !== 0 &&
-          Object.entries(primeSortedObject).map(([key, value]) => {
+      {/* TODO FILTER */}
+
+      <TodoFilter />
+
+      {!isObjectEmpty(primeSortedObject) ? (
+        <ul className="poppins capitalize px-10 py-5">
+          {Object.entries(primeSortedObject).map(([key, value]) => {
             return (
               <div key={key}>
                 <h2>{key}</h2>
@@ -47,7 +54,10 @@ const SortedTodoList = () => {
               </div>
             );
           })}
-      </ul>
+        </ul>
+      ) : (
+        <NoTodos />
+      )}
     </div>
   );
 };

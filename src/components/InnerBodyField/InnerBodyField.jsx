@@ -5,7 +5,6 @@ import EditWeb from "./EditWeb";
 
 // REDUX HOOKS
 import { useSelector } from "react-redux";
-console.log(new Date());
 
 const InnerBodyField = () => {
   const showEditPage = useSelector((state) => state.reveal.editPage);

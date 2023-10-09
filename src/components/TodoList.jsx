@@ -5,13 +5,12 @@ import "./TodoList.css";
 import StatsBar from "./StatsBar";
 import SortedTodoList from "./TodoListField/SortedTodoList";
 import InnerBodyField from "./InnerBodyField/InnerBodyField";
-import TodoFilter from "./TodoListField/TodoFilter/TodoFilter";
 
 const ToodList = () => {
   return (
-    <div className=" w-full h-[90%] ">
+    <div className=" w-full h-[96%] min-h-[96%] ">
       {/* This is H1 heading */}
-      <h1 className={`text-3xl text-red-500 font-bold text-center pt-5 `}>
+      <h1 className={`text-xl text-red-500 font-bold text-center pt-5 `}>
         TODO LIST
       </h1>
 

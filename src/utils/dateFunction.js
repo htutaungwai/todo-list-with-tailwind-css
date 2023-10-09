@@ -12,7 +12,6 @@ export const primeDateGenerator = (dates) => {
   const primeObject = {};
   dates.sort(byDate);
 
-  console.log(dates);
   dates.forEach((d) => {
     const dd = new Date(d.date);
     if (!primeObject[dd.getFullYear()]) {

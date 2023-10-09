@@ -14,6 +14,7 @@ import dataTodos from "./data/dataTodos";
 import AddTodo from "./components/AddTodo";
 import ToodList from "./components/TodoList";
 import AddTaskBtn from "./components/AddTaskBtn";
+import Footer from "./components/Footer/Footer";
 
 // DAY.JS
 import dayjs from "dayjs";
@@ -44,7 +45,7 @@ function App() {
       {/* Todo List */}
       <ToodList todos={todos} setTodos={setTodos} />
       {/* ADD TASK BUTTON  */}
-      <AddTaskBtn setShowAddTodo={setShowAddTodo} showAddTodo={showAddTodo} />
+      <Footer />
     </div>
   );
 }

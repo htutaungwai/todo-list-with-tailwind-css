@@ -7,13 +7,13 @@ import {
   updateSelectedTodo,
 } from "../../features/todosSlice/todosSlice";
 
+import { revealEditPage } from "../../features/showPagesSlice/revealSlice";
+
 const EditWeb = () => {
   const dispatch = useDispatch();
   const { title, description, checked, date, id } = useSelector(
     (state) => state.todo.selectedTodo
   );
-
-  console.log(date);
 
   const onChangeHandler = (value, name) => {
     const typicalObject = {
@@ -52,6 +52,14 @@ const EditWeb = () => {
           onChangeHandler(e.toISOString(), "DATE");
         }}
       />
+
+      <button
+        onClick={() => {
+          dispatch(revealEditPage(false));
+        }}
+      >
+        X
+      </button>
     </div>
   );
 };
