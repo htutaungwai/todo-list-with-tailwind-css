@@ -1,7 +1,8 @@
 import React from "react";
 
 // COMPONENTS
-import EditWeb from "./EditWeb";
+import EditTask from "./EditTask";
+import AddTask from "./AddTask";
 
 // REDUX HOOKS
 import { useSelector } from "react-redux";
@@ -9,7 +10,7 @@ import { useSelector } from "react-redux";
 const InnerBodyField = () => {
   const showEditPage = useSelector((state) => state.reveal.editPage);
 
-  return <>{showEditPage && <EditWeb />}</>;
+  return <>{showEditPage && <EditTask />}</>;
 };
 
 export default InnerBodyField;

@@ -39,7 +39,7 @@ const SingleTodo = ({ obj, mood }) => {
 
   return (
     <li
-      className={`mb-2 border-b-2`}
+      className={`mb-2 border-b-2 hover:bg-zinc-200 ease-in transition-all rounded-md`}
       onClick={(e) => {
         onClickHandler(e.target);
       }}
@@ -57,7 +57,7 @@ const SingleTodo = ({ obj, mood }) => {
           }}
         />
 
-        <label className={`${obj.checked ? "underline" : ""} font-medium`}>
+        <label className={`${obj.checked ? "line-through" : ""} font-medium`}>
           {obj.title}
         </label>
 

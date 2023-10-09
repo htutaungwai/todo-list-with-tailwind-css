@@ -29,19 +29,23 @@ const SortedTodoList = () => {
     >
       {/* TODO FILTER */}
 
-      <TodoFilter />
+      {/* <TodoFilter /> */}
 
       {!isObjectEmpty(primeSortedObject) ? (
         <ul className="poppins capitalize px-10 py-5">
           {Object.entries(primeSortedObject).map(([key, value]) => {
             return (
               <div key={key}>
-                <h2>{key}</h2>
+                <h2 className="text-xl font-extrabold  bg-zinc-200  text-center rounded-sm py-1">
+                  {key}
+                </h2>
 
                 {Object.entries(value).map(([monthKey, monthValue]) => {
                   return (
                     <div key={monthKey}>
-                      <h1>{monthKey}</h1>
+                      <h3 className="font-semibold text-red-500 py-2">
+                        {monthKey}
+                      </h3>
                       {monthValue.length !== 0 &&
                         monthValue.map((obj) => {
                           return (
