@@ -14,7 +14,7 @@ import { useDispatch, useSelector } from "react-redux";
 // REDUCERS
 import { revealEditPage } from "../features/showPagesSlice/revealSlice";
 
-const SingleTodo = ({ obj, mood }) => {
+const SingleTodo = ({ obj }) => {
   const selectedTodo = useSelector((state) => state.todo.selectedTodo);
 
   const dispatch = useDispatch();
@@ -56,6 +56,8 @@ const SingleTodo = ({ obj, mood }) => {
             dispatch(updateCheckTodo(obj.id));
           }}
         />
+
+        {/* TITLE */}
 
         <label className={`${obj.checked ? "line-through" : ""} font-medium`}>
           {obj.title}
