@@ -11,6 +11,8 @@ const todosSlice = createSlice({
   initialState,
   reducers: {
     addTodo: (state, action) => {
+      // ////////////////////
+      console.log("added todo");
       const { title, checked, description } = action.payload;
       const todo = {
         id: nanoid(),
@@ -22,6 +24,8 @@ const todosSlice = createSlice({
     },
 
     updateTodo: (state, action) => {
+      // ////////////////////
+      console.log("updated todo");
       const { id, name, value } = action.payload;
 
       state.todos.map((todo) => {
@@ -46,6 +50,8 @@ const todosSlice = createSlice({
     },
 
     updateCheckTodo: (state, action) => {
+      // ////////////////////
+      console.log("updated checked todo");
       state.todos.map((todo) => {
         if (todo.id === action.payload) {
           todo.checked = true;
@@ -54,6 +60,8 @@ const todosSlice = createSlice({
     },
 
     updateSelectedTodo: (state, action) => {
+      // ////////////////////
+      console.log("updated selected todo");
       const { name, value } = action.payload;
       switch (name) {
         case "TITLE":
@@ -73,10 +81,14 @@ const todosSlice = createSlice({
     },
 
     removeSingleTodo: (state, action) => {
+      // ////////////////////
+      console.log("remove single todo");
       state.todos = state.todos.filter((todo) => todo.id !== action.payload);
     },
 
     selectTodo: (state, action) => {
+      // ////////////////////
+      console.log("seleced todo");
       const [newTodo] = state.todos.filter(
         (todo) => todo.id === action.payload
       );

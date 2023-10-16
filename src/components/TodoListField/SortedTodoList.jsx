@@ -1,3 +1,6 @@
+// REACT STATES
+import { useState } from "react";
+
 // COMPONENTS
 import SingleTodo from "../SingleTodo";
 
@@ -22,6 +25,7 @@ const SortedTodoList = () => {
 
   // since REDUX state cannot be mutable
   const mutableTodos = [...todos];
+  const [searchTodos, setSearchTodos] = useState([]);
 
   // generating a sorted object
   const primeSortedObject = primeDateGenerator(mutableTodos);
@@ -34,9 +38,10 @@ const SortedTodoList = () => {
     >
       {/* TODO FILTER */}
 
+      {/* Manipulating TODOs*/}
+
       {!isObjectEmpty(primeSortedObject) ? (
         <>
-          <TodoFilter />
           <ul className="poppins capitalize px-10 py-5">
             {Object.entries(primeSortedObject).map(([key, value]) => {
               return (
