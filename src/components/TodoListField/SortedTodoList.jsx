@@ -1,5 +1,5 @@
 // REACT STATES
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 // COMPONENTS
 import SingleTodo from "../SingleTodo";
@@ -17,6 +17,7 @@ import TodoFilter from "./TodoFilter/TodoFilter";
 
 // ICONS
 import { BsCalendar3 } from "react-icons/bs";
+import { AiOutlinePlusCircle } from "react-icons/ai";
 
 const SortedTodoList = () => {
   // STATES
@@ -25,10 +26,37 @@ const SortedTodoList = () => {
 
   // since REDUX state cannot be mutable
   const mutableTodos = [...todos];
-  const [searchTodos, setSearchTodos] = useState([]);
+
+  // SEARCH STATE
+  const [searchedTodos, setSearchedTodos] = useState([]);
+  const [searchValue, setSearchValue] = useState("");
 
   // generating a sorted object
   const primeSortedObject = primeDateGenerator(mutableTodos);
+
+  // SEARCH HANDLER
+  const searchHandler = (value) => {
+    setSearchValue(value);
+  };
+
+  // CHECKING SEARCH VALUE
+  // useEffect(() => {
+  //   if (searchValue !== "") {
+  //     mutableTodos = mutableTodos.filter((todo) => {
+  //       const { title, description } = todo;
+
+  //       if (title.includes(searchValue)) {
+  //         return todo;
+  //       } else if (description.includes(searchValue)) {
+  //         return todo;
+  //       } else {
+  //         return;
+  //       }
+  //     });
+  //   } else {
+  //     mutableTodos = [...todos];
+  //   }
+  // }, [searchValue]);
 
   return (
     <div
@@ -36,10 +64,24 @@ const SortedTodoList = () => {
         mood === "light" ? "bg-zinc-50" : "bg-black  text-white"
       }`}
     >
-      {/* TODO FILTER */}
+      {/* SEARCH AND SORT BY SECTION */}
+      <div>
+        <div className="">
+          <input
+            type="text"
+            placeholder="search todo"
+            onChange={(e) => {
+              searchHandler(e.target.value.toString());
+            }}
+          />
 
-      {/* Manipulating TODOs*/}
+          <button className="bg-red-500">
+            <AiOutlinePlusCircle />
+          </button>
+        </div>
+      </div>
 
+      {/* Displaying TODOs*/}
       {!isObjectEmpty(primeSortedObject) ? (
         <>
           <ul className="poppins capitalize px-10 py-5">
