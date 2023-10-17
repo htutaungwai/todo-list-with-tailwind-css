@@ -28,7 +28,6 @@ const SortedTodoList = () => {
   const mutableTodos = [...todos];
 
   // SEARCH STATE
-  const [searchedTodos, setSearchedTodos] = useState([]);
   const [searchValue, setSearchValue] = useState("");
 
   // generating a sorted object
@@ -38,25 +37,6 @@ const SortedTodoList = () => {
   const searchHandler = (value) => {
     setSearchValue(value);
   };
-
-  // CHECKING SEARCH VALUE
-  // useEffect(() => {
-  //   if (searchValue !== "") {
-  //     mutableTodos = mutableTodos.filter((todo) => {
-  //       const { title, description } = todo;
-
-  //       if (title.includes(searchValue)) {
-  //         return todo;
-  //       } else if (description.includes(searchValue)) {
-  //         return todo;
-  //       } else {
-  //         return;
-  //       }
-  //     });
-  //   } else {
-  //     mutableTodos = [...todos];
-  //   }
-  // }, [searchValue]);
 
   return (
     <div
@@ -71,7 +51,7 @@ const SortedTodoList = () => {
             type="text"
             placeholder="search todo"
             onChange={(e) => {
-              searchHandler(e.target.value.toString());
+              searchHandler(e.target.value.toString().toLowerCase());
             }}
           />
 
@@ -102,9 +82,17 @@ const SortedTodoList = () => {
                           {monthKey}
                         </h3>
                         {monthValue.length !== 0 &&
-                          monthValue.map((obj) => {
-                            return <SingleTodo obj={obj} key={obj.id} />;
-                          })}
+                          monthValue
+                            .filter((item) =>
+                              searchValue.toLocaleLowerCase() === ""
+                                ? item
+                                : item.title
+                                    .toLocaleLowerCase()
+                                    .includes(searchValue)
+                            )
+                            .map((obj) => {
+                              return <SingleTodo obj={obj} key={obj.id} />;
+                            })}
                       </div>
                     );
                   })}
