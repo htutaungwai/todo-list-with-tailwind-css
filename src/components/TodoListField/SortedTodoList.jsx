@@ -29,14 +29,24 @@ const SortedTodoList = () => {
 
   // SEARCH STATE
   const [searchValue, setSearchValue] = useState("");
+  const [searchState, setSearchState] = useState(false);
 
   // generating a sorted object
   const primeSortedObject = primeDateGenerator(mutableTodos);
 
   // SEARCH HANDLER
   const searchHandler = (value) => {
-    setSearchValue(value);
+    setSearchValue(value.toLocaleLowerCase());
   };
+
+  useEffect(() => {
+    if (searchValue === "") {
+      setSearchState(false);
+      return;
+    }
+
+    setSearchState(true);
+  }, [searchValue]);
 
   return (
     <div
@@ -68,23 +78,27 @@ const SortedTodoList = () => {
             {Object.entries(primeSortedObject).map(([key, value]) => {
               return (
                 <div key={key}>
-                  <div className="flex w-full min-w-full flex-row bg-zinc-200 justify-center items-center relative">
-                    <h2 className="text-xl font-extrabold    text-center rounded-sm py-1">
-                      {key}
-                    </h2>
-                    <BsCalendar3 className="absolute right-6" />
-                  </div>
+                  {!searchState && (
+                    <div className="flex w-full min-w-full flex-row bg-zinc-200 justify-center items-center relative">
+                      <h2 className="text-xl font-extrabold    text-center rounded-sm py-1">
+                        {key}
+                      </h2>
+                      <BsCalendar3 className="absolute right-6" />
+                    </div>
+                  )}
 
                   {Object.entries(value).map(([monthKey, monthValue]) => {
                     return (
                       <div key={monthKey}>
-                        <h3 className="font-semibold text-red-500 py-2">
-                          {monthKey}
-                        </h3>
+                        {!searchState && (
+                          <h3 className="font-semibold text-red-500 py-2">
+                            {monthKey}
+                          </h3>
+                        )}
                         {monthValue.length !== 0 &&
                           monthValue
                             .filter((item) =>
-                              searchValue.toLocaleLowerCase() === ""
+                              !searchState
                                 ? item
                                 : item.title
                                     .toLocaleLowerCase()
