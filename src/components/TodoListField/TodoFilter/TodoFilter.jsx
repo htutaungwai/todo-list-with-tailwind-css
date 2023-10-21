@@ -1,10 +1,7 @@
-// // ICONS
-import { AiOutlinePlusCircle } from "react-icons/ai";
+import React from "react";
 
 const TodoFilter = () => {
-  const searchHandler = () => {};
-
-  return <></>;
+  return <div>TodoFilter</div>;
 };
 
 export default TodoFilter;

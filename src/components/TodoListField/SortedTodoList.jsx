@@ -18,6 +18,7 @@ import TodoFilter from "./TodoFilter/TodoFilter";
 // ICONS
 import { BsCalendar3 } from "react-icons/bs";
 import { AiOutlinePlusCircle } from "react-icons/ai";
+import SearchBar from "./TodoFilter/SearchBar";
 
 const SortedTodoList = () => {
   // STATES
@@ -55,25 +56,11 @@ const SortedTodoList = () => {
       }`}
     >
       {/* SEARCH AND SORT BY SECTION */}
-      <div>
-        <div className="">
-          <input
-            type="text"
-            placeholder="search todo"
-            onChange={(e) => {
-              searchHandler(e.target.value.toString().toLowerCase());
-            }}
-          />
-
-          <button className="bg-red-500">
-            <AiOutlinePlusCircle />
-          </button>
-        </div>
-      </div>
 
       {/* Displaying TODOs*/}
       {!isObjectEmpty(primeSortedObject) ? (
         <>
+          <SearchBar setSearchValue={setSearchValue} />
           <ul className="poppins capitalize px-10 py-5">
             {Object.entries(primeSortedObject).map(([key, value]) => {
               return (
@@ -101,6 +88,10 @@ const SortedTodoList = () => {
                               !searchState
                                 ? item
                                 : item.title
+                                    .toLocaleLowerCase()
+                                    .includes(searchValue)
+                                ? item
+                                : item.description
                                     .toLocaleLowerCase()
                                     .includes(searchValue)
                             )

@@ -1,23 +1,29 @@
-// import { AiOutlinePlusCircle } from "react-icons/ai";
+// ICONS
+import { AiOutlinePlusCircle } from "react-icons/ai";
 
-// // SLICES
+// COMPONENTS
+import TodoFilter from "./TodoFilter";
 
-// // REACT-REDUX
-// import { useSelector } from "react-redux";
+const SearchBar = ({ setSearchValue }) => {
+  return (
+    <div>
+      <div className="">
+        <input
+          type="text"
+          placeholder="search todo"
+          onChange={(e) => {
+            setSearchValue(e.target.value.toString().toLowerCase());
+          }}
+        />
 
-// const SearchBar = () => {
-//   const todos = useSelector((state) => state.todo.todos);
+        <button className="bg-red-500">
+          <AiOutlinePlusCircle />
+        </button>
+      </div>
 
-//   const searchHandler = (value) => {
+      <TodoFilter />
+    </div>
+  );
+};
 
-//     console.log(filteredTodos);
-//   };
-
-//   // state.
-
-//   return (
-
-//   );
-// };
-
-// export default SearchBar;
+export default SearchBar;
