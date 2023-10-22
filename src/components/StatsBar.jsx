@@ -46,7 +46,7 @@ const StatsBar = () => {
       {/* STATISTICS BAR END*/}
       <div
         className={`ml-auto mr-5 rounded-md border-slate-600 shadow-xl border-2 ${
-          mood === "light" ? "bg-slate-800" : "bg-stone-100 "
+          mood === "dark" ? "bg-slate-800" : "bg-stone-200 "
         }`}
       >
         <button
@@ -55,7 +55,7 @@ const StatsBar = () => {
           }}
           className="text-md p-2"
         >
-          {mood === "dark" ? (
+          {mood === "light" ? (
             <BsSunFill className="text-yellow-500" />
           ) : (
             <BsMoonFill className=" text-slate-300" />

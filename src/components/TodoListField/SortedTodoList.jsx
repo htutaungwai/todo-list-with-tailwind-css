@@ -51,7 +51,7 @@ const SortedTodoList = () => {
 
   return (
     <div
-      className={`w-full h-full max-w-xl  poppins flex flex-col overflow-y-scroll overflow-x-hidden  ${
+      className={`w-full h-full max-w-xl  poppins flex flex-col overflow-y-scroll overflow-x-hidden relative   ${
         mood === "light" ? "bg-zinc-50" : "bg-black  text-white"
       }`}
     >

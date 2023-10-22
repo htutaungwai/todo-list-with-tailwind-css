@@ -2,12 +2,13 @@ import React, { useEffect, useState } from "react";
 import { DateTimePicker } from "@mantine/dates";
 import { useSelector, useDispatch } from "react-redux";
 import {
-  selectTodo,
   updateTodo,
   updateSelectedTodo,
 } from "../../features/todosSlice/todosSlice";
 
 import { revealEditPage } from "../../features/showPagesSlice/revealSlice";
+import Tiptap from "../Tiptap/Tiptap";
+import MenuBar from "../Tiptap/MenuBar";
 
 const EditWeb = () => {
   const dispatch = useDispatch();
@@ -26,8 +27,8 @@ const EditWeb = () => {
   };
 
   return (
-    <div className="w-full h-full bg-zinc-50  absolute top-0 md:block md:relative">
-      <input
+    <div className="w-full h-full bg-zinc-50  absolute top-0 md:block md:relative p-4">
+      {/* <input
         type="text"
         value={title}
         onChange={(e) => {
@@ -59,7 +60,9 @@ const EditWeb = () => {
         }}
       >
         X
-      </button>
+      </button> */}
+
+      <MenuBar />
     </div>
   );
 };

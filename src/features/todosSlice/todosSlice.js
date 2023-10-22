@@ -13,14 +13,22 @@ const todosSlice = createSlice({
     addTodo: (state, action) => {
       // ////////////////////
       console.log("added todo");
-      const { title, checked, description } = action.payload;
+      const title = action.payload.title ? action.payload.title : "";
+      const description = action.payload.title ? action.payload.title : "";
+      const checked = action.payload.checked ? action.payload.checked : false;
+      const date = action.payload.date
+        ? action.payload.date
+        : new Date().toISOString();
+
       const todo = {
         id: nanoid(),
         title: title,
         checked: checked,
         description: description,
+        date: date,
       };
       state.todos.push(todo);
+      state.selectedTodo = todo;
     },
 
     updateTodo: (state, action) => {
