@@ -34,6 +34,8 @@ const SingleTodo = ({ obj }) => {
 
     // IF USER CLICKS ON DIV
     dispatch(selectTodo(obj.id));
+    dispatch(revealEditPage(false));
+
     dispatch(revealEditPage(true));
   };
 

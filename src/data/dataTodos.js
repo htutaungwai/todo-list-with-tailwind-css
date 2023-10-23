@@ -6,12 +6,14 @@ const dataTodos = [
       "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web ",
     id: "390dpaxwiwo",
     date: "2023-12-28T13:09:00.697Z",
+    content: ``,
   },
   {
     title: "go to the market",
     checked: false,
     description:
       "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web  ",
+    content: "",
     id: "3900xiwo",
     date: "2023-10-30T13:09:00.697Z",
   },
@@ -21,6 +23,7 @@ const dataTodos = [
     description:
       "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web ",
     id: "3900xwiwo",
+    content: "",
     date: "2023-11-05T13:09:00.697Z",
   },
   {
@@ -29,6 +32,7 @@ const dataTodos = [
     description:
       "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web ",
     id: "390dw0xwiwo",
+    content: "",
     date: "2024-01-12T13:09:00.697Z",
   },
   {
@@ -37,6 +41,29 @@ const dataTodos = [
     description:
       "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web ",
     id: "w0xwiwo",
+    content: `<h2>
+    Hello Mark,
+  </h2>
+  <p>
+    this is a <em>basic</em> example of <strong>tiptap</strong>. Sure, there are all kind of basic text styles you’d probably expect from a text editor. But wait until you see the lists:
+  </p>
+  <ul>
+    <li>
+      That’s a bullet list with one …
+    </li>
+    <li>
+      … or two list items.
+    </li>
+  </ul>
+  <p>
+    Isn’t that great? And all of that is editable. But wait, there’s more. Let’s try a code block:
+  </p>
+  <pre><code class="language-css">body {
+  display: none;
+  }</code></pre>
+  <p>
+    I know, I know, this is impressive. It’s only the tip of the iceberg though. Give it a try and click a little bit around. Don’t forget to check the other examples too.
+  </p>`,
     date: "2023-10-30T16:10:00.332Z",
   },
   {
@@ -49,6 +76,7 @@ const dataTodos = [
       I'll be relieved when the bathroom light is shining brightly again, guiding our way through those early mornings and late-night visits
       `,
     id: "390dw0x2wiwo",
+    content: "",
     date: "2023-10-30T09:09:00.743Z",
   },
 ];

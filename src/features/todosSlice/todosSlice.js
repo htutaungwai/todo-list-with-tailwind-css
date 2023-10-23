@@ -16,6 +16,7 @@ const todosSlice = createSlice({
       const title = action.payload.title ? action.payload.title : "";
       const description = action.payload.title ? action.payload.title : "";
       const checked = action.payload.checked ? action.payload.checked : false;
+      // const content = action.payload.content ? action.payload.content : "";
       const date = action.payload.date
         ? action.payload.date
         : new Date().toISOString();
@@ -26,6 +27,7 @@ const todosSlice = createSlice({
         checked: checked,
         description: description,
         date: date,
+        content: content,
       };
       state.todos.push(todo);
       state.selectedTodo = todo;
@@ -50,9 +52,15 @@ const todosSlice = createSlice({
               todo.date = value;
               // code block
               break;
+            case "CONTENT":
+              todo.content = value;
+              // code block
+              break;
             default:
               break;
           }
+
+          state.selectedTodo = todo;
         }
       });
     },

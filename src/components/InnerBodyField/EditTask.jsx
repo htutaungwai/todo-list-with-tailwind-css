@@ -12,7 +12,7 @@ import MenuBar from "../Tiptap/MenuBar";
 
 const EditWeb = () => {
   const dispatch = useDispatch();
-  const { title, description, checked, date, id } = useSelector(
+  const { title, description, checked, date, id, content } = useSelector(
     (state) => state.todo.selectedTodo
   );
 
@@ -22,25 +22,18 @@ const EditWeb = () => {
       name,
       value,
     };
+    //
     dispatch(updateTodo(typicalObject));
-    dispatch(updateSelectedTodo(typicalObject));
   };
 
+  console.log(content);
   return (
-    <div className="w-full h-full bg-zinc-50  absolute top-0 md:block md:relative p-4">
-      {/* <input
+    <div className="w-full h-full max-h-full overflow-x-hidden overflow-y-scroll bg-zinc-50 absolute top-0 md:block md:relative p-4 z-20">
+      <input
         type="text"
         value={title}
         onChange={(e) => {
           onChangeHandler(e.target.value, "TITLE");
-        }}
-      />
-
-      <textarea
-        type="text"
-        value={description}
-        onChange={(e) => {
-          onChangeHandler(e.target.value, "DESCRIPTION");
         }}
       />
 
@@ -60,7 +53,12 @@ const EditWeb = () => {
         }}
       >
         X
-      </button> */}
+      </button>
+
+      <br />
+      <br />
+      <br />
+      <br />
 
       <MenuBar />
     </div>
