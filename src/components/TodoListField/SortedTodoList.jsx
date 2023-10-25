@@ -13,7 +13,6 @@ import { isObjectEmpty } from "../../utils/objFunctions";
 
 // COMPONENTS
 import NoTodos from "./NoTodos";
-import TodoFilter from "./TodoFilter/TodoFilter";
 
 // ICONS
 import { BsCalendar3 } from "react-icons/bs";

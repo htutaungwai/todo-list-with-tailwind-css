@@ -15,15 +15,12 @@ import AddTodo from "./components/AddTodo";
 import ToodList from "./components/TodoList";
 import AddTaskBtn from "./components/AddTaskBtn";
 import Footer from "./components/Footer/Footer";
-
-// DAY.JS
-import dayjs from "dayjs";
+import SideBar from "./components/SideBar/SideBar";
 
 function App() {
   const [showAddTodo, setShowAddTodo] = useState(false);
   const [todos, setTodos] = useState(dataTodos);
   const { mood } = useSelector((state) => state.theme);
-  const showEditPage = useSelector((state) => state.reveal.editPage);
 
   return (
     <div
@@ -45,6 +42,8 @@ function App() {
       {/* Todo List */}
       <ToodList todos={todos} setTodos={setTodos} />
       {/* ADD TASK BUTTON  */}
+
+      <SideBar />
       <Footer />
     </div>
   );

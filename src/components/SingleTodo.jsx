@@ -36,7 +36,9 @@ const SingleTodo = ({ obj }) => {
     dispatch(selectTodo(obj.id));
     dispatch(revealEditPage(false));
 
-    dispatch(revealEditPage(true));
+    setTimeout(() => {
+      dispatch(revealEditPage(true));
+    }, 300);
   };
 
   return (

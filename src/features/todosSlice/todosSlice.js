@@ -13,10 +13,14 @@ const todosSlice = createSlice({
     addTodo: (state, action) => {
       // ////////////////////
       console.log("added todo");
-      const title = action.payload.title ? action.payload.title : "";
-      const description = action.payload.title ? action.payload.title : "";
+      const title = action.payload.title ? action.payload.title : "new todo";
+      const description = action.payload.title
+        ? action.payload.description
+        : "new todo";
       const checked = action.payload.checked ? action.payload.checked : false;
-      // const content = action.payload.content ? action.payload.content : "";
+      const content = action.payload.content
+        ? action.payload.content
+        : "<h1>New Todo</h1>";
       const date = action.payload.date
         ? action.payload.date
         : new Date().toISOString();
