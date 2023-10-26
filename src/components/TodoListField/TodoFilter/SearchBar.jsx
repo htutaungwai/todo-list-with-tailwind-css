@@ -44,7 +44,7 @@ const SearchBar = ({ setSearchValue }) => {
               })
             );
 
-            dispatch(revealEditPage());
+            dispatch(revealEditPage(true));
           }}
         >
           <AiOutlinePlusCircle />

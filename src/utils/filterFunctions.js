@@ -1,39 +1,17 @@
-const sampleObject = {
-  2023: {
-    january: [
-      {
-        title: "MMSP",
-        description: "min may sat pat",
-      },
+function filteredByTitle(msj) {
+  console.log("In alpha: " + msj);
+}
 
-      {
-        title: "LLLL",
-        description: "lee lee lar lar",
-      },
-    ],
+function filteredByDateCreated(msj) {
+  console.log("In beta: " + msj);
+}
 
-    febuary: [
-      {
-        title: "LL",
-        description: "lee lar",
-      },
-    ],
-  },
-  2024: {
-    march: [
-      {
-        title: "SPP",
-        description: "sap pat pal",
-      },
-    ],
+function filteredByDateUpdated(msj) {
+  console.log("In beta: " + msj);
+}
 
-    march: [
-      {
-        title: "KMKL",
-        description: "ko may ko lol",
-      },
-    ],
-  },
+module.exports = {
+  filteredByTitle,
+  filteredByDateCreated,
+  filteredByDateUpdated,
 };
-
-const filteredByText = (value) => {};

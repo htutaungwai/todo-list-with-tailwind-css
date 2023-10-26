@@ -1,13 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import { DateTimePicker } from "@mantine/dates";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  updateTodo,
-  updateSelectedTodo,
-} from "../../features/todosSlice/todosSlice";
+import { updateTodo } from "../../features/todosSlice/todosSlice";
 
 import { revealEditPage } from "../../features/showPagesSlice/revealSlice";
-import Tiptap from "../Tiptap/Tiptap";
 import MenuBar from "../Tiptap/MenuBar";
 
 const EditWeb = () => {
@@ -15,6 +11,11 @@ const EditWeb = () => {
   const { title, description, checked, date, id, content } = useSelector(
     (state) => state.todo.selectedTodo
   );
+  const titleRef = useRef(HTMLElement);
+
+  useEffect(() => {
+    titleRef.current.focus();
+  }, []);
 
   const onChangeHandler = (value, name) => {
     const typicalObject = {
@@ -22,15 +23,14 @@ const EditWeb = () => {
       name,
       value,
     };
-    //
     dispatch(updateTodo(typicalObject));
   };
 
-  console.log(content);
   return (
     <div className="w-full h-full max-h-full overflow-x-hidden overflow-y-scroll bg-zinc-50 absolute top-0 md:block md:relative p-4 z-20">
       <input
         type="text"
+        ref={titleRef}
         value={title}
         onChange={(e) => {
           onChangeHandler(e.target.value, "TITLE");
