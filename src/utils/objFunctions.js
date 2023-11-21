@@ -4,6 +4,5 @@ export function isObjectEmpty(obj) {
       return false;
     }
   }
-
   return true;
 }

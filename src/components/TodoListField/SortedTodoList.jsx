@@ -16,7 +16,6 @@ import NoTodos from "./NoTodos";
 
 // ICONS
 import { BsCalendar3 } from "react-icons/bs";
-import { AiOutlinePlusCircle } from "react-icons/ai";
 import SearchBar from "./TodoFilter/SearchBar";
 
 const SortedTodoList = () => {
@@ -27,16 +26,17 @@ const SortedTodoList = () => {
   // since REDUX state cannot be mutable
   const mutableTodos = [...todos];
 
-  // SEARCH STATE
+  // SEARCH STATE and SORT STATE
   const [searchValue, setSearchValue] = useState("");
   const [searchState, setSearchState] = useState(false);
+  const [sortBy, setSortBy] = useState("TITLE");
 
   // generating a sorted object
-  const primeSortedObject = primeDateGenerator(mutableTodos);
+  const primeSortedObject = primeDateGenerator(mutableTodos, sortBy);
 
-  // SEARCH HANDLER
-  const searchHandler = (value) => {
-    setSearchValue(value.toLocaleLowerCase());
+  // SORT STATE HANDLER
+  const sortByHandler = (value) => {
+    setSortBy(value);
   };
 
   useEffect(() => {
@@ -66,7 +66,7 @@ const SortedTodoList = () => {
                 <div key={key}>
                   {!searchState && (
                     <div className="flex w-full min-w-full flex-row bg-zinc-200 justify-center items-center relative">
-                      <h2 className="text-xl font-extrabold    text-center rounded-sm py-1">
+                      <h2 className="text-xl font-extrabold text-center rounded-sm py-1">
                         {key}
                       </h2>
                       <BsCalendar3 className="absolute right-6" />
@@ -81,6 +81,7 @@ const SortedTodoList = () => {
                             {monthKey}
                           </h3>
                         )}
+
                         {monthValue.length !== 0 &&
                           monthValue
                             .filter((item) =>

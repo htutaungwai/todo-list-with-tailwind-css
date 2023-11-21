@@ -17,9 +17,9 @@ import { FaSortAmountDown } from "react-icons/fa";
 import { BsCheckLg } from "react-icons/bs";
 
 const SearchBar = ({ setSearchValue }) => {
-  // MIGHT DELETE LATOR
+  // MIGHT DELETE LATER
   const sideBarState = useSelector((state) => state.reveal.sideBar);
-  // MIGHT DELETE LATOR
+  // MIGHT DELETE LATER
   const dispatch = useDispatch();
   return (
     <div className="sticky top-0 bg-zinc-50 z-10 shadow-md">

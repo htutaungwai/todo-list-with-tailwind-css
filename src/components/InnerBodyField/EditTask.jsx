@@ -8,7 +8,7 @@ import MenuBar from "../Tiptap/MenuBar";
 
 const EditWeb = () => {
   const dispatch = useDispatch();
-  const { title, description, checked, date, id, content } = useSelector(
+  const { title, description, checked, dateCreated, id, content } = useSelector(
     (state) => state.todo.selectedTodo
   );
   const titleRef = useRef(HTMLElement);
@@ -38,7 +38,7 @@ const EditWeb = () => {
       />
 
       <DateTimePicker
-        value={new Date(date)}
+        value={new Date(dateCreated)}
         valueFormat="DD MMM YYYY hh:mm A"
         label="Pick date and time"
         placeholder="Pick date and time"

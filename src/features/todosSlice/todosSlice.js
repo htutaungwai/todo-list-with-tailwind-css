@@ -21,8 +21,8 @@ const todosSlice = createSlice({
       const content = action.payload.content
         ? action.payload.content
         : "<h1>New Todo</h1>";
-      const date = action.payload.date
-        ? action.payload.date
+      const dateCreated = action.payload.dateCreated
+        ? action.payload.dateCreated
         : new Date().toISOString();
 
       const todo = {
@@ -30,7 +30,7 @@ const todosSlice = createSlice({
         title: title,
         checked: checked,
         description: description,
-        date: date,
+        dateCreated: dateCreated,
         content: content,
       };
       state.todos.push(todo);
@@ -53,7 +53,7 @@ const todosSlice = createSlice({
               // code block
               break;
             case "DATE":
-              todo.date = value;
+              todo.created = value;
               // code block
               break;
             case "CONTENT":
@@ -92,7 +92,7 @@ const todosSlice = createSlice({
           // code block
           break;
         case "DATE":
-          state.selectedTodo.date = value;
+          state.selectedTodo.dateCreated = value;
           // code block
           break;
         default:
@@ -109,6 +109,7 @@ const todosSlice = createSlice({
     selectTodo: (state, action) => {
       // ////////////////////
       console.log("seleced todo");
+      console.log(action.payload);
       const [newTodo] = state.todos.filter(
         (todo) => todo.id === action.payload
       );

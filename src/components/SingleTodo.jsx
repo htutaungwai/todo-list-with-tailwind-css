@@ -104,7 +104,7 @@ const SingleTodo = ({ obj }) => {
         </p>
 
         <span className="absolute right-5 text-xs text-black  top-1">
-          12/Oct/2022
+          {obj.dateCreated}
         </span>
       </div>
     </li>
