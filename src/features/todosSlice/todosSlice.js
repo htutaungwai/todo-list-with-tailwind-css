@@ -24,13 +24,16 @@ const todosSlice = createSlice({
       const dateCreated = action.payload.dateCreated
         ? action.payload.dateCreated
         : new Date().toISOString();
-
+      const dateUpdated = action.payload.dateUpdated
+        ? action.payload.dateUpdated
+        : new Date().toISOString();
       const todo = {
         id: nanoid(),
         title: title,
         checked: checked,
         description: description,
         dateCreated: dateCreated,
+        dateUpdated: dateUpdated,
         content: content,
       };
       state.todos.push(todo);
@@ -44,23 +47,20 @@ const todosSlice = createSlice({
 
       state.todos.map((todo) => {
         if (todo.id === id) {
+          todo.dateUpdated = new Date().toISOString();
           switch (name) {
             case "TITLE":
               todo.title = value;
               break;
             case "DESCRIPTION":
               todo.description = value;
-              // code block
+
               break;
-            case "DATE":
-              todo.created = value;
-              // code block
+            case "CREATED":
+              todo.dateCreated = value;
               break;
             case "CONTENT":
               todo.content = value;
-              // code block
-              break;
-            default:
               break;
           }
 
@@ -95,9 +95,8 @@ const todosSlice = createSlice({
           state.selectedTodo.dateCreated = value;
           // code block
           break;
-        default:
-          break;
       }
+      state.selectedTodo.dateUpdated = new Date().toISOString();
     },
 
     removeSingleTodo: (state, action) => {

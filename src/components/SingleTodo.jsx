@@ -1,6 +1,9 @@
 // HOOKS
 import { useRef, useEffect } from "react";
 
+// LIBIARIES
+import moment from "moment";
+
 // COMPONENTS
 import {
   removeSingleTodo,
@@ -104,7 +107,7 @@ const SingleTodo = ({ obj }) => {
         </p>
 
         <span className="absolute right-5 text-xs text-black  top-1">
-          {obj.dateCreated}
+          {moment(obj.dateCreated).format("MMM Do YY")}
         </span>
       </div>
     </li>

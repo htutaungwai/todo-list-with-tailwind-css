@@ -8,7 +8,7 @@ import SingleTodo from "../SingleTodo";
 import { useSelector } from "react-redux";
 
 // FUNCTIONS
-import { primeDateGenerator } from "../../utils/dateFunction";
+import { primeObjectGenearator } from "../../utils/dateFunction";
 import { isObjectEmpty } from "../../utils/objFunctions";
 
 // COMPONENTS
@@ -29,16 +29,11 @@ const SortedTodoList = () => {
   // SEARCH STATE and SORT STATE
   const [searchValue, setSearchValue] = useState("");
   const [searchState, setSearchState] = useState(false);
-  const [sortBy, setSortBy] = useState("TITLE");
+  const [sortBy, setSortBy] = useState("CREATED");
 
   // generating a sorted object
-  const primeSortedObject = primeDateGenerator(mutableTodos, sortBy);
-
-  // SORT STATE HANDLER
-  const sortByHandler = (value) => {
-    setSortBy(value);
-  };
-
+  const primeSortedObject = primeObjectGenearator(mutableTodos, sortBy);
+  console.log(primeSortedObject);
   useEffect(() => {
     if (searchValue === "") {
       setSearchState(false);
@@ -54,12 +49,16 @@ const SortedTodoList = () => {
         mood === "light" ? "bg-zinc-50" : "bg-black  text-white"
       }`}
     >
-      {/* SEARCH AND SORT BY SECTION */}
+      {/* SEARCH AND S ORT BY SECTION */}
 
       {/* Displaying TODOs*/}
       {!isObjectEmpty(primeSortedObject) ? (
         <>
-          <SearchBar setSearchValue={setSearchValue} />
+          <SearchBar
+            setSearchValue={setSearchValue}
+            sortBy={sortBy}
+            setSortBy={setSortBy}
+          />
           <ul className="poppins capitalize px-10 py-5">
             {Object.entries(primeSortedObject).map(([key, value]) => {
               return (

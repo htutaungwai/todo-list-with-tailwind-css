@@ -43,7 +43,7 @@ const EditWeb = () => {
         label="Pick date and time"
         placeholder="Pick date and time"
         onChange={(e) => {
-          onChangeHandler(e.toISOString(), "DATE");
+          onChangeHandler(e.toISOString(), "CREATED");
         }}
       />
 

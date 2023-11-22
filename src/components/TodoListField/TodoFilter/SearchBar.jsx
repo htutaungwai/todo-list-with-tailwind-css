@@ -16,11 +16,17 @@ import { Menu, Button, Tooltip } from "@mantine/core";
 import { FaSortAmountDown } from "react-icons/fa";
 import { BsCheckLg } from "react-icons/bs";
 
-const SearchBar = ({ setSearchValue }) => {
+const SearchBar = ({ setSearchValue, sortBy, setSortBy }) => {
   // MIGHT DELETE LATER
   const sideBarState = useSelector((state) => state.reveal.sideBar);
   // MIGHT DELETE LATER
   const dispatch = useDispatch();
+
+  // SORTBY HANDLER
+
+  const sortByHandler = (option) => {
+    if (option !== "" || option !== null) setSortBy(option);
+  };
   return (
     <div className="sticky top-0 bg-zinc-50 z-10 shadow-md">
       <div className="">
@@ -69,9 +75,30 @@ const SearchBar = ({ setSearchValue }) => {
 
         <Menu.Dropdown>
           <Menu.Label>Sorted By</Menu.Label>
-          <Menu.Item rightSection={<BsCheckLg color="red" />}>Title</Menu.Item>
-          <Menu.Item>Date Updated</Menu.Item>
-          <Menu.Item>Date Created</Menu.Item>
+          <Menu.Item
+            rightSection={sortBy === "TITLE" && <BsCheckLg color="red" />}
+            onClick={() => {
+              sortByHandler("TITLE");
+            }}
+          >
+            Title
+          </Menu.Item>
+          <Menu.Item
+            rightSection={sortBy === "UPDATED" && <BsCheckLg color="red" />}
+            onClick={() => {
+              sortByHandler("UPDATED");
+            }}
+          >
+            Date Updated
+          </Menu.Item>
+          <Menu.Item
+            rightSection={sortBy === "CREATED" && <BsCheckLg color="red" />}
+            onClick={() => {
+              sortByHandler("CREATED");
+            }}
+          >
+            Date Created
+          </Menu.Item>
         </Menu.Dropdown>
       </Menu>
     </div>
