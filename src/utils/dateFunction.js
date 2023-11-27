@@ -1,3 +1,6 @@
+// LIBIARIES
+import moment from "moment";
+
 export function byDateCreated(a, b) {
   return (
     Date.parse(new Date(a.dateCreated)) - Date.parse(new Date(b.dateCreated))
@@ -42,13 +45,21 @@ export const primeObjectGenearator = (dates, option) => {
       break;
     case "UPDATED":
       dates.sort(byDateUpdated);
+      primeObject["Last Updated"] = {};
+
+      dates.forEach((date) => {
+        const momentAgo = moment(date.dateUpdated).startOf("minute").fromNow();
+        if (!primeObject["Last Updated"][momentAgo]) {
+          primeObject["Last Updated"][momentAgo] = [];
+        }
+
+        primeObject["Last Updated"][momentAgo].push(date);
+      });
       break;
     default:
       dates.sort(byDateCreated);
       dates.forEach((date) => {
-        const sampleDate = new Date(
-          option === "UPDATED" ? date.dateUpdated : date.dateCreated
-        );
+        const sampleDate = new Date(date.dateCreated);
         if (!primeObject[sampleDate.getFullYear()]) {
           primeObject[sampleDate.getFullYear()] = {};
         }
