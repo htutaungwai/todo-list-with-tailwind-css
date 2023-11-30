@@ -33,7 +33,7 @@ const SortedTodoList = () => {
 
   // generating a sorted object
   const primeSortedObject = primeObjectGenearator(mutableTodos, sortBy);
-  console.log(primeSortedObject);
+
   useEffect(() => {
     if (searchValue === "") {
       setSearchState(false);
@@ -94,6 +94,7 @@ const SortedTodoList = () => {
                                     .toLocaleLowerCase()
                                     .includes(searchValue)
                             )
+
                             .map((obj) => {
                               return <SingleTodo obj={obj} key={obj.id} />;
                             })}

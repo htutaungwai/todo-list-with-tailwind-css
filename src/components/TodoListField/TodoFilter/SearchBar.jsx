@@ -1,36 +1,31 @@
 // ICONS
 import { AiOutlinePlusCircle } from "react-icons/ai";
 
-// REACT- REDUX
-import { useDispatch, useSelector } from "react-redux";
-
 // REDUCERS
 import { addTodo } from "../../../features/todosSlice/todosSlice";
-import {
-  revealEditPage,
-  revealSideBar,
-} from "../../../features/showPagesSlice/revealSlice";
+import { revealEditPage } from "../../../features/showPagesSlice/revealSlice";
 
+// MANTINE
 import { Menu, Button, Tooltip } from "@mantine/core";
 
+// ICONS
 import { FaSortAmountDown } from "react-icons/fa";
 import { BsCheckLg } from "react-icons/bs";
 
+// REACT-REDUX
+import { useDispatch } from "react-redux";
+
 const SearchBar = ({ setSearchValue, sortBy, setSortBy }) => {
-  // MIGHT DELETE LATER
-  const sideBarState = useSelector((state) => state.reveal.sideBar);
-  // MIGHT DELETE LATER
   const dispatch = useDispatch();
-
   // SORTBY HANDLER
-
   const sortByHandler = (option) => {
     if (option !== "" || option !== null) setSortBy(option);
   };
   return (
     <div className="sticky top-0 bg-zinc-50 z-10 shadow-md">
-      <div className="">
+      <div className="flex items-center pl-4 py-1">
         <input
+          className="basis-4/6 p-1 rounded-sm"
           type="text"
           placeholder="search todo"
           onChange={(e) => {
@@ -39,7 +34,7 @@ const SearchBar = ({ setSearchValue, sortBy, setSortBy }) => {
         />
 
         <button
-          className="bg-red-500"
+          className="bg-gray-500 w-10 h-9 rounded-sm flex items-center justify-center"
           onClick={() => {
             dispatch(
               addTodo({
@@ -53,54 +48,47 @@ const SearchBar = ({ setSearchValue, sortBy, setSortBy }) => {
             dispatch(revealEditPage(true));
           }}
         >
-          <AiOutlinePlusCircle />
+          <AiOutlinePlusCircle className="text-white text-2xl" />
         </button>
-        <button
-          onClick={() => {
-            dispatch(revealSideBar(!sideBarState));
-          }}
-        >
-          toggle
-        </button>
+
+        <Menu shadow="lg" width={200}>
+          <Menu.Target>
+            <Tooltip label="sorted by">
+              <Button color="red" className="ml-2">
+                <FaSortAmountDown />
+              </Button>
+            </Tooltip>
+          </Menu.Target>
+
+          <Menu.Dropdown>
+            <Menu.Label>Sorted By</Menu.Label>
+            <Menu.Item
+              rightSection={sortBy === "TITLE" && <BsCheckLg color="red" />}
+              onClick={() => {
+                sortByHandler("TITLE");
+              }}
+            >
+              Title
+            </Menu.Item>
+            <Menu.Item
+              rightSection={sortBy === "UPDATED" && <BsCheckLg color="red" />}
+              onClick={() => {
+                sortByHandler("UPDATED");
+              }}
+            >
+              Date Updated
+            </Menu.Item>
+            <Menu.Item
+              rightSection={sortBy === "CREATED" && <BsCheckLg color="red" />}
+              onClick={() => {
+                sortByHandler("CREATED");
+              }}
+            >
+              Date Created
+            </Menu.Item>
+          </Menu.Dropdown>
+        </Menu>
       </div>
-
-      <Menu shadow="lg" width={200}>
-        <Menu.Target>
-          <Tooltip label="sorted by">
-            <Button color="red">
-              <FaSortAmountDown />
-            </Button>
-          </Tooltip>
-        </Menu.Target>
-
-        <Menu.Dropdown>
-          <Menu.Label>Sorted By</Menu.Label>
-          <Menu.Item
-            rightSection={sortBy === "TITLE" && <BsCheckLg color="red" />}
-            onClick={() => {
-              sortByHandler("TITLE");
-            }}
-          >
-            Title
-          </Menu.Item>
-          <Menu.Item
-            rightSection={sortBy === "UPDATED" && <BsCheckLg color="red" />}
-            onClick={() => {
-              sortByHandler("UPDATED");
-            }}
-          >
-            Date Updated
-          </Menu.Item>
-          <Menu.Item
-            rightSection={sortBy === "CREATED" && <BsCheckLg color="red" />}
-            onClick={() => {
-              sortByHandler("CREATED");
-            }}
-          >
-            Date Created
-          </Menu.Item>
-        </Menu.Dropdown>
-      </Menu>
     </div>
   );
 };
