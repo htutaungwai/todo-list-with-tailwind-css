@@ -29,7 +29,7 @@ export const primeObjectGenearator = (dates, option) => {
   switch (option) {
     case "TITLE":
       dates.sort(byTitle);
-      primeObject["a ~ z"] = {};
+      if (dates.length > 0) primeObject["a ~ z"] = {};
       dates.forEach((item) => {
         const firstCharacter = Array.from(item.title)[0];
         if (firstCharacter === undefined) {
@@ -45,7 +45,7 @@ export const primeObjectGenearator = (dates, option) => {
       break;
     case "UPDATED":
       dates.sort(byDateUpdated);
-      primeObject["Last Updated"] = {};
+      if (dates.length > 0) primeObject["Last Updated"] = {};
 
       dates.forEach((date) => {
         const momentAgo = moment(date.dateUpdated).startOf("minute").fromNow();

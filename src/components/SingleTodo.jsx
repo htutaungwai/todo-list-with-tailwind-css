@@ -17,7 +17,11 @@ import { useDispatch, useSelector } from "react-redux";
 // REDUCERS
 import { revealEditPage } from "../features/showPagesSlice/revealSlice";
 
-const SingleTodo = ({ obj }) => {
+// ICONS
+import { FaCheckDouble } from "react-icons/fa";
+
+const SingleTodo = ({ obj, sortBy }) => {
+  console.log(sortBy);
   const selectedTodo = useSelector((state) => state.todo.selectedTodo);
   const editPageState = useSelector((state) => state.reveal.editPage);
 
@@ -74,13 +78,14 @@ const SingleTodo = ({ obj }) => {
         />
 
         {/* TITLE */}
-
         <label
           className={` text-md ${
             obj.checked ? "line-through" : ""
           } font-medium`}
         >
-          {obj.title}
+          {obj.title.length > 38
+            ? obj.title.substring(0, 38) + `...`
+            : obj.title}
         </label>
 
         <br />
@@ -106,9 +111,23 @@ const SingleTodo = ({ obj }) => {
             : obj.description}
         </p>
 
-        <span className="absolute right-5 text-xs text-black  top-1">
-          {moment(obj.dateCreated).format("MMM Do YY")}
-        </span>
+        {obj.id === selectedTodo?.id && (
+          <span className="absolute right-5 text-xs text-black  top-1 mr-20">
+            <FaCheckDouble color="red" />
+          </span>
+        )}
+
+        {sortBy === "CREATED" && (
+          <span className="absolute right-5 text-xs text-black  top-1">
+            {moment(obj.dateCreated).format("MMM Do YY")}
+          </span>
+        )}
+
+        {sortBy === "UPDATED" && (
+          <span className="absolute right-5 top-1 text-xs text-black">
+            {moment().startOf("minute").fromNow()}
+          </span>
+        )}
       </div>
     </li>
   );

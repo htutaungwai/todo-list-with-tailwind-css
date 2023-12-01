@@ -9,7 +9,7 @@ import { revealEditPage } from "../../../features/showPagesSlice/revealSlice";
 import { Menu, Button, Tooltip } from "@mantine/core";
 
 // ICONS
-import { FaSortAmountDown } from "react-icons/fa";
+import { FaSortAmountDown, FaCheckDouble } from "react-icons/fa";
 import { BsCheckLg } from "react-icons/bs";
 
 // REACT-REDUX
@@ -23,7 +23,7 @@ const SearchBar = ({ setSearchValue, sortBy, setSortBy }) => {
   };
   return (
     <div className="sticky top-0 bg-zinc-50 z-10 shadow-md">
-      <div className="flex items-center pl-4 py-1">
+      <div className="flex items-center pl-8 py-1 ">
         <input
           className="basis-4/6 p-1 rounded-sm"
           type="text"
@@ -34,7 +34,7 @@ const SearchBar = ({ setSearchValue, sortBy, setSortBy }) => {
         />
 
         <button
-          className="bg-gray-500 w-10 h-9 rounded-sm flex items-center justify-center"
+          className="bg-gray-500 w-9 h-9 -ml-1 rounded-sm flex items-center justify-center"
           onClick={() => {
             dispatch(
               addTodo({

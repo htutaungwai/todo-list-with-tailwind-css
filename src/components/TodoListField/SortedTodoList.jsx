@@ -81,23 +81,31 @@ const SortedTodoList = () => {
                           </h3>
                         )}
 
-                        {monthValue.length !== 0 &&
-                          monthValue
-                            .filter((item) =>
-                              !searchState
-                                ? item
-                                : item.title
-                                    .toLocaleLowerCase()
-                                    .includes(searchValue)
-                                ? item
-                                : item.description
-                                    .toLocaleLowerCase()
-                                    .includes(searchValue)
-                            )
+                        <div>
+                          {monthValue.length !== 0 &&
+                            monthValue
+                              .filter((item) =>
+                                !searchState
+                                  ? item
+                                  : item.title
+                                      .toLocaleLowerCase()
+                                      .includes(searchValue)
+                                  ? item
+                                  : item.description
+                                      .toLocaleLowerCase()
+                                      .includes(searchValue)
+                              )
 
-                            .map((obj) => {
-                              return <SingleTodo obj={obj} key={obj.id} />;
-                            })}
+                              .map((obj) => {
+                                return (
+                                  <SingleTodo
+                                    obj={obj}
+                                    key={obj.id}
+                                    sortBy={sortBy}
+                                  />
+                                );
+                              })}
+                        </div>
                       </div>
                     );
                   })}
