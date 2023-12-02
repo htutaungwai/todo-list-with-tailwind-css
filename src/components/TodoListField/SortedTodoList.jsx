@@ -49,7 +49,7 @@ const SortedTodoList = () => {
         mood === "light" ? "bg-zinc-50" : "bg-black  text-white"
       }`}
     >
-      {/* SEARCH AND S ORT BY SECTION */}
+      {/* SEARCH AND SORT BY SECTION */}
 
       {/* Displaying TODOs*/}
       {!isObjectEmpty(primeSortedObject) ? (
@@ -59,7 +59,7 @@ const SortedTodoList = () => {
             sortBy={sortBy}
             setSortBy={setSortBy}
           />
-          <ul className="poppins capitalize px-10 py-5">
+          <ul className="poppins capitalize px-10 py-5 bg-zinc-50">
             {Object.entries(primeSortedObject).map(([key, value]) => {
               return (
                 <div key={key}>

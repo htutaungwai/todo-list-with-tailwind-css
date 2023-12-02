@@ -1,9 +1,19 @@
-import React, { useEffect, useRef } from "react";
+// REACT
+import { useEffect, useRef } from "react";
+
+// MANTINE DATE
 import { DateTimePicker } from "@mantine/dates";
+
+// REACT-REDUX
 import { useSelector, useDispatch } from "react-redux";
+
+// REDUX SLICE
 import { updateTodo } from "../../features/todosSlice/todosSlice";
 
+// REVEAL SLICE
 import { revealEditPage } from "../../features/showPagesSlice/revealSlice";
+
+// COMPONENTS
 import MenuBar from "../Tiptap/MenuBar";
 
 const EditWeb = () => {
@@ -27,9 +37,10 @@ const EditWeb = () => {
   };
 
   return (
-    <div className="w-full h-full max-h-full overflow-x-hidden overflow-y-scroll bg-zinc-50 absolute top-0 md:block md:relative p-4 z-20">
-      <input
-        type="text"
+    <div className="w-full h-full max-h-full overflow-x-hidden overflow-y-scroll bg-zinc-200 md:bg-zinc-50 absolute top-0 md:block md:relative p-4 z-20 ">
+      <textarea
+        type="text title"
+        className="w-full rounded-md text-2xl sourceCode p-2 font-semibold  h-24 resize-none"
         ref={titleRef}
         value={title}
         onChange={(e) => {
@@ -40,7 +51,7 @@ const EditWeb = () => {
       <DateTimePicker
         value={new Date(dateCreated)}
         valueFormat="DD MMM YYYY hh:mm A"
-        label="Pick date and time"
+        label="Deadline 💀"
         placeholder="Pick date and time"
         onChange={(e) => {
           onChangeHandler(e.toISOString(), "CREATED");

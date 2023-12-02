@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,400;0,500;1,400;1,600&family=Source+Code+Pro:wght@300;500;700&display=swap");
-
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&family=Source+Code+Pro:wght@300;500;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Hedvig+Letters+Sans&family=Poppins:wght@300;400;500&family=Source+Code+Pro:wght@300;500;700&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -16,9 +16,22 @@
   font-family: "Poppins", sans-serif;
 }
 
+.sourceCode {
+  font-family: "Source Code Pro";
+}
+
 .primaryDark {
   background-color: #27374d;
 }
 .secondaryDark {
   background-color: #526d82;
+}
+
+textarea:focus,
+input:focus {
+  outline: none;
+}
+
+.mantine-DateTimePicker-label {
+  font-family: "Poppins";
 }

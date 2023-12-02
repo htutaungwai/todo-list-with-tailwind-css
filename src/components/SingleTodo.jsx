@@ -117,7 +117,7 @@ const SingleTodo = ({ obj, sortBy }) => {
           </span>
         )}
 
-        {sortBy === "CREATED" && (
+        {sortBy !== "UPDATED" && (
           <span className="absolute right-5 text-xs text-black  top-1">
             {moment(obj.dateCreated).format("MMM Do YY")}
           </span>
@@ -125,7 +125,7 @@ const SingleTodo = ({ obj, sortBy }) => {
 
         {sortBy === "UPDATED" && (
           <span className="absolute right-5 top-1 text-xs text-black">
-            {moment().startOf("minute").fromNow()}
+            {moment(obj.dateUpdated).startOf("minute").fromNow()}
           </span>
         )}
       </div>
