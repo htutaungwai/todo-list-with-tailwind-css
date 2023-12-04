@@ -14,7 +14,7 @@ import { updateTodo } from "../../features/todosSlice/todosSlice";
 import { revealEditPage } from "../../features/showPagesSlice/revealSlice";
 
 // COMPONENTS
-import MenuBar from "../Tiptap/MenuBar";
+import RichTextEditor from "../Tiptap/RichTextEditor";
 
 // ICONS
 import { FaQuoteLeft, FaQuoteRight } from "react-icons/fa";
@@ -22,7 +22,7 @@ import { IoCloseSharp } from "react-icons/io5";
 
 const EditWeb = () => {
   const dispatch = useDispatch();
-  const { title, description, checked, dateCreated, id, content } = useSelector(
+  const { title, dateCreated, id } = useSelector(
     (state) => state.todo.selectedTodo
   );
   const titleRef = useRef(HTMLElement);
@@ -30,6 +30,11 @@ const EditWeb = () => {
   useEffect(() => {
     titleRef.current.focus();
   }, []);
+
+  const autoResizeHandler = () => {
+    const scrollHeight = titleRef.current.scrollHeight;
+    titleRef.current.style.height = `${scrollHeight}px`;
+  };
 
   const onChangeHandler = (value, name) => {
     const typicalObject = {
@@ -54,17 +59,17 @@ const EditWeb = () => {
       </div>
       <div className=" mt-5 relative">
         <div className="absolute -top-3 -left-2 text-xl ">
-          <FaQuoteLeft />
+          <FaQuoteLeft className="text-red-500" />
         </div>
 
         <div className="absolute bottom-0 right-1 text-xl ">
-          <FaQuoteRight />
+          <FaQuoteRight className="text-red-500" />
         </div>
         <textarea
-          type="text title"
-          className="w-full rounded-md text-2xl sourceCode p-2 font-semibold  h-24 resize-none before:content-['hello-world'] "
+          className="w-full rounded-md text-2xl sourceCode p-2 font-semibold resize-none"
           ref={titleRef}
           value={title}
+          onKeyUp={autoResizeHandler}
           onChange={(e) => {
             onChangeHandler(e.target.value, "TITLE");
           }}
@@ -85,7 +90,7 @@ const EditWeb = () => {
 
       <br />
 
-      <MenuBar />
+      <RichTextEditor />
     </div>
   );
 };

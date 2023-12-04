@@ -4,7 +4,7 @@ import TextStyle from "@tiptap/extension-text-style";
 import { EditorProvider, useCurrentEditor, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import React, { useEffect, useState } from "react";
-import "./MenuBar.css";
+import "./RichTextEditor.css";
 
 // ICONS
 import {
@@ -36,7 +36,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { updateTodo } from "../../features/todosSlice/todosSlice";
 import { revealEditPage } from "../../features/showPagesSlice/revealSlice";
 
-const MenuBar = () => {
+const RichTextEditor = () => {
   const content = useSelector((state) => state.todo.selectedTodo.content);
   const { editor } = useCurrentEditor();
 
@@ -45,7 +45,7 @@ const MenuBar = () => {
   }
 
   return (
-    <div className="inline-flex flex-row rounded-md border">
+    <div className="flex flex-row rounded-md border w-full bg-red-50 items-center basis-0">
       <button
         onClick={() => editor.chain().focus().toggleBold().run()}
         disabled={!editor.can().chain().focus().toggleBold().run()}
@@ -63,109 +63,133 @@ const MenuBar = () => {
       <button
         onClick={() => editor.chain().focus().toggleStrike().run()}
         disabled={!editor.can().chain().focus().toggleStrike().run()}
-        className={editor.isActive("strike") ? "is-active" : ""}
+        className={editor.isActive("strike") ? "is-active" : "editor"}
       >
         <FaStrikethrough />
       </button>
       <button
         onClick={() => editor.chain().focus().toggleCode().run()}
         disabled={!editor.can().chain().focus().toggleCode().run()}
-        className={editor.isActive("code") ? "is-active" : ""}
+        className={editor.isActive("code") ? "is-active" : "editor"}
       >
         <FaCode />
-      </button>
-      <button onClick={() => editor.chain().focus().unsetAllMarks().run()}>
-        <FaBan />
       </button>
 
       <button
         onClick={() => editor.chain().focus().setParagraph().run()}
-        className={editor.isActive("paragraph") ? "is-active" : ""}
+        className={editor.isActive("paragraph") ? "is-active" : "editor"}
       >
         <FaParagraph />
       </button>
       <button
         onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()}
-        className={editor.isActive("heading", { level: 1 }) ? "is-active" : ""}
+        className={
+          editor.isActive("heading", { level: 1 }) ? "is-active" : "editor"
+        }
       >
         <LuHeading1 />
       </button>
       <button
         onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}
-        className={editor.isActive("heading", { level: 2 }) ? "is-active" : ""}
+        className={
+          editor.isActive("heading", { level: 2 }) ? "is-active" : "editor"
+        }
       >
         <LuHeading2 />
       </button>
       <button
         onClick={() => editor.chain().focus().toggleHeading({ level: 3 }).run()}
-        className={editor.isActive("heading", { level: 3 }) ? "is-active" : ""}
+        className={
+          editor.isActive("heading", { level: 3 }) ? "is-active" : "editor"
+        }
       >
         <LuHeading3 />
       </button>
       <button
         onClick={() => editor.chain().focus().toggleHeading({ level: 4 }).run()}
-        className={editor.isActive("heading", { level: 4 }) ? "is-active" : ""}
+        className={
+          editor.isActive("heading", { level: 4 }) ? "is-active" : "editor"
+        }
       >
         <LuHeading4 />
       </button>
       <button
         onClick={() => editor.chain().focus().toggleHeading({ level: 5 }).run()}
-        className={editor.isActive("heading", { level: 5 }) ? "is-active" : ""}
+        className={
+          editor.isActive("heading", { level: 5 }) ? "is-active" : "editor"
+        }
       >
         <LuHeading5 />
       </button>
       <button
         onClick={() => editor.chain().focus().toggleHeading({ level: 6 }).run()}
-        className={editor.isActive("heading", { level: 6 }) ? "is-active" : ""}
+        className={
+          editor.isActive("heading", { level: 6 }) ? "is-active" : "editor"
+        }
       >
         <LuHeading6 />
       </button>
       <button
         onClick={() => editor.chain().focus().toggleBulletList().run()}
-        className={editor.isActive("bulletList") ? "is-active" : ""}
+        className={editor.isActive("bulletList") ? "is-active" : "editor"}
       >
         <FaListUl />
       </button>
       <button
         onClick={() => editor.chain().focus().toggleOrderedList().run()}
-        className={editor.isActive("orderedList") ? "is-active" : ""}
+        className={editor.isActive("orderedList") ? "is-active" : "editor"}
       >
         <FaListOl />
       </button>
       <button
         onClick={() => editor.chain().focus().toggleCodeBlock().run()}
-        className={editor.isActive("codeBlock") ? "is-active" : ""}
+        className={editor.isActive("codeBlock") ? "is-active" : "editor"}
       >
         <FaTerminal />
       </button>
       <button
         onClick={() => editor.chain().focus().toggleBlockquote().run()}
-        className={editor.isActive("blockquote") ? "is-active" : ""}
+        className={editor.isActive("blockquote") ? "is-active" : "editor"}
       >
         <FaQuoteRight />
       </button>
       <button onClick={() => editor.chain().focus().setHorizontalRule().run()}>
         <FaRuler />
       </button>
-      <button onClick={() => editor.chain().focus().setHardBreak().run()}>
+      <button
+        onClick={() => editor.chain().focus().setHardBreak().run()}
+        className="editor"
+      >
         <FaTablet />
       </button>
       <button
         onClick={() => editor.chain().focus().undo().run()}
         disabled={!editor.can().chain().focus().undo().run()}
+        className="editor"
       >
         <FaUndoAlt />
       </button>
       <button
         onClick={() => editor.chain().focus().redo().run()}
         disabled={!editor.can().chain().focus().redo().run()}
+        className="editor"
       >
         <FaRedoAlt />
       </button>
+
+      <button
+        onClick={() => editor.chain().focus().unsetAllMarks().run()}
+        className="editor"
+      >
+        <FaBan />
+      </button>
+
       <button
         onClick={() => editor.chain().focus().setColor("#958DF1").run()}
         className={
-          editor.isActive("textStyle", { color: "#958DF1" }) ? "is-active" : ""
+          editor.isActive("textStyle", { color: "#958DF1" })
+            ? "is-active"
+            : "editor"
         }
       >
         purple
@@ -220,7 +244,7 @@ export default () => {
 
   return (
     <EditorProvider
-      slotBefore={<MenuBar />}
+      slotBefore={<RichTextEditor />}
       extensions={extensions}
       content={content}
       onUpdate={({ editor }) => {

@@ -20,7 +20,7 @@ const todosSlice = createSlice({
       const checked = action.payload.checked ? action.payload.checked : false;
       const content = action.payload.content
         ? action.payload.content
-        : "<h1>New Todo</h1>";
+        : "<span>New Todo</span>";
       const dateCreated = action.payload.dateCreated
         ? action.payload.dateCreated
         : new Date().toISOString();

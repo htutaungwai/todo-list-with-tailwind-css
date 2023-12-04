@@ -1,7 +1,7 @@
 // src/Tiptap.jsx
 import { EditorProvider, FloatingMenu, BubbleMenu } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
-import MenuBar from "./MenuBar";
+import RichTextEditor from "./RichTextEditor";
 
 // define your extension array
 const extensions = [StarterKit];
@@ -11,7 +11,7 @@ const content = "<p>Hello World!</p>";
 const Tiptap = () => {
   return (
     <EditorProvider
-      slotBefore={<MenuBar />}
+      slotBefore={<RichTextEditor />}
       extensions={extensions}
       content={content}
     ></EditorProvider>

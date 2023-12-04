@@ -21,7 +21,6 @@ import { revealEditPage } from "../features/showPagesSlice/revealSlice";
 import { FaCheckDouble } from "react-icons/fa";
 
 const SingleTodo = ({ obj, sortBy }) => {
-  console.log(sortBy);
   const selectedTodo = useSelector((state) => state.todo.selectedTodo);
   const editPageState = useSelector((state) => state.reveal.editPage);
 

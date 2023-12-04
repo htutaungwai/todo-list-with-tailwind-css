@@ -44,8 +44,11 @@ const SearchBar = ({ setSearchValue, sortBy, setSortBy }) => {
                 date: null,
               })
             );
+            dispatch(revealEditPage(false));
 
-            dispatch(revealEditPage(true));
+            setTimeout(() => {
+              dispatch(revealEditPage(true));
+            }, 300);
           }}
         >
           <AiOutlinePlusCircle className="text-white text-2xl" />
