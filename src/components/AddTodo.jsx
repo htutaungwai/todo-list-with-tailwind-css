@@ -12,9 +12,7 @@ const addTodo = ({ showAddTodo, setShowAddTodo, todos, setTodos }) => {
           setShowAddTodo(false);
         }
       }
-
       document.addEventListener("mousedown", handleClickOutside);
-
       return () => {
         document.removeEventListener("mousedown", handleClickOutside);
       };

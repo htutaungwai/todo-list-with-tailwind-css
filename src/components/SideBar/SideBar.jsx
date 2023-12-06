@@ -1,7 +1,14 @@
+// MANTINE HOOK
 import { useDisclosure } from "@mantine/hooks";
 import { Drawer, Button, ScrollArea } from "@mantine/core";
+
+// REACT-REDUX
 import { useDispatch, useSelector } from "react-redux";
+
+// REACT
 import { useEffect } from "react";
+
+// REVEAL SLICE REDUCER
 import { revealSideBar } from "../../features/showPagesSlice/revealSlice";
 
 function SideBar() {
@@ -20,6 +27,7 @@ function SideBar() {
   return (
     <>
       <Drawer
+        position="right"
         opened={opened}
         onClose={() => {
           dispatch(revealSideBar(false));

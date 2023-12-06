@@ -45,7 +45,7 @@ const RichTextEditor = () => {
   }
 
   return (
-    <div className="flex flex-row rounded-md border w-full bg-red-50 items-center basis-0">
+    <div className="flex flex-row rounded-md border w-fit items-center basis-0">
       <button
         onClick={() => editor.chain().focus().toggleBold().run()}
         disabled={!editor.can().chain().focus().toggleBold().run()}
@@ -153,7 +153,10 @@ const RichTextEditor = () => {
       >
         <FaQuoteRight />
       </button>
-      <button onClick={() => editor.chain().focus().setHorizontalRule().run()}>
+      <button
+        onClick={() => editor.chain().focus().setHorizontalRule().run()}
+        className="editor"
+      >
         <FaRuler />
       </button>
       <button
@@ -192,7 +195,7 @@ const RichTextEditor = () => {
             : "editor"
         }
       >
-        purple
+        c
       </button>
       {/* 
       <button onClick={() => editor.chain().focus().clearNodes().run()}>

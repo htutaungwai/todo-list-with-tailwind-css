@@ -47,7 +47,7 @@ const EditWeb = () => {
 
   return (
     <div className="w-full h-full max-h-full overflow-x-hidden overflow-y-scroll bg-zinc-200 md:bg-zinc-50 absolute top-0 md:block md:relative p-4 z-20 ">
-      <div className="relative bg-zinc-100 w-full  pt-10">
+      <div className="relative w-full  pt-10">
         <button
           onClick={() => {
             dispatch(revealEditPage(false));

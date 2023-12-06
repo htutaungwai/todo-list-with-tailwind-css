@@ -1,12 +1,25 @@
-import { BsMoonFill, BsSunFill } from "react-icons/bs";
+//BOOTSTRAP ICONS
+import {
+  BsMoonFill,
+  BsSunFill,
+  BsFillPersonFill,
+  BsEnvelopeFill,
+} from "react-icons/bs";
+
+// REACT-REDUX
 import { useDispatch, useSelector } from "react-redux";
+
+// REDUCER
 import { changeTheme } from "../features/themeSlice/themeSlice";
+import { revealSideBar } from "../features/showPagesSlice/revealSlice";
 
 const StatsBar = () => {
   // STATES
   const todos = useSelector((state) => state.todo.todos);
+  const { sideBar } = useSelector((state) => state.reveal);
   const { mood } = useSelector((state) => state.theme);
   const dispatch = useDispatch();
+
   return (
     <div
       className={`border-black shadow-md mb-1 pt-1 pb-3 pl-4  z-0 flex  text-xs md:text-md md:gap-4
@@ -44,23 +57,54 @@ const StatsBar = () => {
       </div>
 
       {/* STATISTICS BAR END*/}
-      <div
-        className={`ml-auto mr-5 rounded-md border-slate-600 shadow-xl border-2 ${
-          mood === "dark" ? "bg-slate-800" : "bg-stone-200 "
-        }`}
-      >
-        <button
-          onClick={() => {
-            dispatch(changeTheme());
-          }}
-          className="text-md p-2"
+      <div className="flex justify-end w-full">
+        <div
+          className={` mr-5 rounded-md border-slate-600 shadow-xl border-2 ${
+            mood === "dark" ? "bg-slate-800" : "bg-stone-200 "
+          }`}
         >
-          {mood === "light" ? (
-            <BsSunFill className="text-yellow-500" />
-          ) : (
-            <BsMoonFill className=" text-slate-300" />
-          )}
-        </button>
+          <button
+            onClick={() => {
+              dispatch(changeTheme());
+            }}
+            className="text-md p-2"
+          >
+            {mood === "light" ? (
+              <BsSunFill className="text-yellow-500" />
+            ) : (
+              <BsMoonFill className=" text-slate-300" />
+            )}
+          </button>
+        </div>
+        <div
+          className={` mr-5 rounded-md border-slate-600 shadow-xl border-2 ${
+            mood === "dark" ? "bg-slate-800" : "bg-stone-100 "
+          }`}
+        >
+          <button
+            onClick={() => {
+              console.log("hell");
+            }}
+            className="text-md p-2 font-bold"
+          >
+            <BsEnvelopeFill color="black" />
+          </button>
+        </div>
+
+        <div
+          className={` mr-5 rounded-md border-slate-600 shadow-xl border-2 ${
+            mood === "dark" ? "bg-slate-800" : "bg-stone-200 "
+          }`}
+        >
+          <button
+            onClick={() => {
+              dispatch(revealSideBar(!sideBar));
+            }}
+            className="text-md p-2"
+          >
+            <BsFillPersonFill />
+          </button>
+        </div>
       </div>
     </div>
   );
