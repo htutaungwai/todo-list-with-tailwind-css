@@ -10,13 +10,16 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 
 // REDUCER
-import { changeTheme } from "../features/themeSlice/themeSlice";
-import { revealSideBar } from "../features/showPagesSlice/revealSlice";
+import { changeTheme } from "../../features/themeSlice/themeSlice";
+import { revealSideBar } from "../../features/showPagesSlice/revealSlice";
+
+// MANTINE
+import { Popover, Button } from "@mantine/core";
+import Notifications from "./Notifications/Notifications";
 
 const StatsBar = () => {
   // STATES
   const todos = useSelector((state) => state.todo.todos);
-  const { sideBar } = useSelector((state) => state.reveal);
   const { mood } = useSelector((state) => state.theme);
   const dispatch = useDispatch();
 
@@ -58,6 +61,28 @@ const StatsBar = () => {
 
       {/* STATISTICS BAR END*/}
       <div className="flex justify-end w-full">
+        {/* MAIL */}
+        <Popover
+          withArrow
+          width={400}
+          offset={{ mainAxis: 0, crossAxis: -100 }}
+          position="bottom"
+          className={` mr-5 rounded-md border-slate-600 shadow-xl border-2 ${
+            mood === "dark" ? "bg-slate-800" : "bg-stone-100"
+          }`}
+        >
+          <Popover.Target>
+            <Button variant="default" color="violet" size="xs">
+              <BsEnvelopeFill color="black" />
+            </Button>
+          </Popover.Target>
+
+          <Popover.Dropdown>
+            <Notifications />
+          </Popover.Dropdown>
+        </Popover>
+        {/* MAIL END */}
+
         <div
           className={` mr-5 rounded-md border-slate-600 shadow-xl border-2 ${
             mood === "dark" ? "bg-slate-800" : "bg-stone-200 "
@@ -76,20 +101,6 @@ const StatsBar = () => {
             )}
           </button>
         </div>
-        <div
-          className={` mr-5 rounded-md border-slate-600 shadow-xl border-2 ${
-            mood === "dark" ? "bg-slate-800" : "bg-stone-100 "
-          }`}
-        >
-          <button
-            onClick={() => {
-              console.log("hell");
-            }}
-            className="text-md p-2 font-bold"
-          >
-            <BsEnvelopeFill color="black" />
-          </button>
-        </div>
 
         <div
           className={` mr-5 rounded-md border-slate-600 shadow-xl border-2 ${
@@ -98,7 +109,7 @@ const StatsBar = () => {
         >
           <button
             onClick={() => {
-              dispatch(revealSideBar(!sideBar));
+              dispatch(revealSideBar(true));
             }}
             className="text-md p-2"
           >

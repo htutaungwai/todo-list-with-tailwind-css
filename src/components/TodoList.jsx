@@ -2,7 +2,7 @@
 import "./TodoList.css";
 
 // COMPONENTS
-import StatsBar from "./StatsBar";
+import StatsBar from "./StatsBar/StatsBar";
 import SortedTodoList from "./TodoListField/SortedTodoList";
 import InnerBodyField from "./InnerBodyField/InnerBodyField";
 
