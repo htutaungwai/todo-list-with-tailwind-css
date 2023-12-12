@@ -13,7 +13,13 @@ import { revealSideBar } from "../../features/showPagesSlice/revealSlice";
 
 // ICONS
 
-import { IoPersonCircleSharp } from "react-icons/io5";
+import {
+  IoPersonCircleSharp,
+  IoTrash,
+  IoSparkles,
+  IoCheckmarkCircleSharp,
+  IoCellular,
+} from "react-icons/io5";
 
 function SideBar() {
   const [opened, { open, close }] = useDisclosure(false);
@@ -58,19 +64,23 @@ function SideBar() {
 
         <div className="">
           <ul className="w-full  h-auto flex flex-col gap-1 pt-5 ">
-            <li className="w-full  py-1 rounded-sm cursor-pointer px-2 hover:backdrop-blur-md hover:bg-red-50 ease-in-out transition-all ">
+            <li className="w-full  py-1 rounded-sm cursor-pointer px-2 hover:backdrop-blur-md hover:bg-red-50 ease-in-out transition-all flex flex-row  items-center gap-2">
+              <IoCheckmarkCircleSharp className="text-green-400" />
               <h5 className="text-sm">Completed</h5>
             </li>
 
-            <li className="w-full  py-1 rounded-sm cursor-pointer px-2 hover:backdrop-blur-md hover:bg-red-50 ease-in-out transition-all ">
+            <li className="w-full  py-1 rounded-sm cursor-pointer px-2 hover:backdrop-blur-md hover:bg-red-50 ease-in-out transition-all flex flex-row  items-center gap-2">
+              <IoTrash className="text-red-600" />
               <h5 className="text-sm">Deleted</h5>
             </li>
 
-            <li className="w-full  py-1 rounded-sm cursor-pointer px-2 hover:backdrop-blur-md hover:bg-red-50 ease-in-out transition-all ">
+            <li className="w-full  py-1 rounded-sm cursor-pointer px-2 hover:backdrop-blur-md hover:bg-red-50 ease-in-out transition-all flex flex-row  items-center gap-2">
+              <IoSparkles className="text-yellow-400" />
               <h5 className="text-sm">Favourites</h5>
             </li>
 
-            <li className="w-full  py-1 rounded-sm cursor-pointer px-2 hover:backdrop-blur-md hover:bg-red-50 ease-in-out transition-all ">
+            <li className="w-full  py-1 rounded-sm cursor-pointer px-2 hover:backdrop-blur-md hover:bg-red-50 ease-in-out transition-all flex flex-row  items-center gap-2">
+              <IoCellular className="text-blue-700" />
               <h5 className="text-sm">Ongoing</h5>
             </li>
 

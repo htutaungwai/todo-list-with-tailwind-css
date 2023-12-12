@@ -8,11 +8,31 @@ import "@mantine/core/styles.css";
 import "@mantine/dates/styles.css";
 import { MantineProvider } from "@mantine/core";
 
-ReactDOM.createRoot(document.getElementById("root")).render(
+// REACT ROUTUER DOM
+import { createRoot } from "react-dom/client";
+import {
+  createBrowserRouter,
+  RouterProvider,
+  Route,
+  Link,
+} from "react-router-dom";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <App />,
+  },
+  {
+    path: "completed",
+    element: <div>completed</div>,
+  },
+]);
+
+createRoot(document.getElementById("root")).render(
   <Provider store={store}>
     <MantineProvider>
       <React.StrictMode>
-        <App />
+        <RouterProvider router={router} />
       </React.StrictMode>
     </MantineProvider>
   </Provider>
