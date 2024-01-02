@@ -12,7 +12,6 @@ import { useEffect } from "react";
 import { revealSideBar } from "../../features/showPagesSlice/revealSlice";
 
 // ICONS
-
 import {
   IoPersonCircleSharp,
   IoTrash,
@@ -22,9 +21,17 @@ import {
 } from "react-icons/io5";
 
 function SideBar() {
+  // useDisclosure hook inherited from MANTINE
   const [opened, { open, close }] = useDisclosure(false);
+
+  // SideBar global state
   const sideBarState = useSelector((state) => state.reveal.sideBar);
+
+  //use dispatch
   const dispatch = useDispatch();
+
+  // THEME
+  const { mood } = useSelector((state) => state.theme);
 
   useEffect(() => {
     if (sideBarState) {
@@ -43,6 +50,7 @@ function SideBar() {
         }}
         withCloseButton={false}
         position="right"
+        className="bg-red-400"
       >
         <div className="flex flex-row items-center justify-between font-sans">
           <div className="flex flex-row gap-4 items-center">

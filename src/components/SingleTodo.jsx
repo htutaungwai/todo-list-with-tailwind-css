@@ -23,8 +23,11 @@ import { FaCheckDouble } from "react-icons/fa";
 const SingleTodo = ({ obj, sortBy }) => {
   const selectedTodo = useSelector((state) => state.todo.selectedTodo);
   const editPageState = useSelector((state) => state.reveal.editPage);
+  const { mood } = useSelector((state) => state.theme);
 
+  // use dispatch
   const dispatch = useDispatch();
+
   const inputRef = useRef(HTMLInputElement || null);
 
   const onClickHandler = (event) => {
@@ -58,7 +61,11 @@ const SingleTodo = ({ obj, sortBy }) => {
 
   return (
     <li
-      className={`mb-2 border-b-2 hover:bg-zinc-200 ease-in transition-all rounded-md`}
+      className={`${
+        mood === "light"
+          ? "hover:bg-zinc-200 "
+          : "hover:bg-slate-700 border-b-slate-600"
+      } mb-2 border-b-2  ease-in transition-all rounded-md`}
       onClick={(e) => {
         onClickHandler(e.target);
       }}
@@ -89,6 +96,7 @@ const SingleTodo = ({ obj, sortBy }) => {
 
         <br />
 
+        {/* CATEGORY */}
         <div className="flex pl-4 p-1 gap-1">
           <div className="border-2 border-dotted  flex rounded-full border-red-700 p-[0.3%]">
             <span className=" bg-red-400 text-xs px-2 py-1 text-white rounded-full ">
@@ -104,7 +112,11 @@ const SingleTodo = ({ obj, sortBy }) => {
         </div>
 
         {/* DESCRIPTION */}
-        <p className="text-xs text-gray-500 my-2 pl-6">
+        <p
+          className={`${
+            mood === "light" ? "text-gray-500" : "text-gray-300"
+          } text-xs  my-2 pl-6`}
+        >
           {obj.description.length > 150
             ? obj.description.substring(0, 150) + `...`
             : obj.description}
@@ -117,7 +129,11 @@ const SingleTodo = ({ obj, sortBy }) => {
         )}
 
         {sortBy !== "UPDATED" && (
-          <span className="absolute right-5 text-xs text-black  top-1">
+          <span
+            className={`${
+              mood === "light" ? "text-black" : "text-gray-300"
+            }  absolute right-5 text-xs   top-1`}
+          >
             {moment(obj.dateCreated).format("MMM Do YY")}
           </span>
         )}

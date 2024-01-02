@@ -13,16 +13,24 @@ import { FaSortAmountDown, FaCheckDouble } from "react-icons/fa";
 import { BsCheckLg } from "react-icons/bs";
 
 // REACT-REDUX
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const SearchBar = ({ setSearchValue, sortBy, setSortBy }) => {
   const dispatch = useDispatch();
+
+  // THEME MOOD
+  const { mood } = useSelector((state) => state.theme);
+
   // SORTBY HANDLER
   const sortByHandler = (option) => {
     if (option !== "" || option !== null) setSortBy(option);
   };
   return (
-    <div className="sticky top-0 bg-zinc-50 z-10 shadow-md">
+    <div
+      className={`${
+        mood === "light" ? "bg-zinc-50" : "bg-slate-900"
+      }  sticky top-0 py-2 z-10 shadow-md`}
+    >
       <div className="flex items-center pl-8 py-1 ">
         <input
           className="basis-4/6 p-1 rounded-sm"

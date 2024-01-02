@@ -1,9 +1,18 @@
 import React from "react";
-import ReactDOM from "react-dom/client";
-import App from "./App.jsx";
+
+// CSS
 import "./index.css";
+
+// COMPONENTS
+import App from "./App.jsx";
+
+// STORE
 import store from "./app/store.js";
+
+//REACT_REDUX
 import { Provider } from "react-redux";
+
+// MANTINE
 import "@mantine/core/styles.css";
 import "@mantine/dates/styles.css";
 import { MantineProvider } from "@mantine/core";

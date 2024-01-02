@@ -25,7 +25,7 @@ function App() {
   return (
     <div
       className={`min-h-screen min-w-screen w-screen h-screen flex flex-col ${
-        mood === "dark" ? " bg-zinc-800 text-white" : "text-black"
+        mood === "dark" ? " bg-slate-700 text-white" : "text-black bg-white"
       }`}
     >
       {/* Show Todo Start END */}

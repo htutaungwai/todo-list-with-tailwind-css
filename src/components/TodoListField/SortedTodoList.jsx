@@ -6,17 +6,15 @@ import SingleTodo from "../SingleTodo";
 
 // REACT-REDUX
 import { useSelector } from "react-redux";
+import NoTodos from "./NoTodos";
+import SearchBar from "./TodoFilter/SearchBar";
 
 // FUNCTIONS
 import { primeObjectGenearator } from "../../utils/dateFunction";
 import { isObjectEmpty } from "../../utils/objFunctions";
 
-// COMPONENTS
-import NoTodos from "./NoTodos";
-
 // ICONS
 import { BsCalendar3 } from "react-icons/bs";
-import SearchBar from "./TodoFilter/SearchBar";
 
 const SortedTodoList = () => {
   // STATES
@@ -46,7 +44,7 @@ const SortedTodoList = () => {
   return (
     <div
       className={`w-full h-full max-w-xl  poppins flex flex-col overflow-y-scroll overflow-x-hidden relative   ${
-        mood === "light" ? "bg-zinc-50" : "bg-black  text-white"
+        mood === "light" ? "text-black" : "  text-white"
       }`}
     >
       {/* SEARCH AND SORT BY SECTION */}
@@ -59,12 +57,20 @@ const SortedTodoList = () => {
             sortBy={sortBy}
             setSortBy={setSortBy}
           />
-          <ul className="poppins capitalize px-10 py-5 bg-zinc-50">
+          <ul
+            className={`${
+              mood === "light" ? "bg-zinc-50" : "bg-slate-800"
+            } poppins capitalize px-10 py-5`}
+          >
             {Object.entries(primeSortedObject).map(([key, value]) => {
               return (
                 <div key={key}>
                   {!searchState && (
-                    <div className="flex w-full min-w-full flex-row bg-zinc-200 justify-center items-center relative">
+                    <div
+                      className={`${
+                        mood === "light" ? "bg-zinc-200" : "bg-slate-900"
+                      } flex w-full min-w-full flex-row  justify-center items-center relative`}
+                    >
                       <h2 className="text-xl font-extrabold text-center rounded-sm py-1">
                         {key}
                       </h2>

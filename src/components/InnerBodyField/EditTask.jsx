@@ -22,6 +22,8 @@ import { IoCloseSharp } from "react-icons/io5";
 
 const EditWeb = () => {
   const dispatch = useDispatch();
+  const { mood } = useSelector((state) => state.theme);
+
   const { title, dateCreated, id } = useSelector(
     (state) => state.todo.selectedTodo
   );
@@ -46,7 +48,11 @@ const EditWeb = () => {
   };
 
   return (
-    <div className="w-full h-full max-h-full overflow-x-hidden overflow-y-scroll bg-zinc-200 md:bg-zinc-50 absolute top-0 md:block md:relative p-4 z-20 ">
+    <div
+      className={`${
+        mood === "light" ? "bg-zinc-200 md:bg-zinc-50" : "bg-slate-700"
+      } w-full h-full max-h-full overflow-x-hidden overflow-y-scroll  absolute top-0 md:block md:relative p-4 z-20 `}
+    >
       <div className="relative w-full  pt-10">
         <button
           onClick={() => {
@@ -58,6 +64,8 @@ const EditWeb = () => {
         </button>
       </div>
       <div className=" mt-5 relative">
+        {/* QUOTE icons*/}
+
         <div className="absolute -top-3 -left-2 text-xl ">
           <FaQuoteLeft className="text-red-500" />
         </div>
@@ -65,8 +73,10 @@ const EditWeb = () => {
         <div className="absolute bottom-0 right-1 text-xl ">
           <FaQuoteRight className="text-red-500" />
         </div>
+
+        {/* TITLE */}
         <textarea
-          className="w-full rounded-md text-2xl sourceCode p-2 font-semibold resize-none"
+          className={`w-full rounded-md text-2xl text-black sourceCode p-2 font-semibold resize-none`}
           ref={titleRef}
           value={title}
           onKeyUp={autoResizeHandler}
