@@ -33,7 +33,7 @@ const SearchBar = ({ setSearchValue, sortBy, setSortBy }) => {
     >
       <div className="flex items-center pl-8 py-1 ">
         <input
-          className="basis-4/6 p-1 rounded-sm"
+          className={`basis-4/6 p-1 rounded-sm text-black`}
           type="text"
           placeholder="search todo"
           onChange={(e) => {

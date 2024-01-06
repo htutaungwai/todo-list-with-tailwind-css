@@ -107,6 +107,7 @@ function SideBar() {
             {sections.map((section) => {
               return (
                 <li
+                  key={section.name}
                   className={`${
                     mood === "light" ? "hover:bg-red-50" : "hover:bg-slate-800"
                   } w-full  py-1 rounded-sm cursor-pointer px-2 hover:backdrop-blur-md  ease-in-out transition-all flex flex-row  items-center gap-2`}

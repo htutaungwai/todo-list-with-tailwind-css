@@ -13,8 +13,9 @@ import SearchBar from "./TodoFilter/SearchBar";
 import { primeObjectGenearator } from "../../utils/dateFunction";
 import { isObjectEmpty } from "../../utils/objFunctions";
 
-// ICONS
-import { BsCalendar3 } from "react-icons/bs";
+// BOOTSTRAP ICONS
+import { BsCalendar3, BsClockHistory } from "react-icons/bs";
+import { MdOutlineAbc } from "react-icons/md";
 
 const SortedTodoList = () => {
   // STATES
@@ -32,6 +33,7 @@ const SortedTodoList = () => {
   // generating a sorted object
   const primeSortedObject = primeObjectGenearator(mutableTodos, sortBy);
 
+  // to check if there any keyword in the serachbar
   useEffect(() => {
     if (searchValue === "") {
       setSearchState(false);
@@ -40,6 +42,19 @@ const SortedTodoList = () => {
 
     setSearchState(true);
   }, [searchValue]);
+
+  // function for sortBy icons
+  function sortbyIcons(sortByState) {
+    switch (sortByState) {
+      case "UPDATED":
+        return <BsClockHistory className="absolute right-6" />;
+      case "TITLE":
+        return <MdOutlineAbc className="absolute right-6 text-4xl" />;
+
+      default:
+        return <BsCalendar3 className="absolute right-6" />;
+    }
+  }
 
   return (
     <div
@@ -74,7 +89,7 @@ const SortedTodoList = () => {
                       <h2 className="text-xl font-extrabold text-center rounded-sm py-1">
                         {key}
                       </h2>
-                      <BsCalendar3 className="absolute right-6" />
+                      {sortbyIcons(sortBy)}
                     </div>
                   )}
 
@@ -101,7 +116,6 @@ const SortedTodoList = () => {
                                       .toLocaleLowerCase()
                                       .includes(searchValue)
                               )
-
                               .map((obj) => {
                                 return (
                                   <SingleTodo

@@ -60,6 +60,7 @@ const StatsBar = () => {
       </div>
 
       {/* STATISTICS BAR END*/}
+
       <div className="flex justify-end w-full">
         {/* MAIL */}
         <Popover
