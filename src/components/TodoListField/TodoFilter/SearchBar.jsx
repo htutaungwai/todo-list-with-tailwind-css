@@ -29,7 +29,7 @@ const SearchBar = ({ setSearchValue, sortBy, setSortBy }) => {
     <div
       className={`${
         mood === "light" ? "bg-zinc-50" : "bg-slate-900"
-      }  sticky top-0 py-2 z-10 shadow-md`}
+      }  sticky top-0 py-2 z-20 shadow-md`}
     >
       <div className="flex items-center pl-8 py-1 ">
         <input

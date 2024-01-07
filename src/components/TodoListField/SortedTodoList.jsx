@@ -15,7 +15,7 @@ import { isObjectEmpty } from "../../utils/objFunctions";
 
 // BOOTSTRAP ICONS
 import { BsCalendar3, BsClockHistory } from "react-icons/bs";
-import { MdOutlineAbc } from "react-icons/md";
+import { MdOutlineAbc, MdBeachAccess } from "react-icons/md";
 
 const SortedTodoList = () => {
   // STATES
@@ -59,7 +59,7 @@ const SortedTodoList = () => {
   return (
     <div
       className={`w-full h-full max-w-xl  poppins flex flex-col overflow-y-scroll overflow-x-hidden relative   ${
-        mood === "light" ? "text-black" : "  text-white"
+        mood === "light" ? "text-black bg-zinc-50" : "  text-white bg-slate-800"
       }`}
     >
       {/* SEARCH AND SORT BY SECTION */}
@@ -75,7 +75,7 @@ const SortedTodoList = () => {
           <ul
             className={`${
               mood === "light" ? "bg-zinc-50" : "bg-slate-800"
-            } poppins capitalize px-10 py-5`}
+            } poppins capitalize mx-10 my-5 z-10`}
           >
             {Object.entries(primeSortedObject).map(([key, value]) => {
               return (
@@ -137,6 +137,8 @@ const SortedTodoList = () => {
       ) : (
         <NoTodos />
       )}
+
+      <MdBeachAccess className="absolute top-1/2 left-1/2 text-5xl -translate-x-1/2 text-gray-300 z-0" />
     </div>
   );
 };
