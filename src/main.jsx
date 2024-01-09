@@ -6,6 +6,10 @@ import "./index.css";
 // COMPONENTS
 import App from "./App.jsx";
 
+// PAGES
+import Login from "./pages/Login.jsx";
+import Signup from "./pages/signup.jsx";
+
 // STORE
 import store from "./app/store.js";
 
@@ -32,8 +36,18 @@ const router = createBrowserRouter([
     element: <App />,
   },
   {
-    path: "completed",
-    element: <div>completed</div>,
+    path: "signup",
+    element: <Signup />,
+  },
+
+  {
+    path: "login",
+    element: <Login />,
+  },
+
+  {
+    path: "*",
+    element: <div>404 Not Found</div>,
   },
 ]);
 

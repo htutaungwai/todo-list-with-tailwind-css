@@ -30,7 +30,7 @@ const dataTodos = [
     dateUpdated: "2023-10-30T13:09:00.697Z",
   },
   {
-    title: "Todoist ကနေကြိုဆိုပါတယ်နော်... 🎉",
+    title: "ဒီနေ့ရဲ့ဖွင့်ဟဝန်ခံချက်... ",
     checked: false,
     description:
       "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web ",
@@ -72,7 +72,7 @@ const dataTodos = [
     dateUpdated: "2023-10-30T16:10:00.332Z",
   },
   {
-    title: "fix the bathroom light",
+    title: "Todoist ကနေကြိုဆိုပါတယ်နော်... 🎉",
     checked: false,
     description: `Today, I encountered a small yet frustrating problem in our home. The bathroom light has decided to play hide and seek with us, leaving us in the dark, quite literally!
       This morning, I stumbled into the bathroom, half-asleep, only to find the light switch yielding no results. At first, I thought it might be a blown bulb, so I attempted to change it, but no luck. The darkness that followed wasn't exactly the energizing start to the day I had in mind.
