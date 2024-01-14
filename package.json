@@ -12,6 +12,7 @@
   "dependencies": {
     "@mantine/core": "^7.0.2",
     "@mantine/dates": "^7.1.0",
+    "@mantine/form": "^7.4.1",
     "@mantine/hooks": "^7.0.2",
     "@reduxjs/toolkit": "^1.9.6",
     "@tiptap/extension-color": "^2.1.12",
