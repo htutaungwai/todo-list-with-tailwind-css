@@ -5,6 +5,9 @@ import { Drawer, CloseButton } from "@mantine/core";
 // REACT-REDUX
 import { useDispatch, useSelector } from "react-redux";
 
+// REACT_ROUTER_DOM
+import { Link } from "react-router-dom";
+
 // REACT
 import { useEffect } from "react";
 
@@ -38,22 +41,22 @@ function SideBar() {
     {
       name: "completed",
       icon: <IoCheckmarkCircleSharp className="text-green-400" />,
-      href: "/tasks/completed",
+      href: "/todos/completed",
     },
     {
       name: "deleted",
       icon: <IoTrash className="text-red-600" />,
-      href: "/tasks/deleted",
+      href: "/todos/deleted",
     },
     {
       name: "favourites",
       icon: <IoSparkles className="text-yellow-400" />,
-      href: "/tasks/favourites",
+      href: "/todos/favourites",
     },
     {
       name: "ongoing",
       icon: <IoCellular className="text-blue-700" />,
-      href: "/tasks/ongoing",
+      href: "/todos/ongoing",
     },
   ];
 
@@ -106,15 +109,22 @@ function SideBar() {
           <ul className="w-full  h-auto flex flex-col gap-1 pt-5 ">
             {sections.map((section) => {
               return (
-                <li
-                  key={section.name}
-                  className={`${
-                    mood === "light" ? "hover:bg-red-50" : "hover:bg-slate-800"
-                  } w-full  py-1 rounded-sm cursor-pointer px-2 hover:backdrop-blur-md  ease-in-out transition-all flex flex-row  items-center gap-2`}
-                >
-                  {section.icon}
-                  <h5 className="text-sm capitalize">{section.name}</h5>
-                </li>
+                <Link to={section.href}>
+                  <li
+                    key={section.name}
+                    className={`${
+                      mood === "light"
+                        ? "hover:bg-red-50"
+                        : "hover:bg-slate-800"
+                    } w-full  py-1 rounded-sm cursor-pointer px-2 hover:backdrop-blur-md  ease-in-out transition-all flex flex-row  items-center gap-2`}
+                    onClick={() => {
+                      dispatch(revealSideBar(false));
+                    }}
+                  >
+                    {section.icon}
+                    <h5 className="text-sm capitalize">{section.name}</h5>
+                  </li>
+                </Link>
               );
             })}
           </ul>

@@ -9,6 +9,7 @@ import App from "./App.jsx";
 // PAGES
 import Login from "./pages/Login.jsx";
 import Signup from "./pages/signup.jsx";
+import Notfound from "./pages/Notfound.jsx";
 
 // STORE
 import store from "./app/store.js";
@@ -29,9 +30,16 @@ import {
   Route,
   Link,
 } from "react-router-dom";
-import Notfound from "./pages/Notfound.jsx";
-import Completed from "./components/Tasks/Completed.jsx";
+
 import ToodList from "./components/TodoList.jsx";
+
+// Route --- [localhost:3000/TODOS/ALL]
+import AllTodos from "./components/Todos/AllTodos.jsx";
+import CompletedTodos from "./components/Todos/CompletedTodos.jsx";
+import DeletedTodos from "./components/Todos/CompletedTodos.jsx";
+import FavouriteTodos from "./components/Todos/FavouriteTodos.jsx";
+import OngoingTodos from "./components/Todos/OngoingTodos.jsx";
+import RootTodos from "./components/Todos/RootTodos.jsx";
 
 const router = createBrowserRouter([
   {
@@ -41,12 +49,40 @@ const router = createBrowserRouter([
       { path: "/", element: <ToodList /> },
 
       {
-        path: "completed",
-        element: <Completed />,
+        path: "todos",
+        element: <RootTodos />,
+        children: [
+          {
+            index: true,
+            path: "all",
+            element: <AllTodos />,
+          },
+
+          {
+            path: "completed",
+            element: <CompletedTodos />,
+          },
+
+          {
+            path: "deleted",
+            element: <DeletedTodos />,
+          },
+
+          {
+            path: "ongoing",
+            element: <OngoingTodos />,
+          },
+
+          {
+            path: "favourites",
+            element: <FavouriteTodos />,
+          },
+        ],
       },
     ],
   },
 
+  ,
   {
     path: "login",
     element: <Login />,

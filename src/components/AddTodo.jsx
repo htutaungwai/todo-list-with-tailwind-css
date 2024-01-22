@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 
 import TodoForm from "./TodoForm";
-import { motion } from "framer-motion";
+
 import { GrFormClose } from "react-icons/gr";
 
 const addTodo = ({ showAddTodo, setShowAddTodo, todos, setTodos }) => {
@@ -22,7 +22,7 @@ const addTodo = ({ showAddTodo, setShowAddTodo, todos, setTodos }) => {
   const wrapperRef = useRef(HTMLElement || null);
   useOutsideDivCloser(wrapperRef);
   return (
-    <motion.div
+    <div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
@@ -51,7 +51,7 @@ const addTodo = ({ showAddTodo, setShowAddTodo, todos, setTodos }) => {
           setShowAddTodo={setShowAddTodo}
         />
       </div>
-    </motion.div>
+    </div>
   );
 };
 
