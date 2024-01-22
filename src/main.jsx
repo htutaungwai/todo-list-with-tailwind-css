@@ -29,15 +29,22 @@ import {
   Route,
   Link,
 } from "react-router-dom";
+import Notfound from "./pages/Notfound.jsx";
+import Completed from "./components/Tasks/Completed.jsx";
+import ToodList from "./components/TodoList.jsx";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
-  },
-  {
-    path: "signup",
-    element: <Signup />,
+    children: [
+      { path: "/", element: <ToodList /> },
+
+      {
+        path: "completed",
+        element: <Completed />,
+      },
+    ],
   },
 
   {
@@ -46,8 +53,13 @@ const router = createBrowserRouter([
   },
 
   {
+    path: "signup",
+    element: <Signup />,
+  },
+
+  {
     path: "*",
-    element: <div>404 Not Found</div>,
+    element: <Notfound />,
   },
 ]);
 

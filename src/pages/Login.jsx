@@ -22,7 +22,7 @@ const Login = () => {
       <div className="min-w-1/2 bg-red-500 w-1/2 min-h-screen hidden md:block"></div>
 
       <div className="w-1/2 min-h-screen flex items-center flex-col justify-center ">
-        <h1 className="text-2xl font-bold poppins">Sign Up</h1>
+        <h1 className="text-2xl font-bold poppins">Log In</h1>
         <Box maw={340} mx={"auto"} style={{ minWidth: 300 }}>
           <form onSubmit={form.onSubmit((values) => console.log(values))}>
             <TextInput

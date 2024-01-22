@@ -16,6 +16,10 @@ import ToodList from "./components/TodoList";
 import AddTaskBtn from "./components/AddTaskBtn";
 import Footer from "./components/Footer/Footer";
 import SideBar from "./components/SideBar/SideBar";
+import StatsBar from "./components/StatsBar/StatsBar";
+
+// REACT_ROUTER_DOM
+import { Outlet, Link } from "react-router-dom";
 
 function App() {
   const [showAddTodo, setShowAddTodo] = useState(false);
@@ -40,8 +44,17 @@ function App() {
       {/* Show TODO END*/}
 
       {/* Todo List */}
-      <ToodList todos={todos} setTodos={setTodos} />
-      {/* ADD TASK BUTTON  */}
+      <div className=" w-full h-[96%] min-h-[96%] ">
+        {/* This is H1 heading */}
+        <h1 className={`text-xl text-red-500 font-bold text-center pt-4 `}>
+          TodoList
+        </h1>
+        <StatsBar />
+
+        <Outlet />
+
+        {/* ADD TASK BUTTON  */}
+      </div>
 
       <SideBar />
       <Footer />
