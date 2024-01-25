@@ -109,9 +109,8 @@ function SideBar() {
           <ul className="w-full  h-auto flex flex-col gap-1 pt-5 ">
             {sections.map((section) => {
               return (
-                <Link to={section.href}>
+                <Link to={section.href} key={section.name}>
                   <li
-                    key={section.name}
                     className={`${
                       mood === "light"
                         ? "hover:bg-red-50"
