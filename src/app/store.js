@@ -12,7 +12,7 @@ const store = configureStore({
     theme: themeReducer,
     reveal: revealsReducer,
     auth: authReducer,
-    [apiSlice.reudcerPath]: apiSlice.reducer,
+    [apiSlice.reducerPath]: apiSlice.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(apiSlice.middleware),

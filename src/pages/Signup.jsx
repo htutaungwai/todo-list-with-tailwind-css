@@ -5,9 +5,16 @@ import {
   Group,
   Box,
   PasswordInput,
+  Text,
 } from "@mantine/core";
+
+// MANTINE-FORM
 import { useForm } from "@mantine/form";
 
+// REACT-ROUTER-DOM
+import { Link } from "react-router-dom";
+
+// ICONS
 import { IoLockClosed } from "react-icons/io5";
 
 const Signup = () => {
@@ -39,7 +46,7 @@ const Signup = () => {
     <div className="mainContainer flex flex-row">
       <div className="min-w-1/2 bg-red-500 w-1/2 min-h-screen hidden md:block"></div>
 
-      <div className="w-1/2 min-h-screen flex items-center flex-col justify-center">
+      <div className=" w-full md:w-1/2 min-h-screen flex items-center flex-col justify-center">
         <h1 className="text-2xl font-bold poppins">Sign Up</h1>
         <Box maw={340} mx="auto">
           <form onSubmit={form.onSubmit((values) => console.log(values))}>
@@ -61,6 +68,7 @@ const Signup = () => {
             <PasswordInput
               withAsterisk
               label="Password"
+              placeholder="***********"
               mt={"md"}
               {...form.getInputProps("password", { type: "password" })}
             />
@@ -69,11 +77,19 @@ const Signup = () => {
               withAsterisk
               rightSection={<IoLockClosed />}
               label="Confirm Password"
+              placeholder="***********"
               mt="md"
               {...form.getInputProps("confirmPassword", {
                 type: "confirmPassword",
               })}
             />
+
+            <Text mt="sm" fw={500} size="sm">
+              Already have an account?{"  "}
+              <Link to="/login" className="underline text-blue-600 font-normal">
+                Login here
+              </Link>
+            </Text>
 
             <Checkbox
               mt="md"

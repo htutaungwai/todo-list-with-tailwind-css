@@ -8,7 +8,7 @@ import App from "./App.jsx";
 
 // PAGES
 import Login from "./pages/Login.jsx";
-import Signup from "./pages/signup.jsx";
+import Signup from "./pages/Signup.jsx";
 import Notfound from "./pages/Notfound.jsx";
 
 // STORE
@@ -40,6 +40,10 @@ import DeletedTodos from "./components/Todos/CompletedTodos.jsx";
 import FavouriteTodos from "./components/Todos/FavouriteTodos.jsx";
 import OngoingTodos from "./components/Todos/OngoingTodos.jsx";
 import RootTodos from "./components/Todos/RootTodos.jsx";
+
+// REACT-TOASTIFY
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const router = createBrowserRouter([
   {
@@ -100,11 +104,14 @@ const router = createBrowserRouter([
 ]);
 
 createRoot(document.getElementById("root")).render(
-  <Provider store={store}>
-    <MantineProvider>
-      <React.StrictMode>
-        <RouterProvider router={router} />
-      </React.StrictMode>
-    </MantineProvider>
-  </Provider>
+  <>
+    <ToastContainer />
+    <Provider store={store}>
+      <MantineProvider>
+        <React.StrictMode>
+          <RouterProvider router={router} />
+        </React.StrictMode>
+      </MantineProvider>
+    </Provider>
+  </>
 );

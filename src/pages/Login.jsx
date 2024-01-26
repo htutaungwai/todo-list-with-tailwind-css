@@ -1,7 +1,51 @@
-import { TextInput, Button, Group, Box, PasswordInput } from "@mantine/core";
+// REACT
+import { useEffect, useState } from "react";
+// MANTINE-CORE
+import {
+  TextInput,
+  Button,
+  Group,
+  Box,
+  PasswordInput,
+  Text,
+} from "@mantine/core";
+
+// MANTINE-FORM
 import { useForm } from "@mantine/form";
 
+//REACT-REDUX
+import { useDispatch, useSelector } from "react-redux";
+
+// REACT-ROUTER-DOM
+import { useNavigate, Link } from "react-router-dom";
+
+// MUTATIONS
+import { useLoginMutation } from "../features/usersApiSlice/usersApiSlice";
+
+// AUTH
+import { setCredentials } from "../features/authSlice/authSlice";
+
+// REACT-TOASTIFY
+import { ToastContainer, toast, Bounce } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 const Login = () => {
+  // hooks
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const { userInfo } = useSelector((state) => state.auth);
+
+  // LOGIN MUTAION
+  const [login, { isLoading }] = useLoginMutation();
+
+  //checking whether if the end use has the cookies or not
+  useEffect(() => {
+    if (userInfo) {
+      navigate("/");
+    }
+  }, [userInfo, navigate]);
+
   const form = useForm({
     initialValues: {
       email: "",
@@ -18,33 +62,76 @@ const Login = () => {
   });
 
   return (
-    <div className="mainContainer min-w-screen min-h-screen flex flex-row">
-      <div className="min-w-1/2 bg-red-500 w-1/2 min-h-screen hidden md:block"></div>
+    <>
+      <div className="mainContainer min-w-screen min-h-screen flex flex-row">
+        <div className="min-w-1/2 bg-red-500 w-1/2 min-h-screen hidden md:block"></div>
 
-      <div className="w-1/2 min-h-screen flex items-center flex-col justify-center ">
-        <h1 className="text-2xl font-bold poppins">Log In</h1>
-        <Box maw={340} mx={"auto"} style={{ minWidth: 300 }}>
-          <form onSubmit={form.onSubmit((values) => console.log(values))}>
-            <TextInput
-              mt={"md"}
-              label="Email"
-              placeholder="your@email.com"
-              {...form.getInputProps("email")}
-            />
+        <div className=" w-full md:w-1/2 min-h-screen flex items-center flex-col justify-center">
+          <h1 className="text-2xl font-bold poppins">Log In</h1>
+          <Box maw={340} mx={"auto"} style={{ minWidth: 300 }}>
+            <form
+              onSubmit={form.onSubmit(async ({ email, password }) => {
+                try {
+                  const res = await login({ email, password }).unwrap();
 
-            <PasswordInput
-              label="Password"
-              mt={"md"}
-              {...form.getInputProps("password", { type: "password" })}
-            />
+                  setTimeout(() => {
+                    dispatch(setCredentials({ ...res }));
+                    navigate("/");
+                  }, 3000);
+                } catch (error) {
+                  console.log(error?.data?.message || error);
 
-            <Group justify="flex-end" mt="md">
-              <Button type="submit">Submit</Button>
-            </Group>
-          </form>
-        </Box>
+                  toast.error(` ${error?.data?.message || error}`, {
+                    position: "top-right",
+                    autoClose: 3000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                    transition: Bounce,
+                  });
+
+                  form.setErrors({
+                    email: error?.data?.message || error,
+                    password: error?.data?.message || error,
+                  });
+                }
+              })}
+            >
+              <TextInput
+                mt={"md"}
+                label="Email"
+                placeholder="your@email.com"
+                {...form.getInputProps("email")}
+              />
+
+              <PasswordInput
+                label="Password"
+                mt={"md"}
+                placeholder="***********"
+                {...form.getInputProps("password", { type: "password" })}
+              />
+
+              <Text mt="sm" fw={500} size="sm">
+                Don't you have an account yet?{"  "}
+                <Link
+                  to="/signup"
+                  className="underline text-blue-600 font-normal"
+                >
+                  Signup here
+                </Link>
+              </Text>
+
+              <Group justify="flex-end" mt="md">
+                <Button type="submit">Submit</Button>
+              </Group>
+            </form>
+          </Box>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

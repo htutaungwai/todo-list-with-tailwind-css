@@ -1,8 +1,8 @@
 // HOOKS
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 // REDUX HOOKS
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 // CSS STYLING
 import "./index.css";
@@ -12,19 +12,23 @@ import dataTodos from "./data/dataTodos";
 
 // COMPONENTS
 import AddTodo from "./components/AddTodo";
-import ToodList from "./components/TodoList";
 import AddTaskBtn from "./components/AddTaskBtn";
 import Footer from "./components/Footer/Footer";
 import SideBar from "./components/SideBar/SideBar";
 import StatsBar from "./components/StatsBar/StatsBar";
 
 // REACT_ROUTER_DOM
-import { Outlet, Link } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 
 function App() {
   const [showAddTodo, setShowAddTodo] = useState(false);
   const [todos, setTodos] = useState(dataTodos);
   const { mood } = useSelector((state) => state.theme);
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  useEffect(() => {}, [navigate]);
 
   return (
     <div
