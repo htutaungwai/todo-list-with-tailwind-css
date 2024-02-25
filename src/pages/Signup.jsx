@@ -12,12 +12,27 @@ import {
 import { useForm } from "@mantine/form";
 
 // REACT-ROUTER-DOM
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 // ICONS
 import { IoLockClosed } from "react-icons/io5";
 
+// REACT HOOKS
+import { useEffect } from "react";
+
+//REACT REDUX
+import { useSelector } from "react-redux";
+
 const Signup = () => {
+  const navigate = useNavigate();
+  const { userInfo } = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    if (userInfo) {
+      navigate("/");
+    }
+  }, [userInfo, navigate]);
+
   const form = useForm({
     initialValues: {
       username: "",

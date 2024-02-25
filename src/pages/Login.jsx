@@ -28,6 +28,7 @@ import { setCredentials } from "../features/authSlice/authSlice";
 // REACT-TOASTIFY
 import { ToastContainer, toast, Bounce } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Spinner from "../components/Loading/Spinner";
 
 const Login = () => {
   // hooks
@@ -39,7 +40,7 @@ const Login = () => {
   // LOGIN MUTAION
   const [login, { isLoading }] = useLoginMutation();
 
-  //checking whether if the end use has the cookies or not
+  //checking whether if the end user has the cookies or not
   useEffect(() => {
     if (userInfo) {
       navigate("/");
@@ -63,6 +64,7 @@ const Login = () => {
 
   return (
     <>
+      {isLoading && <Spinner />}
       <div className="mainContainer min-w-screen min-h-screen flex flex-row">
         <div className="min-w-1/2 bg-red-500 w-1/2 min-h-screen hidden md:block"></div>
 
@@ -73,15 +75,12 @@ const Login = () => {
               onSubmit={form.onSubmit(async ({ email, password }) => {
                 try {
                   const res = await login({ email, password }).unwrap();
-
-                  setTimeout(() => {
-                    dispatch(setCredentials({ ...res }));
-                    navigate("/");
-                  }, 3000);
+                  dispatch(setCredentials({ ...res }));
+                  navigate("/");
                 } catch (error) {
                   console.log(error?.data?.message || error);
 
-                  toast.error(` ${error?.data?.message || error}`, {
+                  toast.error(` ${error?.data?.message || error?.error}`, {
                     position: "top-right",
                     autoClose: 3000,
                     hideProgressBar: false,
@@ -93,9 +92,25 @@ const Login = () => {
                     transition: Bounce,
                   });
 
+                  // form.setValues({
+                  //   email: "",
+                  //   password: "",
+                  // });
+
+                  form.setValues({
+                    email: "",
+                    password: "",
+                  });
+
                   form.setErrors({
-                    email: error?.data?.message || error,
-                    password: error?.data?.message || error,
+                    email:
+                      error?.data?.message ||
+                      error?.error ||
+                      "Unknown Error occurs",
+                    password:
+                      error?.data?.message ||
+                      error?.error ||
+                      "Unknown Error occurs",
                   });
                 }
               })}
@@ -103,7 +118,7 @@ const Login = () => {
               <TextInput
                 mt={"md"}
                 label="Email"
-                placeholder="your@email.com"
+                placeholder="example@email.com"
                 {...form.getInputProps("email")}
               />
 

@@ -23,12 +23,19 @@ import { Outlet, useNavigate } from "react-router-dom";
 function App() {
   const [showAddTodo, setShowAddTodo] = useState(false);
   const [todos, setTodos] = useState(dataTodos);
-  const { mood } = useSelector((state) => state.theme);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  useEffect(() => {}, [navigate]);
+  // GLOBAL STATE
+  const { mood } = useSelector((state) => state.theme);
+  const { userInfo } = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    if (!userInfo) {
+      navigate("/login");
+    }
+  }, [userInfo, navigate]);
 
   return (
     <div
