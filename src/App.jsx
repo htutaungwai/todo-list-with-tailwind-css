@@ -31,6 +31,8 @@ function App() {
   const { mood } = useSelector((state) => state.theme);
   const { userInfo } = useSelector((state) => state.auth);
 
+  console.log(userInfo);
+
   useEffect(() => {
     if (!userInfo) {
       navigate("/login");
@@ -67,7 +69,7 @@ function App() {
         {/* ADD TASK BUTTON  */}
       </div>
 
-      <SideBar />
+      {userInfo && <SideBar />}
       <Footer />
     </div>
   );

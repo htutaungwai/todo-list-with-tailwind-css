@@ -26,8 +26,7 @@ import { useLoginMutation } from "../features/usersApiSlice/usersApiSlice";
 import { setCredentials } from "../features/authSlice/authSlice";
 
 // REACT-TOASTIFY
-import { ToastContainer, toast, Bounce } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { toast, Bounce } from "react-toastify";
 import Spinner from "../components/Loading/Spinner";
 
 const Login = () => {

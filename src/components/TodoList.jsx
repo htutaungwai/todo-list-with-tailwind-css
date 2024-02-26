@@ -5,8 +5,6 @@ import "./TodoList.css";
 import SortedTodoList from "./TodoListField/SortedTodoList";
 import InnerBodyField from "./InnerBodyField/InnerBodyField";
 
-// REA
-
 const ToodList = () => {
   return (
     <div className="h-[84%] max-h-[84%] flex ">

@@ -29,6 +29,7 @@ function SideBar() {
 
   // SideBar global state
   const sideBarState = useSelector((state) => state.reveal.sideBar);
+  const { userInfo } = useSelector((state) => state.auth);
 
   //use dispatch
   const dispatch = useDispatch();
@@ -93,8 +94,12 @@ function SideBar() {
               <IoPersonCircleSharp />
             </span>
             <div>
-              <h2 className="font-bold">Htut Aung Wai</h2>
-              <p className="text-gray-500">htutaungway@gmail.com</p>
+              <h2 className="font-bold">
+                {userInfo.name ? userInfo.name : "null"}
+              </h2>
+              <p className="text-gray-500">
+                {userInfo.email ? userInfo.email : "null"}
+              </p>
             </div>
           </div>
           <CloseButton
