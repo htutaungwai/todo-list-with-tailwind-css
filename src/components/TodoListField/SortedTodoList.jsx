@@ -112,7 +112,7 @@ const SortedTodoList = () => {
                                       .toLocaleLowerCase()
                                       .includes(searchValue)
                                   ? item
-                                  : item.description
+                                  : item.content
                                       .toLocaleLowerCase()
                                       .includes(searchValue)
                               )

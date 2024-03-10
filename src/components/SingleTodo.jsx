@@ -20,6 +20,10 @@ import { revealEditPage } from "../features/showPagesSlice/revealSlice";
 // ICONS
 import { FaCheckDouble } from "react-icons/fa";
 
+// HTML-to-TEXT
+
+import { convert } from "html-to-text";
+
 const SingleTodo = ({ obj, sortBy }) => {
   const selectedTodo = useSelector((state) => state.todo.selectedTodo);
   const editPageState = useSelector((state) => state.reveal.editPage);
@@ -28,7 +32,11 @@ const SingleTodo = ({ obj, sortBy }) => {
   // use dispatch
   const dispatch = useDispatch();
 
+  // useRef for InputElement focus
   const inputRef = useRef(HTMLInputElement || null);
+
+  // converting htmlContent to string
+  const description = convert(obj.content);
 
   const onClickHandler = (event) => {
     // IF USE CLICKS ON INPUT TAG
@@ -117,9 +125,9 @@ const SingleTodo = ({ obj, sortBy }) => {
             mood === "light" ? "text-gray-500" : "text-gray-300"
           } text-xs  my-2 pl-6`}
         >
-          {obj.description.length > 150
-            ? obj.description.substring(0, 150) + `...`
-            : obj.description}
+          {description.length > 150
+            ? description.substring(0, 150) + `...`
+            : description}
         </p>
 
         {obj.id === selectedTodo?.id && (
