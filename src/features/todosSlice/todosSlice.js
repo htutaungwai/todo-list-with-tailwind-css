@@ -14,13 +14,11 @@ const todosSlice = createSlice({
       // ////////////////////
       console.log("added todo");
       const title = action.payload.title ? action.payload.title : "new todo";
-      const description = action.payload.title
-        ? action.payload.description
-        : "new todo";
+
       const checked = action.payload.checked ? action.payload.checked : false;
       const content = action.payload.content
         ? action.payload.content
-        : "<span>New Todo</span>";
+        : "<p>".repeat(15) + "</p>";
       const dateCreated = action.payload.dateCreated
         ? action.payload.dateCreated
         : new Date().toISOString();
@@ -31,7 +29,7 @@ const todosSlice = createSlice({
         id: nanoid(),
         title: title,
         checked: checked,
-        description: description,
+
         dateCreated: dateCreated,
         dateUpdated: dateUpdated,
         content: content,
@@ -52,10 +50,7 @@ const todosSlice = createSlice({
             case "TITLE":
               todo.title = value;
               break;
-            case "DESCRIPTION":
-              todo.description = value;
 
-              break;
             case "CREATED":
               todo.dateCreated = value;
               break;
@@ -87,8 +82,7 @@ const todosSlice = createSlice({
         case "TITLE":
           state.selectedTodo.title = value;
           break;
-        case "DESCRIPTION":
-          state.selectedTodo.description = value;
+
           // code block
           break;
         case "DATE":
