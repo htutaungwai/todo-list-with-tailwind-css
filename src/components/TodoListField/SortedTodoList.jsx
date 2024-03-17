@@ -138,7 +138,9 @@ const SortedTodoList = () => {
         <NoTodos />
       )}
 
-      <MdBeachAccess className="absolute top-1/2 left-1/2 text-5xl -translate-x-1/2 text-gray-300 z-0" />
+      {!isObjectEmpty(primeSortedObject) && (
+        <MdBeachAccess className="absolute top-1/2 left-1/2 text-5xl -translate-x-1/2 text-gray-300 z-0" />
+      )}
     </div>
   );
 };

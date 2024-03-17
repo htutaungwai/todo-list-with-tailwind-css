@@ -13,7 +13,7 @@ const AddTaskBtn = () => {
             addTodo({
               title: "first todo",
               description: "first todo",
-              content: "<h2>first todo</h2>",
+              content: "<p>".repeat(15) + "</p>",
               checked: false,
             })
           );

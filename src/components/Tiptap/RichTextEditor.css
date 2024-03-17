@@ -1,3 +1,17 @@
+.tiptap.ProseMirror {
+  padding: 5px 10px;
+}
+
+ul,
+ol {
+  padding: 0 1rem;
+}
+.tiptap ul {
+  list-style-type: square;
+}
+.tiptap ol {
+  list-style-type: decimal;
+}
 .tiptap h1 {
   font-size: xx-large;
 }
@@ -30,7 +44,7 @@
   width: 100%;
   margin-top: 10px;
   margin-bottom: 10px;
-  padding: 10px;
+  padding: 10px 5px;
   background-color: black;
   color: white;
 }
@@ -56,4 +70,20 @@ button.editor {
   border-radius: 10%;
   color: black;
   margin-left: 3px;
+}
+
+pre {
+  background: #0d0d0d;
+  color: #fff;
+  font-family: "JetBrainsMono", monospace;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  margin: 15px 5px;
+
+  code {
+    color: inherit;
+    padding: 1 1 1 1;
+    background: none;
+    font-size: 0.8rem;
+  }
 }
