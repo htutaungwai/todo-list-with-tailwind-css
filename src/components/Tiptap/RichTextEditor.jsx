@@ -3,8 +3,9 @@ import ListItem from "@tiptap/extension-list-item";
 import TextStyle from "@tiptap/extension-text-style";
 import { EditorProvider, useCurrentEditor, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
-import React, { useEffect, useState } from "react";
+import { ColorPicker } from "@mantine/core";
 import "./RichTextEditor.css";
+import { HoverCard, Button, Text, Group } from "@mantine/core";
 
 // ICONS
 import {
@@ -67,13 +68,43 @@ const RichTextEditor = () => {
       >
         <FaStrikethrough />
       </button>
-      <button
-        onClick={() => editor.chain().focus().toggleCode().run()}
-        disabled={!editor.can().chain().focus().toggleCode().run()}
-        className={editor.isActive("code") ? "is-active" : "editor"}
-      >
-        <FaCode />
-      </button>
+
+      <Group justify="center">
+        <HoverCard width={280} shadow="md">
+          <HoverCard.Target>
+            <button
+              onClick={() => {
+                editor.chain().focus().toggleCode().run();
+              }}
+              disabled={!editor.can().chain().focus().toggleCode().run()}
+              className={editor.isActive("code") ? "is-active" : "editor"}
+            >
+              <FaCode />
+            </button>
+          </HoverCard.Target>
+          <HoverCard.Dropdown>
+            <ColorPicker
+              format="hex"
+              swatches={[
+                "#2e2e2e",
+                "#868e96",
+                "#fa5252",
+                "#e64980",
+                "#be4bdb",
+                "#7950f2",
+                "#4c6ef5",
+                "#228be6",
+                "#15aabf",
+                "#12b886",
+                "#40c057",
+                "#82c91e",
+                "#fab005",
+                "#fd7e14",
+              ]}
+            />
+          </HoverCard.Dropdown>
+        </HoverCard>
+      </Group>
 
       <button
         onClick={() => editor.chain().focus().setParagraph().run()}
@@ -187,16 +218,15 @@ const RichTextEditor = () => {
         <FaBan />
       </button>
 
-      <button
-        onClick={() => editor.chain().focus().setColor("#958DF1").run()}
-        className={
-          editor.isActive("textStyle", { color: "#958DF1" })
-            ? "is-active"
-            : "editor"
+      <input
+        type="color"
+        onInput={(event) =>
+          editor.chain().focus().setColor(event.target.value).run()
         }
-      >
-        c
-      </button>
+        value={editor.getAttributes("textStyle").color}
+        data-testid="setColor"
+      />
+
       {/* 
       <button onClick={() => editor.chain().focus().clearNodes().run()}>
         clear nodes
@@ -256,3 +286,9 @@ export default () => {
     ></EditorProvider>
   );
 };
+
+// <button
+//         onClick={() => editor.chain().focus().toggleCode().run()}
+//         disabled={!editor.can().chain().focus().toggleCode().run()}
+//         className={editor.isActive("code") ? "is-active" : "editor"}
+//       ></button>
