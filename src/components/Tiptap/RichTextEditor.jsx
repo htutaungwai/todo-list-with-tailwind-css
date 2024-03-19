@@ -3,9 +3,7 @@ import ListItem from "@tiptap/extension-list-item";
 import TextStyle from "@tiptap/extension-text-style";
 import { EditorProvider, useCurrentEditor, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
-import { ColorPicker } from "@mantine/core";
 import "./RichTextEditor.css";
-import { HoverCard, Button, Text, Group } from "@mantine/core";
 
 // ICONS
 import {
@@ -22,7 +20,7 @@ import {
   FaRuler,
   FaUndoAlt,
   FaRedoAlt,
-  FaTablet,
+  FaArrowDown,
 } from "react-icons/fa";
 
 import {
@@ -46,7 +44,7 @@ const RichTextEditor = () => {
   }
 
   return (
-    <div className="flex flex-row rounded-md border w-fit items-center basis-0">
+    <div className="flex flex-row rounded-md border w-fit items-center basis-0 sticky top-0 bg-zinc-100 z-50">
       <button
         onClick={() => editor.chain().focus().toggleBold().run()}
         disabled={!editor.can().chain().focus().toggleBold().run()}
@@ -69,42 +67,13 @@ const RichTextEditor = () => {
         <FaStrikethrough />
       </button>
 
-      <Group justify="center">
-        <HoverCard width={280} shadow="md">
-          <HoverCard.Target>
-            <button
-              onClick={() => {
-                editor.chain().focus().toggleCode().run();
-              }}
-              disabled={!editor.can().chain().focus().toggleCode().run()}
-              className={editor.isActive("code") ? "is-active" : "editor"}
-            >
-              <FaCode />
-            </button>
-          </HoverCard.Target>
-          <HoverCard.Dropdown>
-            <ColorPicker
-              format="hex"
-              swatches={[
-                "#2e2e2e",
-                "#868e96",
-                "#fa5252",
-                "#e64980",
-                "#be4bdb",
-                "#7950f2",
-                "#4c6ef5",
-                "#228be6",
-                "#15aabf",
-                "#12b886",
-                "#40c057",
-                "#82c91e",
-                "#fab005",
-                "#fd7e14",
-              ]}
-            />
-          </HoverCard.Dropdown>
-        </HoverCard>
-      </Group>
+      <button
+        onClick={() => editor.chain().focus().toggleCode().run()}
+        disabled={!editor.can().chain().focus().toggleCode().run()}
+        className={editor.isActive("code") ? "is-active" : "editor"}
+      >
+        <FaCode />
+      </button>
 
       <button
         onClick={() => editor.chain().focus().setParagraph().run()}
@@ -194,7 +163,7 @@ const RichTextEditor = () => {
         onClick={() => editor.chain().focus().setHardBreak().run()}
         className="editor"
       >
-        <FaTablet />
+        <FaArrowDown />
       </button>
       <button
         onClick={() => editor.chain().focus().undo().run()}
@@ -219,6 +188,7 @@ const RichTextEditor = () => {
       </button>
 
       <input
+        className="inputColor"
         type="color"
         onInput={(event) =>
           editor.chain().focus().setColor(event.target.value).run()
@@ -286,9 +256,3 @@ export default () => {
     ></EditorProvider>
   );
 };
-
-// <button
-//         onClick={() => editor.chain().focus().toggleCode().run()}
-//         disabled={!editor.can().chain().focus().toggleCode().run()}
-//         className={editor.isActive("code") ? "is-active" : "editor"}
-//       ></button>

@@ -1,29 +1,5 @@
 const dataTodos = [
   {
-    title: "go to the hospital",
-    checked: false,
-    id: "390dpaxwiwo",
-    dateCreated: "2023-12-28T13:09:00.697Z",
-    dateUpdated: "2023-12-28T13:09:00.697Z",
-    content: `<h1>go to the hospital</h1>`,
-  },
-  {
-    title: "game to the market",
-    checked: false,
-    id: "3900xiwo",
-    dateCreated: "2023-10-30T13:09:00.697Z",
-    dateUpdated: "2023-10-30T13:09:00.697Z",
-    content: "<h1>go to the hospital market</h1>",
-  },
-  {
-    title: "go to the beach",
-    checked: false,
-    id: "3900xwiwo",
-    content: "<h1>go to the beach</h1>",
-    dateCreated: "2023-11-05T13:09:00.697Z",
-    dateUpdated: "2023-10-30T13:09:00.697Z",
-  },
-  {
     title: "ဒီနေ့ရဲ့ဖွင့်ဟဝန်ခံချက်... ",
     checked: false,
     id: "390dw0xwiwo",
