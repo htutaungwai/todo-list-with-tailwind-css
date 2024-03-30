@@ -17,6 +17,10 @@ import { isObjectEmpty } from "../../utils/objFunctions";
 import { BsCalendar3, BsClockHistory } from "react-icons/bs";
 import { MdOutlineAbc, MdBeachAccess } from "react-icons/md";
 
+// AXIOS
+
+import axios from "axios";
+
 const SortedTodoList = () => {
   // STATES
   const todos = useSelector((state) => state.todo.todos);
@@ -32,6 +36,32 @@ const SortedTodoList = () => {
 
   // generating a sorted object
   const primeSortedObject = primeObjectGenearator(mutableTodos, sortBy);
+
+  // fetching all todos
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const apiUrl = "http://localhost:8000/posts";
+      axios
+        .get(
+          apiUrl,
+          { todoist_jwt: "ewfjwoef" },
+          { headers: "application/json" }
+        )
+        .then((response) => {
+          // Handle successful response
+          console.log("Response data:", response.data);
+        })
+        .catch((error) => {
+          // Handle error
+          console.error("Error fetching data:", error);
+        });
+
+      console.log(req);
+    };
+
+    fetchData();
+  }, []);
 
   // to check if there any keyword in the serachbar
   useEffect(() => {

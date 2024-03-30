@@ -21,6 +21,7 @@ import StatsBar from "./components/StatsBar/StatsBar";
 import { Outlet, useNavigate } from "react-router-dom";
 
 function App() {
+  console.log(document.cookie.indexOf("cookie_name=todoist_jwt"));
   const [showAddTodo, setShowAddTodo] = useState(false);
   const [todos, setTodos] = useState(dataTodos);
 
