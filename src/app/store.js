@@ -4,7 +4,6 @@ import themeReducer from "../features/themeSlice/themeSlice";
 import revealsReducer from "../features/showPagesSlice/revealSlice";
 import authReducer from "../features/authSlice/authSlice";
 import { apiSlice } from "../features/apiSlice/apiSlice";
-import { thunk } from "redux-thunk";
 
 const store = configureStore({
   reducer: {
@@ -16,12 +15,6 @@ const store = configureStore({
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(apiSlice.middleware),
-  devTools: true,
-  thunk: {
-    extraArgument: {
-      api: "",
-    },
-  },
 });
 
 export default store;
