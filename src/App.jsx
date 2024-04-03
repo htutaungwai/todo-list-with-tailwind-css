@@ -13,6 +13,7 @@ import dataTodos from "./data/dataTodos";
 // COMPONENTS
 import AddTodo from "./components/AddTodo";
 import AddTaskBtn from "./components/AddTaskBtn";
+// we don't use AddTaskBtn
 import Footer from "./components/Footer/Footer";
 import SideBar from "./components/SideBar/SideBar";
 import StatsBar from "./components/StatsBar/StatsBar";
@@ -20,12 +21,17 @@ import StatsBar from "./components/StatsBar/StatsBar";
 // REACT_ROUTER_DOM
 import { Outlet, useNavigate } from "react-router-dom";
 
+// RTKQuery
+import { useSignupMutation } from "./features/usersApiSlice/usersApiSlice";
+
 function App() {
-  console.log(document.cookie.indexOf("cookie_name=todoist_jwt"));
+  // LOCAL state
   const [showAddTodo, setShowAddTodo] = useState(false);
+
+  // data
   const [todos, setTodos] = useState(dataTodos);
 
-  const dispatch = useDispatch();
+  // use navigate
   const navigate = useNavigate();
 
   // GLOBAL STATE
@@ -35,8 +41,19 @@ function App() {
   console.log(userInfo);
 
   useEffect(() => {
-    if (!userInfo) {
+    function isAuthenticated() {
+      // Check if the authentication cookie is present
+      const authToken = document.cookie
+        .split("; ")
+        .find((row) => row.startsWith("todoist_jwt="));
+
+      return !!authToken;
+    }
+
+    if (!userInfo && isAuthenticated) {
       navigate("/login");
+    } else {
+      console.log("no user info");
     }
   }, [userInfo, navigate]);
 
