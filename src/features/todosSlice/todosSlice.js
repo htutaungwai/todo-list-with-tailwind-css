@@ -1,8 +1,6 @@
 import { createSlice, nanoid } from "@reduxjs/toolkit";
-import dataTodos from "../../data/dataTodos.js";
-
 const initialState = {
-  todos: dataTodos,
+  todos: [],
   selectedTodo: null,
 };
 
@@ -83,8 +81,6 @@ const todosSlice = createSlice({
           state.selectedTodo.title = value;
           break;
 
-          // code block
-          break;
         case "DATE":
           state.selectedTodo.dateCreated = value;
           // code block
@@ -104,9 +100,22 @@ const todosSlice = createSlice({
       console.log("seleced todo");
       console.log(action.payload);
       const [newTodo] = state.todos.filter(
-        (todo) => todo.id === action.payload
+        (todo) => todo._id === action.payload
       );
-      state.selectedTodo = newTodo;
+      console.log(newTodo);
+      return {
+        ...state,
+        selectedTodo: newTodo,
+      };
+    },
+
+    updateTodosArray: (state, action) => {
+      //////////////////////
+      console.log("UPDATING THE WHOLE ARRAY");
+      return {
+        ...state,
+        todos: action.payload,
+      };
     },
   },
 });
@@ -118,5 +127,6 @@ export const {
   selectTodo,
   updateTodo,
   updateSelectedTodo,
+  updateTodosArray,
 } = todosSlice.actions;
 export default todosSlice.reducer;

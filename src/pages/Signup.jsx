@@ -40,7 +40,7 @@ const Signup = () => {
 
   const { userInfo } = useSelector((state) => state.auth);
 
-  // ှ MUTAION
+  // MUTAION
   const [signup, { isLoading }] = useSignupMutation();
 
   useEffect(() => {
@@ -75,7 +75,6 @@ const Signup = () => {
 
   const submitHandler = async ({ name, email, password }) => {
     try {
-      console.log(signup);
       const res = await signup({ name, email, password }).unwrap();
       dispatch(setCredentials({ ...res }));
       navigate("/");

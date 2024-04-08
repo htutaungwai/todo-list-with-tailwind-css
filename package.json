@@ -20,7 +20,6 @@
     "@tiptap/pm": "^2.1.12",
     "@tiptap/react": "^2.1.12",
     "@tiptap/starter-kit": "^2.1.12",
-    "axios": "^1.6.8",
     "html-to-text": "^9.0.5",
     "moment": "^2.29.4",
     "react": "^18.2.0",

@@ -5,7 +5,9 @@ import { useState, useEffect } from "react";
 import SingleTodo from "../SingleTodo";
 
 // REACT-REDUX
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+
+// components
 import NoTodos from "./NoTodos";
 import SearchBar from "./TodoFilter/SearchBar";
 
@@ -17,17 +19,17 @@ import { isObjectEmpty } from "../../utils/objFunctions";
 import { BsCalendar3, BsClockHistory } from "react-icons/bs";
 import { MdOutlineAbc, MdBeachAccess } from "react-icons/md";
 
-// AXIOS
-import axios from "axios";
-
+// RTK QUERY
 import { useGetAllPostsQuery } from "../../features/PostApiSlice/PostApiSlice";
+import { updateTodosArray } from "../../features/todosSlice/todosSlice";
 
 const SortedTodoList = () => {
-  // exxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-
+  // xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
   const { data: posts, error, isLoading, refetch } = useGetAllPostsQuery();
 
-  // exxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+  // dispatch
+  const dispatch = useDispatch();
+
   // STATES
   const todos = useSelector((state) => state.todo.todos);
   const { mood } = useSelector((state) => state.theme);
@@ -43,23 +45,17 @@ const SortedTodoList = () => {
   // generating a sorted object
   const primeSortedObject = primeObjectGenearator(mutableTodos, sortBy);
 
+  // fetching data from database
   useEffect(() => {
-    const fetchPosts = async () => {
-      try {
-        const req = await fetch("http://localhost:8000/posts", {
-          method: "GET",
-          credentials: "include",
-        });
-        const res = await req.json();
-        console.log(res);
-      } catch (error) {
-        console.log(error);
-        throw new error();
+    try {
+      refetch();
+      if (!isLoading && posts) {
+        dispatch(updateTodosArray(posts));
       }
-    };
-
-    fetchPosts();
-  }, []);
+    } catch (error) {
+      console.log(error);
+    }
+  }, [posts]);
 
   // to check if there any keyword in the serachbar
   useEffect(() => {
@@ -67,7 +63,6 @@ const SortedTodoList = () => {
       setSearchState(false);
       return;
     }
-
     setSearchState(true);
   }, [searchValue]);
 
@@ -84,6 +79,7 @@ const SortedTodoList = () => {
     }
   }
 
+  console.log(todos);
   return (
     <div
       className={`w-full h-full max-w-xl  poppins flex flex-col overflow-y-scroll overflow-x-hidden relative   ${
@@ -148,7 +144,7 @@ const SortedTodoList = () => {
                                 return (
                                   <SingleTodo
                                     obj={obj}
-                                    key={obj.id}
+                                    key={obj._id}
                                     sortBy={sortBy}
                                   />
                                 );

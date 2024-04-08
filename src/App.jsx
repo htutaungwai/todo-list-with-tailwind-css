@@ -17,79 +17,96 @@ import AddTaskBtn from "./components/AddTaskBtn";
 import Footer from "./components/Footer/Footer";
 import SideBar from "./components/SideBar/SideBar";
 import StatsBar from "./components/StatsBar/StatsBar";
+import Spinner from "./components/Loading/Spinner";
 
 // REACT_ROUTER_DOM
 import { Outlet, useNavigate } from "react-router-dom";
 
 // RTKQuery
-import { useSignupMutation } from "./features/usersApiSlice/usersApiSlice";
+import { useCheckStatusQuery } from "./features/usersApiSlice/usersApiSlice";
+// REDUCER
+import { revealLoading } from "./features/showPagesSlice/revealSlice";
+
+// Auth Slice
+import { logout } from "./features/authSlice/authSlice";
 
 function App() {
   // LOCAL state
   const [showAddTodo, setShowAddTodo] = useState(false);
-
   // data
   const [todos, setTodos] = useState(dataTodos);
-
-  // use navigate
+  // use navigate and dispatch
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   // GLOBAL STATE
   const { mood } = useSelector((state) => state.theme);
   const { userInfo } = useSelector((state) => state.auth);
+  const { loading } = useSelector((state) => state.reveal);
 
-  console.log(userInfo);
+  const { data: status, error, isLoading, refetch } = useCheckStatusQuery();
 
   useEffect(() => {
-    function isAuthenticated() {
-      // Check if the authentication cookie is present
-      const authToken = document.cookie
-        .split("; ")
-        .find((row) => row.startsWith("todoist_jwt="));
+    const fetchData = async () => {
+      try {
+        const status = await refetch();
 
-      return !!authToken;
-    }
+        if (!status.isLoading && !status.isSuccess) {
+          console.log("dataFetch");
+          dispatch(logout());
+          navigate("/login");
+        }
 
-    if (!userInfo && isAuthenticated) {
-      navigate("/login");
-    } else {
-      console.log("no user info");
-    }
-  }, [userInfo, navigate]);
+        console.log(status);
+      } catch (error) {
+        console.log("SOMETHING WENT WRONG");
+        navigate("/login");
+        dispatch(logout());
+      }
+    };
+    fetchData();
+  }, [status]);
+
+  useEffect(() => {
+    dispatch(revealLoading(isLoading));
+  }, [isLoading]);
 
   return (
-    <div
-      className={`min-h-screen min-w-screen w-screen h-screen flex flex-col ${
-        mood === "dark" ? " bg-slate-700 text-white" : "text-black bg-white"
-      }`}
-    >
-      {/* Show Todo Start END */}
-      {showAddTodo && (
-        <AddTodo
-          setShowAddTodo={setShowAddTodo}
-          showAddTodo
-          todos={todos}
-          setTodos={setTodos}
-        />
-      )}
-      {/* Show TODO END*/}
+    <>
+      {loading && <Spinner />}
+      <div
+        className={`min-h-screen min-w-screen w-screen h-screen flex flex-col ${
+          mood === "dark" ? " bg-slate-700 text-white" : "text-black bg-white"
+        }`}
+      >
+        {/* Show Todo Start END */}
+        {showAddTodo && (
+          <AddTodo
+            setShowAddTodo={setShowAddTodo}
+            showAddTodo
+            todos={todos}
+            setTodos={setTodos}
+          />
+        )}
+        {/* Show TODO END*/}
 
-      {/* Todo List */}
-      <div className=" w-full h-[96%] min-h-[96%] ">
-        {/* This is H1 heading */}
-        <h1 className={`text-xl text-red-500 font-bold text-center pt-4 `}>
-          TodoList
-        </h1>
-        <StatsBar />
+        {/* Todo List */}
+        <div className=" w-full h-[96%] min-h-[96%] ">
+          {/* This is H1 heading */}
+          <h1 className={`text-xl text-red-500 font-bold text-center pt-4 `}>
+            TodoList
+          </h1>
+          <StatsBar />
 
-        <Outlet />
+          <Outlet />
 
-        {/* ADD TASK BUTTON  */}
+          {/* ADD TASK BUTTON  */}
+        </div>
+
+        {userInfo && <SideBar />}
+        <Footer />
       </div>
-
-      {userInfo && <SideBar />}
-      <Footer />
-    </div>
+    </>
   );
 }
 

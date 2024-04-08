@@ -6,13 +6,14 @@ import { Drawer, CloseButton } from "@mantine/core";
 import { useDispatch, useSelector } from "react-redux";
 
 // REACT_ROUTER_DOM
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 // REACT
 import { useEffect } from "react";
 
-// REVEAL SLICE REDUCER
+// REDUCER
 import { revealSideBar } from "../../features/showPagesSlice/revealSlice";
+import { revealLoading } from "../../features/showPagesSlice/revealSlice";
 
 // ICONS
 import {
@@ -23,19 +24,27 @@ import {
   IoCellular,
 } from "react-icons/io5";
 
+// MUTATION
+import { useSignoutMutation } from "../../features/usersApiSlice/usersApiSlice";
+// authSlice
+import { logout } from "../../features/authSlice/authSlice";
+
 function SideBar() {
+  // Logout Mutation
+
+  const [signout, { isLoading }] = useSignoutMutation();
+
   // useDisclosure hook inherited from MANTINE
   const [opened, { open, close }] = useDisclosure(false);
 
   // SideBar global state
-  const sideBarState = useSelector((state) => state.reveal.sideBar);
+  const { sideBar } = useSelector((state) => state.reveal);
   const { userInfo } = useSelector((state) => state.auth);
-
-  //use dispatch
-  const dispatch = useDispatch();
-
-  // THEME
   const { mood } = useSelector((state) => state.theme);
+
+  //use dispatch and navigate
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   // TASK SECTIONS
   const sections = [
@@ -62,19 +71,38 @@ function SideBar() {
   ];
 
   useEffect(() => {
-    if (sideBarState) {
+    if (sideBar) {
       open();
     } else {
       close();
     }
-  }, [sideBarState]);
+  }, [sideBar]);
+
+  useEffect(() => {
+    dispatch(revealLoading(isLoading));
+  }, [isLoading]);
+
+  // SIGN OUT HANDLER
+
+  const signOutHandler = async () => {
+    try {
+      const res = await signout();
+      if (res) {
+        dispatch(logout());
+        dispatch(revealSideBar(false));
+      }
+    } catch (error) {
+      console.log("Something Went Wrong");
+      throw new Error("Something went wrong");
+    }
+  };
 
   return (
     <>
       <Drawer
         opened={opened}
         onClose={() => {
-          dispatch(revealSideBar(!sideBarState));
+          dispatch(revealSideBar(!sideBar));
         }}
         withCloseButton={false}
         position="right"
@@ -139,8 +167,12 @@ function SideBar() {
               mood === "light" ? "bg-black" : "bg-white"
             } w-full h-[1px] my-2`}
           ></div>
+          {/* DIVISION LINE */}
 
-          <button className="mt-3 w-full  py-1 rounded-md cursor-pointer px-2 hover:backdrop-blur-md bg-red-500 ease-in-out transition-all  text-white poppins">
+          <button
+            className="mt-3 w-full  py-1 rounded-md cursor-pointer px-2 hover:backdrop-blur-md bg-red-500 ease-in-out transition-all  text-white poppins"
+            onClick={signOutHandler}
+          >
             Sign Out
           </button>
         </div>

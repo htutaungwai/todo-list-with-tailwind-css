@@ -42,10 +42,10 @@ const SingleTodo = ({ obj, sortBy }) => {
     // IF USE CLICKS ON INPUT TAG
     if (event && inputRef.current === event) {
       setTimeout(() => {
-        if (selectedTodo?.id === obj.id) {
+        if (selectedTodo?.id === obj._id) {
           dispatch(revealEditPage(false));
         }
-        dispatch(removeSingleTodo(obj.id));
+        dispatch(removeSingleTodo(obj._id));
       }, 2000);
       return;
     }
@@ -53,13 +53,13 @@ const SingleTodo = ({ obj, sortBy }) => {
     // IF USER CLICKS ON DIV
 
     // if user clicks for the same todo for twice
-    if (selectedTodo?.id === obj.id) {
+    if (selectedTodo?.id === obj._id) {
       dispatch(revealEditPage(!editPageState));
       return;
     }
 
     // if user clicks for a different todo
-    dispatch(selectTodo(obj.id));
+    dispatch(selectTodo(obj._id));
     dispatch(revealEditPage(false));
 
     setTimeout(() => {
@@ -83,11 +83,11 @@ const SingleTodo = ({ obj, sortBy }) => {
           ref={inputRef}
           className="accent-red-500 mr-2"
           type="checkbox"
-          id={obj.id}
-          name={obj.id}
+          id={obj._id}
+          name={obj._id}
           checked={obj.checked}
           onChange={() => {
-            dispatch(updateCheckTodo(obj.id));
+            dispatch(updateCheckTodo(obj._id));
           }}
         />
 
@@ -130,7 +130,7 @@ const SingleTodo = ({ obj, sortBy }) => {
             : description}
         </p>
 
-        {obj.id === selectedTodo?.id && (
+        {obj._id === selectedTodo?.id && (
           <span className="absolute right-5 text-xs text-black  top-1 mr-20">
             <FaCheckDouble color="red" />
           </span>
