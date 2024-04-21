@@ -53,7 +53,7 @@ const SingleTodo = ({ obj, sortBy }) => {
     // IF USER CLICKS ON DIV
 
     // if user clicks for the same todo for twice
-    if (selectedTodo?.id === obj._id) {
+    if (selectedTodo?._id === obj._id) {
       dispatch(revealEditPage(!editPageState));
       return;
     }
@@ -130,7 +130,7 @@ const SingleTodo = ({ obj, sortBy }) => {
             : description}
         </p>
 
-        {obj._id === selectedTodo?.id && (
+        {obj._id === selectedTodo?._id && (
           <span className="absolute right-5 text-xs text-black  top-1 mr-20">
             <FaCheckDouble color="red" />
           </span>

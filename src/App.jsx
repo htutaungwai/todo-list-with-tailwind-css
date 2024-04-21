@@ -26,6 +26,7 @@ import { Outlet, useNavigate } from "react-router-dom";
 import { useCheckStatusQuery } from "./features/usersApiSlice/usersApiSlice";
 // REDUCER
 import { revealLoading } from "./features/showPagesSlice/revealSlice";
+import { resetState } from "./features/rootReducer/rootActions";
 
 // Auth Slice
 import { logout } from "./features/authSlice/authSlice";
@@ -46,22 +47,23 @@ function App() {
 
   const { data: status, error, isLoading, refetch } = useCheckStatusQuery();
 
+  const logoutHandler = () => {
+    console.log("Logged out");
+    dispatch(resetState());
+
+    dispatch(logout());
+    navigate("/login");
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         const status = await refetch();
-
-        if (!status.isLoading && !status.isSuccess) {
-          console.log("dataFetch");
-          dispatch(logout());
-          navigate("/login");
-        }
-
-        console.log(status);
+        console.log("userInfo :", userInfo);
+        if ((!status.isLoading && !status.isSuccess) || !userInfo)
+          logoutHandler();
       } catch (error) {
-        console.log("SOMETHING WENT WRONG");
-        navigate("/login");
-        dispatch(logout());
+        logoutHandler();
       }
     };
     fetchData();

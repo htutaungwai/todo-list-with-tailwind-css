@@ -79,7 +79,6 @@ const SortedTodoList = () => {
     }
   }
 
-  console.log(todos);
   return (
     <div
       className={`w-full h-full max-w-xl  poppins flex flex-col overflow-y-scroll overflow-x-hidden relative   ${

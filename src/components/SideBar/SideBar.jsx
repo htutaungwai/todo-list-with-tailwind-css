@@ -28,11 +28,12 @@ import {
 import { useSignoutMutation } from "../../features/usersApiSlice/usersApiSlice";
 // authSlice
 import { logout } from "../../features/authSlice/authSlice";
+import { resetState } from "../../features/rootReducer/rootActions";
 
 function SideBar() {
   // Logout Mutation
 
-  const [signout, { isLoading }] = useSignoutMutation();
+  const [signout, { isLoading, isSuccess }] = useSignoutMutation();
 
   // useDisclosure hook inherited from MANTINE
   const [opened, { open, close }] = useDisclosure(false);
@@ -71,6 +72,7 @@ function SideBar() {
   ];
 
   useEffect(() => {
+    console.log(sideBar);
     if (sideBar) {
       open();
     } else {
@@ -80,17 +82,21 @@ function SideBar() {
 
   useEffect(() => {
     dispatch(revealLoading(isLoading));
+    if (!isLoading && isSuccess) {
+      dispatch(resetState());
+      setTimeout(() => {
+        dispatch(revealSideBar(false));
+        dispatch(logout());
+        navigate("/login");
+      }, 3000);
+    }
   }, [isLoading]);
 
   // SIGN OUT HANDLER
 
   const signOutHandler = async () => {
     try {
-      const res = await signout();
-      if (res) {
-        dispatch(logout());
-        dispatch(revealSideBar(false));
-      }
+      await signout();
     } catch (error) {
       console.log("Something Went Wrong");
       throw new Error("Something went wrong");

@@ -23,15 +23,19 @@ const todosSlice = createSlice({
       const dateUpdated = action.payload.dateUpdated
         ? action.payload.dateUpdated
         : new Date().toISOString();
+
+      const category = action.payload.category ? action.payload.category : [];
+
       const todo = {
         id: nanoid(),
         title: title,
         checked: checked,
-
         dateCreated: dateCreated,
         dateUpdated: dateUpdated,
         content: content,
+        category: category,
       };
+
       state.todos.push(todo);
       state.selectedTodo = todo;
     },
@@ -48,7 +52,6 @@ const todosSlice = createSlice({
             case "TITLE":
               todo.title = value;
               break;
-
             case "CREATED":
               todo.dateCreated = value;
               break;
@@ -129,4 +132,5 @@ export const {
   updateSelectedTodo,
   updateTodosArray,
 } = todosSlice.actions;
+
 export default todosSlice.reducer;

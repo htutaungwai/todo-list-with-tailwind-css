@@ -44,7 +44,7 @@ const RichTextEditor = () => {
   }
 
   return (
-    <div className="flex flex-row rounded-md border w-fit items-center basis-0 sticky top-0 bg-zinc-100 z-50">
+    <div className="flex flex-row rounded-md border w-fit items-center basis-0 sticky top-0 bg-zinc-100 z-50 my-4">
       <button
         onClick={() => editor.chain().focus().toggleBold().run()}
         disabled={!editor.can().chain().focus().toggleBold().run()}

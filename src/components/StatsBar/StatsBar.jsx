@@ -110,6 +110,7 @@ const StatsBar = () => {
         >
           <button
             onClick={() => {
+              console.log("this is working fine");
               dispatch(revealSideBar(true));
             }}
             className="text-md p-2"
