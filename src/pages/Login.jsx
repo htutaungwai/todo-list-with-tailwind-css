@@ -39,6 +39,23 @@ const Login = () => {
   // LOGIN MUTAION
   const [login, { isLoading }] = useLoginMutation();
 
+  const handleCallbackResponse = (res) => {
+    console.log(res);
+  };
+  // GOOGLE LOGIN
+  useEffect(() => {
+    google.accounts.id.initialize({
+      client_id:
+        "733762907785-3f4fmv82s6c30598oss1i9qaktbfc18q.apps.googleusercontent.com",
+      callback: handleCallbackResponse,
+    });
+
+    google.accounts.id.renderButton(document.getElementById("SignInDiv"), {
+      theme: "outline",
+      size: "large",
+    });
+  }, []);
+
   //checking whether if the end user has the cookies or not
   useEffect(() => {
     if (userInfo) {
@@ -142,6 +159,8 @@ const Login = () => {
                 <Button type="submit">Submit</Button>
               </Group>
             </form>
+
+            <div id="SignInDiv"></div>
           </Box>
         </div>
       </div>

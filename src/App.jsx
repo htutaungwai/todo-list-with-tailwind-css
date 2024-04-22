@@ -26,7 +26,7 @@ import { Outlet, useNavigate } from "react-router-dom";
 import { useCheckStatusQuery } from "./features/usersApiSlice/usersApiSlice";
 // REDUCER
 import { revealLoading } from "./features/showPagesSlice/revealSlice";
-import { resetState } from "./features/rootReducer/rootActions";
+import { resetState } from "./app/root/rootActions";
 
 // Auth Slice
 import { logout } from "./features/authSlice/authSlice";

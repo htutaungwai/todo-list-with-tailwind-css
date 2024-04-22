@@ -7,7 +7,7 @@ const initialState = {
 };
 
 const revealsSlice = createSlice({
-  name: "reveals",
+  name: "reveal",
   initialState,
   reducers: {
     revealEditPage: (state, action) => {

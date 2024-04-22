@@ -28,7 +28,7 @@ import {
 import { useSignoutMutation } from "../../features/usersApiSlice/usersApiSlice";
 // authSlice
 import { logout } from "../../features/authSlice/authSlice";
-import { resetState } from "../../features/rootReducer/rootActions";
+import { resetState } from "../../app/root/rootActions";
 
 function SideBar() {
   // Logout Mutation
@@ -72,7 +72,6 @@ function SideBar() {
   ];
 
   useEffect(() => {
-    console.log(sideBar);
     if (sideBar) {
       open();
     } else {
@@ -85,7 +84,6 @@ function SideBar() {
     if (!isLoading && isSuccess) {
       dispatch(resetState());
       setTimeout(() => {
-        dispatch(revealSideBar(false));
         dispatch(logout());
         navigate("/login");
       }, 3000);
