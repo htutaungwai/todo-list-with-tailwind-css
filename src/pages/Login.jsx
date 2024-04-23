@@ -25,6 +25,9 @@ import { useLoginMutation } from "../features/usersApiSlice/usersApiSlice";
 // AUTH
 import { setCredentials } from "../features/authSlice/authSlice";
 
+// JWT-decode
+import { jwtDecode } from "jwt-decode";
+
 // REACT-TOASTIFY
 import { toast, Bounce } from "react-toastify";
 import Spinner from "../components/Loading/Spinner";
@@ -40,7 +43,10 @@ const Login = () => {
   const [login, { isLoading }] = useLoginMutation();
 
   const handleCallbackResponse = (res) => {
-    console.log(res);
+    const token = res.credential;
+    const decoded = jwtDecode(token);
+
+    console.log(decoded);
   };
   // GOOGLE LOGIN
   useEffect(() => {
@@ -78,6 +84,39 @@ const Login = () => {
     },
   });
 
+  const onSubmitHandler = form.onSubmit(async ({ email, password }) => {
+    try {
+      const res = await login({ email, password }).unwrap();
+      dispatch(setCredentials({ ...res }));
+      navigate("/");
+    } catch (error) {
+      console.log(error?.data?.message || error);
+
+      toast.error(` ${error?.data?.message || error?.error}`, {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+      });
+
+      form.setValues({
+        email: "",
+        password: "",
+      });
+
+      form.setErrors({
+        email: error?.data?.message || error?.error || "Unknown Error occurs",
+        password:
+          error?.data?.message || error?.error || "Unknown Error occurs",
+      });
+    }
+  });
+
   return (
     <>
       {isLoading && <Spinner />}
@@ -87,50 +126,7 @@ const Login = () => {
         <div className=" w-full md:w-1/2 min-h-screen flex items-center flex-col justify-center">
           <h1 className="text-2xl font-bold poppins">Log In</h1>
           <Box maw={340} mx={"auto"} style={{ minWidth: 300 }}>
-            <form
-              onSubmit={form.onSubmit(async ({ email, password }) => {
-                try {
-                  const res = await login({ email, password }).unwrap();
-                  dispatch(setCredentials({ ...res }));
-                  navigate("/");
-                } catch (error) {
-                  console.log(error?.data?.message || error);
-
-                  toast.error(` ${error?.data?.message || error?.error}`, {
-                    position: "top-right",
-                    autoClose: 3000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                    theme: "light",
-                    transition: Bounce,
-                  });
-
-                  // form.setValues({
-                  //   email: "",
-                  //   password: "",
-                  // });
-
-                  form.setValues({
-                    email: "",
-                    password: "",
-                  });
-
-                  form.setErrors({
-                    email:
-                      error?.data?.message ||
-                      error?.error ||
-                      "Unknown Error occurs",
-                    password:
-                      error?.data?.message ||
-                      error?.error ||
-                      "Unknown Error occurs",
-                  });
-                }
-              })}
-            >
+            <form onSubmit={onSubmitHandler}>
               <TextInput
                 mt={"md"}
                 label="Email"
@@ -160,7 +156,10 @@ const Login = () => {
               </Group>
             </form>
 
-            <div id="SignInDiv"></div>
+            <div
+              id="SignInDiv"
+              className="w-full mt-6 flex justify-center"
+            ></div>
           </Box>
         </div>
       </div>
