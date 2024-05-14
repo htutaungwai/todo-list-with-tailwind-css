@@ -20,7 +20,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, Link } from "react-router-dom";
 
 // MUTATIONS
-import { useLoginMutation } from "../features/usersApiSlice/usersApiSlice";
+import {
+  useLoginMutation,
+  useCheckStatusQuery,
+} from "../features/usersApiSlice/usersApiSlice";
 
 // AUTH
 import { setCredentials } from "../features/authSlice/authSlice";
@@ -39,14 +42,29 @@ const Login = () => {
 
   const { userInfo } = useSelector((state) => state.auth);
 
+  // FORM
+  const form = useForm({
+    initialValues: {
+      email: "",
+      password: "",
+    },
+
+    validate: {
+      email: (value) => (/^\S+@\S+$/.test(value) ? null : "Invalid email"),
+      password: (value) =>
+        /^(?=.*[a-z]).{6,}$/.test(value)
+          ? null
+          : "Password must contain atleast 6 letters.",
+    },
+  });
+
   // LOGIN MUTAION
   const [login, { isLoading }] = useLoginMutation();
 
   const handleCallbackResponse = (res) => {
     const token = res.credential;
     const decoded = jwtDecode(token);
-
-    console.log(decoded);
+    c;
   };
   // GOOGLE LOGIN
   useEffect(() => {
@@ -68,21 +86,6 @@ const Login = () => {
       navigate("/");
     }
   }, [userInfo, navigate]);
-
-  const form = useForm({
-    initialValues: {
-      email: "",
-      password: "",
-    },
-
-    validate: {
-      email: (value) => (/^\S+@\S+$/.test(value) ? null : "Invalid email"),
-      password: (value) =>
-        /^(?=.*[a-z]).{6,}$/.test(value)
-          ? null
-          : "Password must contain atleast 6 letters.",
-    },
-  });
 
   const onSubmitHandler = form.onSubmit(async ({ email, password }) => {
     try {
