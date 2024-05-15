@@ -64,8 +64,8 @@ const Login = () => {
   const handleCallbackResponse = (res) => {
     const token = res.credential;
     const decoded = jwtDecode(token);
-    c;
   };
+
   // GOOGLE LOGIN
   useEffect(() => {
     google.accounts.id.initialize({
