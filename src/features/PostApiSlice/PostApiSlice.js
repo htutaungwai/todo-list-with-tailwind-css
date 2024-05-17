@@ -6,7 +6,15 @@ export const postsApiSlice = apiSlice.injectEndpoints({
       query: () => "/api/posts",
       method: "GET",
     }),
+
+    createNewPost: builder.mutation({
+      query: (data) => ({
+        url: "/api/posts",
+        method: "POST",
+        body: data,
+      }),
+    }),
   }),
 });
 
-export const { useGetAllPostsQuery } = apiSlice;
+export const { useGetAllPostsQuery, useCreateNewPostMutation } = apiSlice;

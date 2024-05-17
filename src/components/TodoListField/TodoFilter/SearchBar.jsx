@@ -12,14 +12,56 @@ import { Menu, Button, Tooltip } from "@mantine/core";
 import { FaSortAmountDown, FaCheckDouble } from "react-icons/fa";
 import { BsCheckLg } from "react-icons/bs";
 
+// RTK Query
+import {
+  useCreateNewPostMutation,
+  useGetAllPostsQuery,
+} from "../../../features/PostApiSlice/PostApiSlice";
+
 // REACT-REDUX
 import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
 
 const SearchBar = ({ setSearchValue, sortBy, setSortBy }) => {
   const dispatch = useDispatch();
 
   // THEME MOOD
   const { mood } = useSelector((state) => state.theme);
+
+  // CEATE NEW POST MUTATION
+  const [
+    createNewPost,
+    {
+      data: newPost,
+      error: newCreatePostError,
+      isLoading: isCreateNewPostLoading,
+      isSuccess: isNewCreatePostSuccess,
+      isError: isNewCreatePostError,
+    },
+  ] = useCreateNewPostMutation();
+
+  // handling new post function
+
+  const handleCreateNewPost = () => {
+    const res = createNewPost({
+      title: "new todo",
+      description: "new todo",
+      checked: false,
+      date: null,
+    });
+
+    // () => {
+    //   dispatch(
+    //     addTodo()
+    //   );
+    //   dispatch(revealEditPage(false));
+    //   setTimeout(() => {
+    //     dispatch(revealEditPage(true));
+    //   }, 300);
+    // }
+  };
+
+  useEffect(() => {});
 
   // SORTBY HANDLER
   const sortByHandler = (option) => {
@@ -43,21 +85,7 @@ const SearchBar = ({ setSearchValue, sortBy, setSortBy }) => {
 
         <button
           className="bg-gray-500 w-9 h-9 -ml-1 rounded-sm flex items-center justify-center"
-          onClick={() => {
-            dispatch(
-              addTodo({
-                title: "new todo",
-                description: "new todo",
-                checked: false,
-                date: null,
-              })
-            );
-            dispatch(revealEditPage(false));
-
-            setTimeout(() => {
-              dispatch(revealEditPage(true));
-            }, 300);
-          }}
+          onClick={handleCreateNewPost}
         >
           <AiOutlinePlusCircle className="text-white text-2xl" />
         </button>

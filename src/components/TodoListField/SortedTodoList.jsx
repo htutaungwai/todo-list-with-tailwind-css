@@ -21,6 +21,8 @@ import { MdOutlineAbc, MdBeachAccess } from "react-icons/md";
 
 // RTK QUERY
 import { useGetAllPostsQuery } from "../../features/PostApiSlice/PostApiSlice";
+
+// RTK
 import { updateTodosArray } from "../../features/todosSlice/todosSlice";
 
 const SortedTodoList = () => {
@@ -47,13 +49,9 @@ const SortedTodoList = () => {
 
   // fetching data from database
   useEffect(() => {
-    try {
-      refetch();
-      if (!isLoading && posts) {
-        dispatch(updateTodosArray(posts));
-      }
-    } catch (error) {
-      console.log(error);
+    refetch();
+    if (!isLoading && posts) {
+      dispatch(updateTodosArray(posts));
     }
   }, [posts]);
 
