@@ -24,7 +24,8 @@ import { Outlet, useNavigate } from "react-router-dom";
 
 // RTKQuery
 import { useCheckStatusQuery } from "./features/usersApiSlice/usersApiSlice";
-// REDUCER
+
+// REDUX-REDUCER
 import { revealLoading } from "./features/showPagesSlice/revealSlice";
 import { resetState } from "./app/root/rootActions";
 

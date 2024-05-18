@@ -1,9 +1,13 @@
 // ICONS
 import { AiOutlinePlusCircle } from "react-icons/ai";
 
-// REDUCERS
-import { addTodo } from "../../../features/todosSlice/todosSlice";
-import { revealEditPage } from "../../../features/showPagesSlice/revealSlice";
+// REDUX-actions
+import { selectTodo } from "../../../features/todosSlice/todosSlice";
+import {
+  revealLoading,
+  revealEditPage,
+} from "../../../features/showPagesSlice/revealSlice";
+import { triggerRefetch } from "../../../features/refetchSlice/refetchSlice";
 
 // MANTINE
 import { Menu, Button, Tooltip } from "@mantine/core";
@@ -42,26 +46,34 @@ const SearchBar = ({ setSearchValue, sortBy, setSortBy }) => {
 
   // handling new post function
 
-  const handleCreateNewPost = () => {
-    const res = createNewPost({
-      title: "new todo",
-      description: "new todo",
-      checked: false,
-      date: null,
-    });
-
-    // () => {
-    //   dispatch(
-    //     addTodo()
-    //   );
-    //   dispatch(revealEditPage(false));
-    //   setTimeout(() => {
-    //     dispatch(revealEditPage(true));
-    //   }, 300);
-    // }
+  const handleCreateNewPost = async () => {
+    try {
+      dispatch(revealEditPage(false));
+      const res = await createNewPost({
+        title: "new todo",
+        description: "new todo",
+        checked: false,
+        date: null,
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
-  useEffect(() => {});
+  useEffect(() => {
+    console.log("isCreateNewPostLoading use effect");
+    if (isCreateNewPostLoading) dispatch(revealLoading(true));
+    else {
+      dispatch(revealLoading(false));
+    }
+  }, [isCreateNewPostLoading]);
+
+  useEffect(() => {
+    console.log("triggerRefetch useeffect");
+    if (isNewCreatePostSuccess && newPost) {
+      dispatch(triggerRefetch());
+    }
+  }, [isNewCreatePostSuccess]);
 
   // SORTBY HANDLER
   const sortByHandler = (option) => {

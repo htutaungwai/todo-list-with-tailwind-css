@@ -4,7 +4,7 @@ import themeReducer from "../../features/themeSlice/themeSlice";
 import revealsReducer from "../../features/showPagesSlice/revealSlice";
 import authReducer from "../../features/authSlice/authSlice";
 import { apiSlice } from "../../features/apiSlice/apiSlice";
-
+import { refetchReducer } from "../../features/refetchSlice/refetchSlice";
 // STATE
 import { RESET_STATE } from "./rootActionTypes";
 
@@ -13,6 +13,7 @@ export const appReducer = combineReducers({
   theme: themeReducer,
   reveal: revealsReducer,
   auth: authReducer,
+  refetch: refetchReducer,
   [apiSlice.reducerPath]: apiSlice.reducer,
 });
 

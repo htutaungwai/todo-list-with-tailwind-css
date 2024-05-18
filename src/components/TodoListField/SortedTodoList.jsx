@@ -27,7 +27,13 @@ import { updateTodosArray } from "../../features/todosSlice/todosSlice";
 
 const SortedTodoList = () => {
   // xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-  const { data: posts, error, isLoading, refetch } = useGetAllPostsQuery();
+  const {
+    data: posts,
+    error,
+    isLoading,
+    isSuccess,
+    refetch,
+  } = useGetAllPostsQuery();
 
   // dispatch
   const dispatch = useDispatch();
@@ -35,6 +41,7 @@ const SortedTodoList = () => {
   // STATES
   const todos = useSelector((state) => state.todo.todos);
   const { mood } = useSelector((state) => state.theme);
+  const totalRefetch = useSelector((state) => state.refetch);
 
   // since REDUX state cannot be mutable
   const mutableTodos = [...todos];
@@ -49,11 +56,12 @@ const SortedTodoList = () => {
 
   // fetching data from database
   useEffect(() => {
+    console.log("SORTED useEffect");
     refetch();
-    if (!isLoading && posts) {
+    if (isSuccess && posts) {
       dispatch(updateTodosArray(posts));
     }
-  }, [posts]);
+  }, [totalRefetch, posts]);
 
   // to check if there any keyword in the serachbar
   useEffect(() => {
