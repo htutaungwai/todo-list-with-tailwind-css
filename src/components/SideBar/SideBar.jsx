@@ -26,13 +26,13 @@ import {
 
 // MUTATION
 import { useSignoutMutation } from "../../features/usersApiSlice/usersApiSlice";
+
 // authSlice
 import { logout } from "../../features/authSlice/authSlice";
 import { resetState } from "../../app/root/rootActions";
 
 function SideBar() {
   // Logout Mutation
-
   const [signout, { isLoading, isSuccess }] = useSignoutMutation();
 
   // useDisclosure hook inherited from MANTINE

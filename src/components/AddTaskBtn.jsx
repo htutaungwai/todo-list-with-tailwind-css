@@ -1,7 +1,16 @@
 import React from "react";
+
+// ICONS
 import { BsFillPlusSquareFill } from "react-icons/bs";
+
+// REACT-REDUX
 import { useDispatch } from "react-redux";
+
+// REDUX actions
 import { addTodo } from "../features/todosSlice/todosSlice";
+
+// RTK query
+
 const AddTaskBtn = () => {
   const dispatch = useDispatch();
   return (
@@ -11,8 +20,8 @@ const AddTaskBtn = () => {
         onClick={() => {
           dispatch(
             addTodo({
-              title: "first todo",
-              description: "first todo",
+              title: "First todo",
+              description: "First todo",
               content: "<p>".repeat(15) + "</p>",
               checked: false,
             })

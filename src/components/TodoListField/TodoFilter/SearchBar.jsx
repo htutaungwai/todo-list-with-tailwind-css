@@ -17,32 +17,44 @@ import { FaSortAmountDown, FaCheckDouble } from "react-icons/fa";
 import { BsCheckLg } from "react-icons/bs";
 
 // RTK Query
-import {
-  useCreateNewPostMutation,
-  useGetAllPostsQuery,
-} from "../../../features/PostApiSlice/PostApiSlice";
+import { useCreateNewPostMutation } from "../../../features/PostApiSlice/PostApiSlice";
 
 // REACT-REDUX
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 
+// HOOKS
+import useCreateNewPostWithEffects from "../../../hooks/useCreateNewPostWithEffects";
+
 const SearchBar = ({ setSearchValue, sortBy, setSortBy }) => {
+  // dispatch
   const dispatch = useDispatch();
+
+  // custom hook
+  const {
+    createNewPost,
+    newPost,
+    createNewPostError,
+    isCreateNewPostLoading,
+    isNewCreatePostSuccess,
+    isRefetchLoading,
+    isRefetchSuccess,
+  } = useCreateNewPostWithEffects();
 
   // THEME MOOD
   const { mood } = useSelector((state) => state.theme);
 
   // CEATE NEW POST MUTATION
-  const [
-    createNewPost,
-    {
-      data: newPost,
-      error: newCreatePostError,
-      isLoading: isCreateNewPostLoading,
-      isSuccess: isNewCreatePostSuccess,
-      isError: isNewCreatePostError,
-    },
-  ] = useCreateNewPostMutation();
+  // const [
+  //   createNewPost,
+  //   {
+  //     data: newPost,
+  //     error: newCreatePostError,
+  //     isLoading: isCreateNewPostLoading,
+  //     isSuccess: isNewCreatePostSuccess,
+  //     isError: isNewCreatePostError,
+  //   },
+  // ] = useCreateNewPostMutation();
 
   // handling new post function
 
@@ -57,23 +69,24 @@ const SearchBar = ({ setSearchValue, sortBy, setSortBy }) => {
       });
     } catch (error) {
       console.log(error);
+      console.log(createNewPostError);
     }
   };
 
-  useEffect(() => {
-    console.log("isCreateNewPostLoading use effect");
-    if (isCreateNewPostLoading) dispatch(revealLoading(true));
-    else {
-      dispatch(revealLoading(false));
-    }
-  }, [isCreateNewPostLoading]);
+  // useEffect(() => {
+  //   console.log("isCreateNewPostLoading use effect");
+  //   if (isCreateNewPostLoading) dispatch(revealLoading(true));
+  //   else {
+  //     dispatch(revealLoading(false));
+  //   }
+  // }, [isCreateNewPostLoading]);
 
-  useEffect(() => {
-    console.log("triggerRefetch useeffect");
-    if (isNewCreatePostSuccess && newPost) {
-      dispatch(triggerRefetch());
-    }
-  }, [isNewCreatePostSuccess]);
+  // useEffect(() => {
+  //   console.log("triggerRefetch useeffect");
+  //   if (isNewCreatePostSuccess && newPost) {
+  //     dispatch(triggerRefetch());
+  //   }
+  // }, [isNewCreatePostSuccess]);
 
   // SORTBY HANDLER
   const sortByHandler = (option) => {
