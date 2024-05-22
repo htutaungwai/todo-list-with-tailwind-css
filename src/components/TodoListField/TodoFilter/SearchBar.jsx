@@ -26,6 +26,9 @@ import { useEffect } from "react";
 // HOOKS
 import useCreateNewPostWithEffects from "../../../hooks/useCreateNewPostWithEffects";
 
+// Toast
+import { Bounce, toast, ToastContainer } from "react-toastify";
+
 const SearchBar = ({ setSearchValue, sortBy, setSortBy }) => {
   // dispatch
   const dispatch = useDispatch();
@@ -36,9 +39,10 @@ const SearchBar = ({ setSearchValue, sortBy, setSortBy }) => {
     newPost,
     createNewPostError,
     isCreateNewPostLoading,
-    isNewCreatePostSuccess,
+    isCreateNewPostSuccess,
     isRefetchLoading,
     isRefetchSuccess,
+    isCreateNewPostError,
   } = useCreateNewPostWithEffects();
 
   // THEME MOOD
@@ -61,18 +65,35 @@ const SearchBar = ({ setSearchValue, sortBy, setSortBy }) => {
   const handleCreateNewPost = async () => {
     try {
       dispatch(revealEditPage(false));
-      const res = await createNewPost({
+
+      await createNewPost({
         title: "new todo",
         description: "new todo",
         checked: false,
         date: null,
       });
+      console.log(isCreateNewPostSuccess);
     } catch (error) {
       console.log(error);
       console.log(createNewPostError);
     }
   };
 
+  useEffect(() => {
+    if (isCreateNewPostSuccess) {
+      toast.success("✨ Post Created Successfully!", {
+        position: "top-left",
+        autoClose: 1000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+      });
+    }
+  }, [isCreateNewPostSuccess, isCreateNewPostError]);
   // useEffect(() => {
   //   console.log("isCreateNewPostLoading use effect");
   //   if (isCreateNewPostLoading) dispatch(revealLoading(true));
@@ -98,6 +119,20 @@ const SearchBar = ({ setSearchValue, sortBy, setSortBy }) => {
         mood === "light" ? "bg-zinc-50" : "bg-slate-900"
       }  sticky top-0 py-2 z-20 shadow-md`}
     >
+      <ToastContainer
+        position="top-left"
+        autoClose={1000}
+        limit={2}
+        hideProgressBar
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+        transition:Bounce
+      />
       <div className="flex items-center pl-8 py-1 ">
         <input
           className={`basis-4/6 p-1 rounded-sm text-black`}

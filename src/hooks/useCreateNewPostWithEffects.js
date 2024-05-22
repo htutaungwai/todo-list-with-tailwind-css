@@ -25,8 +25,8 @@ const useCreateNewPostWithEffects = () => {
       data: newPost,
       error: createNewPostError,
       isLoading: isCreateNewPostLoading,
-      isSuccess: isNewCreatePostSuccess,
-      isError: isNewCreatePostError,
+      isSuccess: isCreateNewPostSuccess,
+      isError: isCreateNewPostError,
     },
   ] = useCreateNewPostMutation();
 
@@ -43,18 +43,18 @@ const useCreateNewPostWithEffects = () => {
 
   useEffect(() => {
     console.log("triggerRefetch useeffect");
-    if (isNewCreatePostSuccess && newPost) {
+    if (isCreateNewPostSuccess && newPost) {
       dispatch(triggerRefetch());
     }
-  }, [isNewCreatePostSuccess]);
+  }, [isCreateNewPostSuccess]);
 
   return {
     createNewPost,
     newPost,
     createNewPostError,
     isCreateNewPostLoading,
-    isNewCreatePostSuccess,
-    isNewCreatePostSuccess,
+    isCreateNewPostSuccess,
+    isCreateNewPostError,
     isRefetchLoading,
     isRefetchSuccess,
   };
