@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { addTodo } from "../features/todosSlice/todosSlice";
+// import { addTodo } from "../features/todosSlice/todosSlice";
 
 const TodoForm = ({ setShowAddTodo }) => {
   const todos = useSelector((state) => state.todo.todos);
@@ -20,12 +20,12 @@ const TodoForm = ({ setShowAddTodo }) => {
 
   // FUNCTIONS
   function addNewTodo() {
-    const { title, status } = newTodo;
-    if (title === null || title === "" || status === null || status === "") {
-      return;
-    }
-    dispatch(addTodo(newTodo));
-    setShowAddTodo(false);
+    // const { title, status } = newTodo;
+    // if (title === null || title === "" || status === null || status === "") {
+    //   return;
+    // }
+    // dispatch(addTodo(newTodo));
+    // setShowAddTodo(false);
   }
 
   // COMPONENTS

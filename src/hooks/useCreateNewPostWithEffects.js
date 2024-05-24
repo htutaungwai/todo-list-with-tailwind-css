@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 // RTK QUERY
 import {
@@ -7,15 +7,17 @@ import {
 } from "../features/PostApiSlice/PostApiSlice";
 
 // REACT-REDUX
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 // refetch State
 
 // Redux actions
 import { revealLoading } from "../features/showPagesSlice/revealSlice";
 import { triggerRefetch } from "../features/refetchSlice/refetchSlice";
+import { selectTodo } from "../features/todosSlice/todosSlice";
 
 const useCreateNewPostWithEffects = () => {
+  const [newPostId, setNewPostId] = useState(null);
   // dispatch
   const dispatch = useDispatch();
 
@@ -30,9 +32,6 @@ const useCreateNewPostWithEffects = () => {
     },
   ] = useCreateNewPostMutation();
 
-  const { isLoading: isRefetchLoading, isSuccess: isRefetchSuccess } =
-    useGetAllPostsQuery();
-
   useEffect(() => {
     console.log("isCreateNewPostLoading use effect");
     if (isCreateNewPostLoading) dispatch(revealLoading(true));
@@ -44,9 +43,18 @@ const useCreateNewPostWithEffects = () => {
   useEffect(() => {
     console.log("triggerRefetch useeffect");
     if (isCreateNewPostSuccess && newPost) {
+      setNewPostId(newPost._id);
       dispatch(triggerRefetch());
     }
   }, [isCreateNewPostSuccess]);
+
+  // useEffect(() => {
+  //   console.log("HERE");
+  //   if (isRefetchSuccess) {
+  //     console.log(newPostId);
+  //     dispatch(selectTodo(newPostId));
+  //   }
+  // }, [isRefetchSuccess]);
 
   return {
     createNewPost,
@@ -55,8 +63,6 @@ const useCreateNewPostWithEffects = () => {
     isCreateNewPostLoading,
     isCreateNewPostSuccess,
     isCreateNewPostError,
-    isRefetchLoading,
-    isRefetchSuccess,
   };
 };
 

@@ -24,10 +24,22 @@ import { FaCheckDouble } from "react-icons/fa";
 
 import { convert } from "html-to-text";
 
+// ------TEST CODE-------------------------------
+
+import { useDeleteSinglePostMutation } from "../features/PostApiSlice/PostApiSlice";
+
+//------- TEST CODE-----------------------------
+
 const SingleTodo = ({ obj, sortBy }) => {
   const selectedTodo = useSelector((state) => state.todo.selectedTodo);
   const editPageState = useSelector((state) => state.reveal.editPage);
   const { mood } = useSelector((state) => state.theme);
+
+  // ------------------------TEST CODE ----------------------------
+
+  const [deleteSinglePost, { data }] = useDeleteSinglePostMutation();
+
+  // ------------------------TEST CODE ----------------------------
 
   // use dispatch
   const dispatch = useDispatch();
@@ -45,7 +57,11 @@ const SingleTodo = ({ obj, sortBy }) => {
         if (selectedTodo?.id === obj._id) {
           dispatch(revealEditPage(false));
         }
-        dispatch(removeSingleTodo(obj._id));
+
+        // removing single todo
+
+        //--------- dispatch(removeSingleTodo(obj._id));
+        //--------- dispatch(deleteSinglePost({ postId: obj._id }));
       }, 2000);
       return;
     }

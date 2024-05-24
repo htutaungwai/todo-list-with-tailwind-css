@@ -108,9 +108,9 @@ createRoot(document.getElementById("root")).render(
     <ToastContainer />
     <Provider store={store}>
       <MantineProvider>
-        <React.StrictMode>
-          <RouterProvider router={router} />
-        </React.StrictMode>
+        {/* <React.StrictMode> */}
+        <RouterProvider router={router} />
+        {/* </React.StrictMode> */}
       </MantineProvider>
     </Provider>
   </>

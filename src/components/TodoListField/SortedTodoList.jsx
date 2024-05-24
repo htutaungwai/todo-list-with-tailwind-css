@@ -41,8 +41,9 @@ const SortedTodoList = () => {
   // STATES
   const todos = useSelector((state) => state.todo.todos);
   const { mood } = useSelector((state) => state.theme);
-  const totalRefetch = useSelector((state) => state.refetch);
+  const { totalRefetch } = useSelector((state) => state.refetch);
 
+  console.log("totalRefetch :", totalRefetch);
   // since REDUX state cannot be mutable
   const mutableTodos = [...todos];
 
@@ -56,12 +57,14 @@ const SortedTodoList = () => {
 
   // fetching data from database
   useEffect(() => {
-    console.log("SORTED useEffect");
+    console.log(
+      "REFETCHING>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
+    );
     refetch();
-    if (isSuccess && posts) {
+    if (isSuccess) {
       dispatch(updateTodosArray(posts));
     }
-  }, [totalRefetch, posts]);
+  }, [totalRefetch]);
 
   // to check if there any keyword in the serachbar
   useEffect(() => {

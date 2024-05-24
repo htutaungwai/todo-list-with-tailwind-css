@@ -2,9 +2,29 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const refetchSlice = createSlice({
   name: "refetch",
-  initialState: 0,
+  initialState: {
+    totalRefetch: 0,
+    isTriggerRefetchLoading: false,
+    isTriggerRefetchSuccess: false,
+    isTriggerRefetchError: false,
+  },
   reducers: {
-    triggerRefetch: (state) => state + 1,
+    triggerRefetch: (state) => {
+      console.log("Triggering refetch");
+      state.totalRefetch++;
+    },
+    setIsTriggerRefetchLoading: (state, action) =>
+      (state.isTriggerRefetchLoading = action.payload),
+    setIsTriggerRefetchSuccess: (state, action) =>
+      (state.isTriggerRefetchSuccess = action.payload),
+    setIsTriggerRefetchError: (state, action) =>
+      (state.isTriggerRefetchError = action.payload),
+
+    resetRefetchState: (state) => {
+      state.isTriggerRefetchLoading = false;
+      state.isTriggerRefetchSuccess = false;
+      state.isTriggerRefetchError = false;
+    },
   },
 });
 

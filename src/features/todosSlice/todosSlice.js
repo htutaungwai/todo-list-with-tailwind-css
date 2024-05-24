@@ -8,37 +8,40 @@ const todosSlice = createSlice({
   name: "todos",
   initialState,
   reducers: {
-    addTodo: (state, action) => {
-      // ////////////////////
-      console.log("added todo");
-      const title = action.payload.title ? action.payload.title : "new todo";
+    //   // -----  ADD TODO is not needed anymore  ------------------------------------- //
+    //   addTodo: (state, action) => {
+    //     // ////////////////////
+    //     console.log("added todo");
+    //     const title = action.payload.title ? action.payload.title : "new todo";
 
-      const checked = action.payload.checked ? action.payload.checked : false;
-      const content = action.payload.content
-        ? action.payload.content
-        : "<p>".repeat(15) + "</p>";
-      const dateCreated = action.payload.dateCreated
-        ? action.payload.dateCreated
-        : new Date().toISOString();
-      const dateUpdated = action.payload.dateUpdated
-        ? action.payload.dateUpdated
-        : new Date().toISOString();
+    //     const checked = action.payload.checked ? action.payload.checked : false;
+    //     const content = action.payload.content
+    //       ? action.payload.content
+    //       : "<p>".repeat(15) + "</p>";
+    //     const dateCreated = action.payload.dateCreated
+    //       ? action.payload.dateCreated
+    //       : new Date().toISOString();
+    //     const dateUpdated = action.payload.dateUpdated
+    //       ? action.payload.dateUpdated
+    //       : new Date().toISOString();
 
-      const category = action.payload.category ? action.payload.category : [];
+    //     const category = action.payload.category ? action.payload.category : [];
 
-      const todo = {
-        id: nanoid(),
-        title: title,
-        checked: checked,
-        dateCreated: dateCreated,
-        dateUpdated: dateUpdated,
-        content: content,
-        category: category,
-      };
+    //     const todo = {
+    //       id: nanoid(),
+    //       title: title,
+    //       checked: checked,
+    //       dateCreated: dateCreated,
+    //       dateUpdated: dateUpdated,
+    //       content: content,
+    //       category: category,
+    //     };
 
-      state.todos.push(todo);
-      state.selectedTodo = todo;
-    },
+    //     state.todos.push(todo);
+    //     state.selectedTodo = todo;
+    //   },
+
+    // -----  ADD TODO is not needed anymore  ------------------------------------- //
 
     updateTodo: (state, action) => {
       // ////////////////////
@@ -95,6 +98,7 @@ const todosSlice = createSlice({
     removeSingleTodo: (state, action) => {
       // ////////////////////
       console.log("remove single todo");
+
       state.todos = state.todos.filter((todo) => todo.id !== action.payload);
     },
 
@@ -124,7 +128,6 @@ const todosSlice = createSlice({
 });
 
 export const {
-  addTodo,
   updateCheckTodo,
   removeSingleTodo,
   selectTodo,
