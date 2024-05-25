@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { LOADING, SUCCESS, RESET, ERROR } from "./refetchTypes";
 
 const refetchSlice = createSlice({
   name: "refetch",
@@ -13,12 +14,29 @@ const refetchSlice = createSlice({
       console.log("Triggering refetch");
       state.totalRefetch++;
     },
-    setIsTriggerRefetchLoading: (state, action) =>
-      (state.isTriggerRefetchLoading = action.payload),
-    setIsTriggerRefetchSuccess: (state, action) =>
-      (state.isTriggerRefetchSuccess = action.payload),
-    setIsTriggerRefetchError: (state, action) =>
-      (state.isTriggerRefetchError = action.payload),
+    setRefetchState: (state, action) => {
+      console.log(action.payload === SUCCESS);
+      switch (action.payload) {
+        case LOADING:
+          state.isTriggerRefetchLoading = true;
+          break;
+
+        case ERROR:
+          state.isTriggerRefetchError = true;
+          break;
+
+        case SUCCESS:
+          console.log("SUCCESSFUL REFETCH >>>>>>>>>>>>>>>>>>>>>>>>>>>");
+          state.isTriggerRefetchSuccess = true;
+          break;
+
+        default:
+          state.isTriggerRefetchLoading = false;
+          state.isTriggerRefetchError = false;
+          state.isTriggerRefetchSuccess = false;
+          break;
+      }
+    },
 
     resetRefetchState: (state) => {
       state.isTriggerRefetchLoading = false;
@@ -28,5 +46,6 @@ const refetchSlice = createSlice({
   },
 });
 
-export const { triggerRefetch } = refetchSlice.actions;
+export const { triggerRefetch, resetRefetchState, setRefetchState } =
+  refetchSlice.actions;
 export const refetchReducer = refetchSlice.reducer;

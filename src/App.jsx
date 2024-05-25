@@ -13,7 +13,7 @@ import dataTodos from "./data/dataTodos";
 // COMPONENTS
 import AddTodo from "./components/AddTodo";
 import AddTaskBtn from "./components/AddTaskBtn";
-// we don't use AddTaskBtn
+//------ we don't use AddTaskBtn-----------
 import Footer from "./components/Footer/Footer";
 import SideBar from "./components/SideBar/SideBar";
 import StatsBar from "./components/StatsBar/StatsBar";
@@ -24,13 +24,22 @@ import { Outlet, useNavigate } from "react-router-dom";
 
 // RTKQuery
 import { useCheckStatusQuery } from "./features/usersApiSlice/usersApiSlice";
+import { useGetAllPostsQuery } from "./features/PostApiSlice/PostApiSlice";
 
 // REDUX-REDUCER
 import { revealLoading } from "./features/showPagesSlice/revealSlice";
+import {
+  resetRefetchState,
+  setRefetchState,
+} from "./features/refetchSlice/refetchSlice";
+import { updateTodosArray } from "./features/todosSlice/todosSlice";
 import { resetState } from "./app/root/rootActions";
 
 // Auth Slice
 import { logout } from "./features/authSlice/authSlice";
+
+// Toast
+import toast, { Toaster } from "react-hot-toast";
 
 function App() {
   // LOCAL state
@@ -45,8 +54,16 @@ function App() {
   const { mood } = useSelector((state) => state.theme);
   const { userInfo } = useSelector((state) => state.auth);
   const { loading } = useSelector((state) => state.reveal);
+  const { totalRefetch } = useSelector((state) => state.refetch);
 
   const { data: status, error, isLoading, refetch } = useCheckStatusQuery();
+  const {
+    data: posts,
+    error: getAllPostError,
+    isLoading: isGetAllPostLoading,
+    isSuccess: isGetAllPostSuccess,
+    refetch: getAllPostRefetch,
+  } = useGetAllPostsQuery();
 
   const logoutHandler = () => {
     console.log("Logged out");
@@ -56,6 +73,7 @@ function App() {
     navigate("/login");
   };
 
+  // user authenticating
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -70,12 +88,32 @@ function App() {
     fetchData();
   }, [status]);
 
+  // data fetching
   useEffect(() => {
-    dispatch(revealLoading(isLoading));
-  }, [isLoading]);
+    console.log("FETCHING DATA>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+    try {
+      dispatch(resetRefetchState());
+      getAllPostRefetch();
+      if (isGetAllPostSuccess) {
+        console.log("999999999999999");
+        dispatch(updateTodosArray(posts));
+        dispatch(setRefetchState("SUCCESS"));
+
+        toast.success("SUCCESSFUL REFETCH");
+      }
+    } catch (error) {
+      dispatch(setRefetchState("ERROR"));
+      toast.error("Fetching failed.");
+    }
+  }, [totalRefetch]);
+
+  useEffect(() => {
+    if (isLoading || isGetAllPostLoading) dispatch(revealLoading(isLoading));
+  }, [isLoading, isGetAllPostLoading]);
 
   return (
     <>
+      <Toaster position="bottom-center" reverseOrder={true} />
       {loading && <Spinner />}
       <div
         className={`min-h-screen min-w-screen w-screen h-screen flex flex-col ${

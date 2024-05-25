@@ -28,7 +28,7 @@ import useCreateNewPostWithEffects from "../../../hooks/useCreateNewPostWithEffe
 
 // Toast
 import { Bounce, ToastContainer } from "react-toastify";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 
 const SearchBar = ({ setSearchValue, sortBy, setSortBy }) => {
   // dispatch
@@ -136,8 +136,6 @@ const SearchBar = ({ setSearchValue, sortBy, setSortBy }) => {
         theme="light"
         transition:Bounce
       /> */}
-
-      <Toaster position="bottom-center" reverseOrder={true} />
 
       <div className="flex items-center pl-8 py-1 ">
         <input

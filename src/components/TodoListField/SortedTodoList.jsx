@@ -24,16 +24,21 @@ import { useGetAllPostsQuery } from "../../features/PostApiSlice/PostApiSlice";
 
 // RTK
 import { updateTodosArray } from "../../features/todosSlice/todosSlice";
+import {
+  resetRefetchState,
+  setRefetchState,
+} from "../../features/refetchSlice/refetchSlice";
+import toast from "react-hot-toast";
 
 const SortedTodoList = () => {
   // xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-  const {
-    data: posts,
-    error,
-    isLoading,
-    isSuccess,
-    refetch,
-  } = useGetAllPostsQuery();
+  // const {
+  //   data: posts,
+  //   error,
+  //   isLoading,
+  //   isSuccess,
+  //   refetch,
+  // } = useGetAllPostsQuery();
 
   // dispatch
   const dispatch = useDispatch();
@@ -41,9 +46,8 @@ const SortedTodoList = () => {
   // STATES
   const todos = useSelector((state) => state.todo.todos);
   const { mood } = useSelector((state) => state.theme);
-  const { totalRefetch } = useSelector((state) => state.refetch);
+  // const { totalRefetch } = useSelector((state) => state.refetch);
 
-  console.log("totalRefetch :", totalRefetch);
   // since REDUX state cannot be mutable
   const mutableTodos = [...todos];
 
@@ -52,19 +56,27 @@ const SortedTodoList = () => {
   const [searchState, setSearchState] = useState(false);
   const [sortBy, setSortBy] = useState("CREATED");
 
+  console.log(todos);
+
   // generating a sorted object
   const primeSortedObject = primeObjectGenearator(mutableTodos, sortBy);
 
   // fetching data from database
-  useEffect(() => {
-    console.log(
-      "REFETCHING>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
-    );
-    refetch();
-    if (isSuccess) {
-      dispatch(updateTodosArray(posts));
-    }
-  }, [totalRefetch]);
+  // useEffect(() => {
+  //   try {
+  //     dispatch(resetRefetchState());
+  //     refetch();
+  //     if (isSuccess) {
+  //       dispatch(setRefetchState("SUCCESS"));
+  //       dispatch(updateTodosArray(posts));
+
+  //       toast.success("SUCCESSFUL REFETCH");
+  //     }
+  //   } catch (error) {
+  //     dispatch(setRefetchState("ERROR"));
+  //     toast.error("Fetching failed.");
+  //   }
+  // }, [totalRefetch, posts]);
 
   // to check if there any keyword in the serachbar
   useEffect(() => {
@@ -141,11 +153,11 @@ const SortedTodoList = () => {
                                 !searchState
                                   ? item
                                   : item.title
-                                      .toLocaleLowerCase()
+                                      ?.toLocaleLowerCase()
                                       .includes(searchValue)
                                   ? item
                                   : item.content
-                                      .toLocaleLowerCase()
+                                      ?.toLocaleLowerCase()
                                       .includes(searchValue)
                               )
                               .map((obj) => {
