@@ -78,26 +78,7 @@ const SearchBar = ({ setSearchValue, sortBy, setSortBy }) => {
     }
   };
 
-  useEffect(() => {
-    if (isCreateNewPostSuccess) {
-      // toast.success("✨ Post Created Successfully!", {
-      //   position: "top-left",
-      //   autoClose: 1000,
-      //   hideProgressBar: true,
-      //   closeOnClick: true,
-      //   pauseOnHover: true,
-      //   draggable: true,
-      //   progress: undefined,
-      //   theme: "light",
-      //   transition: Bounce,
-      // });
-      toast("Post created successfully!", {
-        icon: "✨",
-      });
-    }
-  }, [isCreateNewPostSuccess, isCreateNewPostError]);
-
-  // useEffect(() => {
+  8; // useEffect(() => {
   //   console.log("isCreateNewPostLoading use effect");
   //   if (isCreateNewPostLoading) dispatch(revealLoading(true));
   //   else {

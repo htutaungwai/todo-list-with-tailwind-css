@@ -31,6 +31,7 @@ import { revealLoading } from "./features/showPagesSlice/revealSlice";
 import {
   resetRefetchState,
   setRefetchState,
+  triggerRefetch,
 } from "./features/refetchSlice/refetchSlice";
 import { updateTodosArray } from "./features/todosSlice/todosSlice";
 import { resetState } from "./app/root/rootActions";
@@ -45,7 +46,7 @@ function App() {
   // LOCAL state
   const [showAddTodo, setShowAddTodo] = useState(false);
   // data
-  const [todos, setTodos] = useState(dataTodos);
+
   // use navigate and dispatch
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -54,7 +55,11 @@ function App() {
   const { mood } = useSelector((state) => state.theme);
   const { userInfo } = useSelector((state) => state.auth);
   const { loading } = useSelector((state) => state.reveal);
-  const { totalRefetch } = useSelector((state) => state.refetch);
+  const todos = useSelector((state) => state.todo.todos);
+
+  const { totalRefetch, isTriggerRefetchSuccess } = useSelector(
+    (state) => state.refetch
+  );
 
   const { data: status, error, isLoading, refetch } = useCheckStatusQuery();
   const {
@@ -90,22 +95,25 @@ function App() {
 
   // data fetching
   useEffect(() => {
-    console.log("FETCHING DATA>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
     try {
       dispatch(resetRefetchState());
       getAllPostRefetch();
-      if (isGetAllPostSuccess) {
-        console.log("999999999999999");
-        dispatch(updateTodosArray(posts));
-        dispatch(setRefetchState("SUCCESS"));
-
-        toast.success("SUCCESSFUL REFETCH");
-      }
+      console.log("RFETCHING DATA>>>>>>>>>>>>>>>>>>>>>>");
+      console.log(isGetAllPostSuccess);
     } catch (error) {
       dispatch(setRefetchState("ERROR"));
       toast.error("Fetching failed.");
     }
   }, [totalRefetch]);
+
+  useEffect(() => {
+    console.log("RENDERING SRT");
+    if (isGetAllPostSuccess) {
+      dispatch(updateTodosArray(posts));
+      dispatch(setRefetchState("SUCCESS"));
+      toast.success("SUCCESSFUL REFETCH");
+    }
+  }, [isGetAllPostSuccess, posts]);
 
   useEffect(() => {
     if (isLoading || isGetAllPostLoading) dispatch(revealLoading(isLoading));
@@ -121,14 +129,14 @@ function App() {
         }`}
       >
         {/* Show Todo Start END */}
-        {showAddTodo && (
+        {/* {showAddTodo && (
           <AddTodo
             setShowAddTodo={setShowAddTodo}
             showAddTodo
             todos={todos}
             setTodos={setTodos}
           />
-        )}
+        )} */}
         {/* Show TODO END*/}
 
         {/* Todo List */}

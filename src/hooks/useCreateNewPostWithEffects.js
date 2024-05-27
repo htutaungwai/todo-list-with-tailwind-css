@@ -16,6 +16,8 @@ import { revealLoading } from "../features/showPagesSlice/revealSlice";
 import { triggerRefetch } from "../features/refetchSlice/refetchSlice";
 import { selectTodo } from "../features/todosSlice/todosSlice";
 
+import toast from "react-hot-toast";
+
 const useCreateNewPostWithEffects = () => {
   const [newPostId, setNewPostId] = useState(null);
   // dispatch
@@ -33,17 +35,31 @@ const useCreateNewPostWithEffects = () => {
   ] = useCreateNewPostMutation();
 
   useEffect(() => {
-    console.log("isCreateNewPostLoading use effect");
-    if (isCreateNewPostLoading) dispatch(revealLoading(true));
-    else {
-      dispatch(revealLoading(false));
-    }
-  }, [isCreateNewPostLoading]);
-
-  useEffect(() => {
     console.log("triggerRefetch useeffect");
     if (isCreateNewPostSuccess && newPost) {
       setNewPostId(newPost._id);
+      dispatch(triggerRefetch());
+    }
+  }, [isCreateNewPostSuccess]);
+
+  useEffect(() => {
+    if (isCreateNewPostSuccess) {
+      console.log(newPost);
+      // toast.success("✨ Post Created Successfully!", {
+      //   position: "top-left",
+      //   autoClose: 1000,
+      //   hideProgressBar: true,
+      //   closeOnClick: true,
+      //   pauseOnHover: true,
+      //   draggable: true,
+      //   progress: undefined,
+      //   theme: "light",
+      //   transition: Bounce,
+      // });
+      toast("Post created successfully!", {
+        icon: "✨",
+      });
+
       dispatch(triggerRefetch());
     }
   }, [isCreateNewPostSuccess]);
