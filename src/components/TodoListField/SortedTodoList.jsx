@@ -32,13 +32,6 @@ import toast from "react-hot-toast";
 
 const SortedTodoList = () => {
   // xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-  // const {
-  //   data: posts,
-  //   error,
-  //   isLoading,
-  //   isSuccess,
-  //   refetch,
-  // } = useGetAllPostsQuery();
 
   // dispatch
   const dispatch = useDispatch();

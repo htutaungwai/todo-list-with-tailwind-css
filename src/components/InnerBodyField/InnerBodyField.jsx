@@ -9,8 +9,10 @@ import { useSelector } from "react-redux";
 
 const InnerBodyField = () => {
   const showEditPage = useSelector((state) => state.reveal.editPage);
+  const selectedTodo = useSelector((state) => state.todo.selectedTodo);
 
-  return <>{showEditPage && <EditTask />}</>;
+  console.log("selectedTodo: ", selectedTodo);
+  return <>{showEditPage && selectedTodo !== null && <EditTask />}</>;
 };
 
 export default InnerBodyField;

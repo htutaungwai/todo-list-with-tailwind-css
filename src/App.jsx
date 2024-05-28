@@ -27,7 +27,10 @@ import { useCheckStatusQuery } from "./features/usersApiSlice/usersApiSlice";
 import { useGetAllPostsQuery } from "./features/PostApiSlice/PostApiSlice";
 
 // REDUX-REDUCER
-import { revealLoading } from "./features/showPagesSlice/revealSlice";
+import {
+  revealEditPage,
+  revealLoading,
+} from "./features/showPagesSlice/revealSlice";
 import {
   resetRefetchState,
   setRefetchState,

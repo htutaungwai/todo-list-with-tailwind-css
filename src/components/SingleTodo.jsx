@@ -50,19 +50,18 @@ const SingleTodo = ({ obj, sortBy }) => {
   // converting htmlContent to string
   const description = convert(obj.content);
 
-  const onClickHandler = (event) => {
+  const onClickHandler = async (event) => {
     // IF USE CLICKS ON INPUT TAG
     if (event && inputRef.current === event) {
       setTimeout(() => {
         if (selectedTodo?.id === obj._id) {
           dispatch(revealEditPage(false));
         }
-
-        // removing single todo
+        deleteSinglePost({ postId: obj._id });
 
         //--------- dispatch(removeSingleTodo(obj._id));
         //--------- dispatch(deleteSinglePost({ postId: obj._id }));
-      }, 2000);
+      }, 1000);
       return;
     }
 

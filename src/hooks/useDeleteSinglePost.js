@@ -1,10 +1,7 @@
 import { useEffect } from "react";
 
 // RTK QUERY
-import {
-  useDeleteSinglePostMutation,
-  useGetAllPostsQuery,
-} from "../features/PostApiSlice/PostApiSlice";
+import { useDeleteSinglePostMutation } from "../features/PostApiSlice/PostApiSlice";
 
 // REACT-REDUX
 import { useDispatch, useSelector } from "react-redux";
@@ -28,8 +25,21 @@ const useDeleteSinglePostMutationWithEffects = () => {
     },
   ] = useDeleteSinglePostMutation();
 
-  const { isLoading: isRefetchLoading, isSuccess: isRefetchSuccess } =
-    useGetAllPostsQuery();
+  useEffect(() => {
+    console.log("isDeleteSinglePostSuccess");
+    if (isDeleteSinglePostSuccess) {
+      toast("Post deleted successfully!", {
+        icon: "🗑️",
+      });
+      dispatch(triggerRefetch());
+    }
+  }, [isDeleteSinglePostSuccess]);
+
+  useEffect(() => {
+    if (isDeleteSinglePostLoading) {
+      dispatch(revealLoading(true));
+    }
+  }, [isDeleteSinglePostLoading]);
 
   return {
     deleteSinglePost,

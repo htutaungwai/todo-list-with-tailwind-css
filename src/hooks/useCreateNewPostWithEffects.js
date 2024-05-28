@@ -7,19 +7,27 @@ import {
 } from "../features/PostApiSlice/PostApiSlice";
 
 // REACT-REDUX
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 // refetch State
 
 // Redux actions
-import { revealLoading } from "../features/showPagesSlice/revealSlice";
+import {
+  revealEditPage,
+  revealLoading,
+} from "../features/showPagesSlice/revealSlice";
 import { triggerRefetch } from "../features/refetchSlice/refetchSlice";
 import { selectTodo } from "../features/todosSlice/todosSlice";
 
+// REACT-TOAST
 import toast from "react-hot-toast";
 
 const useCreateNewPostWithEffects = () => {
   const [newPostId, setNewPostId] = useState(null);
+  const { totalRefetch, isTriggerRefetchSuccess } = useSelector(
+    (state) => state.refetch
+  );
+
   // dispatch
   const dispatch = useDispatch();
 
@@ -37,6 +45,7 @@ const useCreateNewPostWithEffects = () => {
   useEffect(() => {
     console.log("triggerRefetch useeffect");
     if (isCreateNewPostSuccess && newPost) {
+      console.log(newPost._id);
       setNewPostId(newPost._id);
       dispatch(triggerRefetch());
     }
@@ -59,18 +68,13 @@ const useCreateNewPostWithEffects = () => {
       toast("Post created successfully!", {
         icon: "✨",
       });
-
       dispatch(triggerRefetch());
     }
   }, [isCreateNewPostSuccess]);
 
-  // useEffect(() => {
-  //   console.log("HERE");
-  //   if (isRefetchSuccess) {
-  //     console.log(newPostId);
-  //     dispatch(selectTodo(newPostId));
-  //   }
-  // }, [isRefetchSuccess]);
+  useEffect(() => {
+    dispatch(selectTodo(newPostId));
+  }, [isTriggerRefetchSuccess]);
 
   return {
     createNewPost,

@@ -78,21 +78,6 @@ const SearchBar = ({ setSearchValue, sortBy, setSortBy }) => {
     }
   };
 
-  8; // useEffect(() => {
-  //   console.log("isCreateNewPostLoading use effect");
-  //   if (isCreateNewPostLoading) dispatch(revealLoading(true));
-  //   else {
-  //     dispatch(revealLoading(false));
-  //   }
-  // }, [isCreateNewPostLoading]);
-
-  // useEffect(() => {
-  //   console.log("triggerRefetch useeffect");
-  //   if (isNewCreatePostSuccess && newPost) {
-  //     dispatch(triggerRefetch());
-  //   }
-  // }, [isNewCreatePostSuccess]);
-
   // SORTBY HANDLER
   const sortByHandler = (option) => {
     if (option !== "" || option !== null) setSortBy(option);
@@ -103,21 +88,6 @@ const SearchBar = ({ setSearchValue, sortBy, setSortBy }) => {
         mood === "light" ? "bg-zinc-50" : "bg-slate-900"
       }  sticky top-0 py-2 z-20 shadow-md`}
     >
-      {/* <ToastContainer
-        position="top-left"
-        autoClose={1000}
-        limit={2}
-        hideProgressBar
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="light"
-        transition:Bounce
-      /> */}
-
       <div className="flex items-center pl-8 py-1 ">
         <input
           className={`basis-4/6 p-1 rounded-sm text-black`}
