@@ -119,6 +119,8 @@ function App() {
   }, [isGetAllPostSuccess, posts]);
 
   useEffect(() => {
+    console.log("isLoading: ", isLoading);
+    console.log("isGetAllPostLoading :", isGetAllPostLoading);
     if (isLoading || isGetAllPostLoading) dispatch(revealLoading(isLoading));
   }, [isLoading, isGetAllPostLoading]);
 

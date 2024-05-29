@@ -26,7 +26,9 @@ import { convert } from "html-to-text";
 
 // ------TEST CODE-------------------------------
 
-import { useDeleteSinglePostMutation } from "../features/PostApiSlice/PostApiSlice";
+//HOOKS
+import useCreateNewPostWithEffects from "../hooks/useCreateNewPostWithEffects";
+import useDeleteSinglePostMutationWithEffects from "../hooks/useDeleteSinglePost";
 
 //------- TEST CODE-----------------------------
 
@@ -37,7 +39,7 @@ const SingleTodo = ({ obj, sortBy }) => {
 
   // ------------------------TEST CODE ----------------------------
 
-  const [deleteSinglePost, { data }] = useDeleteSinglePostMutation();
+  const { deleteSinglePost } = useDeleteSinglePostMutationWithEffects();
 
   // ------------------------TEST CODE ----------------------------
 
@@ -53,15 +55,14 @@ const SingleTodo = ({ obj, sortBy }) => {
   const onClickHandler = async (event) => {
     // IF USE CLICKS ON INPUT TAG
     if (event && inputRef.current === event) {
-      setTimeout(() => {
-        if (selectedTodo?.id === obj._id) {
-          dispatch(revealEditPage(false));
-        }
-        deleteSinglePost({ postId: obj._id });
+      if (selectedTodo?.id === obj._id) {
+        dispatch(revealEditPage(false));
+      }
+      await deleteSinglePost({ postId: obj._id });
 
-        //--------- dispatch(removeSingleTodo(obj._id));
-        //--------- dispatch(deleteSinglePost({ postId: obj._id }));
-      }, 1000);
+      //--------- dispatch(removeSingleTodo(obj._id));
+      //--------- dispatch(deleteSinglePost({ postId: obj._id }));
+
       return;
     }
 
